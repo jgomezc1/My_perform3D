@@ -167,9 +167,9 @@ def load_diaphragms_meta(path: str = os.path.join(APP_DIR, "out", "diaphragms.js
 # -----------------------
 st.set_page_config(layout="wide", page_title="ETABS → OpenSees Viewer")
 
-st.title("ETABS → OpenSees Model Viewer")
+st.title("R&DC Perform3D")
 st.write(
-    "Upload a **model script** (e.g., `kosmos_translated.py`), choose a build stage, "
+    "Upload a **model script** (e.g., `MODEL_translated.py`), choose a build stage, "
     "and visualize the resulting OpenSees domain."
 )
 
