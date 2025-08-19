@@ -6,17 +6,22 @@ Public API:
 - create_interactive_plot(nodes, elements, options) -> plotly.graph_objs.Figure
 
 Where:
-    nodes    : Dict[int, Tuple[float, float, float]]
-    elements : Dict[int, Tuple[int, int]]   # element_tag -> (ni, nj)
+    nodes          : Dict[int, Tuple[float, float, float]]
+    elements       : Dict[int, Tuple[int, int]]   # element_tag -> (ni, nj)
+Options:
+    show_axes, show_grid, show_nodes
+    show_local_axes, local_axis_frac
+    show_master_nodes, master_nodes (Iterable[int]), master_node_size
 
 Notes:
 - We auto-separate "beams" vs "columns" by orientation (dominant axis).
-- Optional: draw local longitudinal axes (i -> j) as 3D cones at member midpoints.
+- Local longitudinal axes (i -> j) optional, batched as a single Cone trace.
+- Diaphragm master nodes are rendered as distinct markers, independent of "show_nodes".
 - No external deps beyond Plotly.
 """
 
 from __future__ import annotations
-from typing import Dict, Tuple, Any, List
+from typing import Dict, Tuple, Any, List, Iterable
 import math
 from plotly import graph_objects as go
 
@@ -111,17 +116,10 @@ def _local_axes_trace(
     """
     Build a single Cone trace that shows local longitudinal axes (i -> j)
     for all given elements. Each arrow is anchored at the element midpoint.
-
-    Parameters
-    ----------
-    frac : float
-        The arrow length is frac * median(element_length). Must be > 0.
-        Using the median makes arrows robust against a few very long members.
     """
     if not elements or not nodes or frac <= 0.0:
         return None
 
-    # First pass: gather lengths
     lengths: List[float] = []
     for _, (ni, nj) in elements.items():
         if ni not in nodes or nj not in nodes:
@@ -142,7 +140,6 @@ def _local_axes_trace(
     us: List[float]; vs: List[float]; ws: List[float]
     xs, ys, zs, us, vs, ws = [], [], [], [], [], []
 
-    # Second pass: midpoints + directions (i -> j), normalized then scaled
     for _, (ni, nj) in elements.items():
         if ni not in nodes or nj not in nodes:
             continue
@@ -152,26 +149,20 @@ def _local_axes_trace(
         L = math.sqrt(dx*dx + dy*dy + dz*dz)
         if L <= EPS:
             continue
-        # midpoint as anchor
-        xm = 0.5 * (x1 + x2)
-        ym = 0.5 * (y1 + y2)
-        zm = 0.5 * (z1 + z2)
-        xs.append(xm); ys.append(ym); zs.append(zm)
-        # normalized direction scaled to a common display length
+        xm = 0.5 * (x1 + x2); ym = 0.5 * (y1 + y2); zm = 0.5 * (z1 + z2)
         s = axis_len / L
+        xs.append(xm); ys.append(ym); zs.append(zm)
         us.append(dx * s); vs.append(dy * s); ws.append(dz * s)
 
     if not xs:
         return None
 
-    # One batched cone trace for performance
     cone = go.Cone(
         x=xs, y=ys, z=zs,
         u=us, v=vs, w=ws,
-        anchor="tail",          # arrows point in +u,+v,+w from the anchor (midpoint)
+        anchor="tail",
         showscale=False,
         name="Local x (i→j)"
-        # We keep default sizemode ("scaled") and omit sizeref to let Plotly scale sensibly.
     )
     return cone
 
@@ -188,8 +179,11 @@ def create_interactive_plot(
       - show_axes: bool
       - show_grid: bool
       - show_nodes: bool
-      - show_local_axes: bool        <-- NEW (default False)
-      - local_axis_frac: float       <-- NEW (default 0.25)
+      - show_local_axes: bool
+      - local_axis_frac: float
+      - show_master_nodes: bool       <-- NEW
+      - master_nodes: Iterable[int]   <-- NEW (tags)
+      - master_node_size: int         <-- NEW
       - node_size: int
       - beam_thickness: int
       - column_thickness: int
@@ -200,6 +194,11 @@ def create_interactive_plot(
     show_nodes = bool(options.get("show_nodes", True))
     show_local_axes = bool(options.get("show_local_axes", False))
     local_axis_frac = float(options.get("local_axis_frac", 0.25))
+
+    show_mn = bool(options.get("show_master_nodes", True))
+    mn_tags: Iterable[int] = options.get("master_nodes", []) or []
+    mn_size = int(options.get("master_node_size", 8))
+
     node_size = int(options.get("node_size", 3))
     lw_beam = int(options.get("beam_thickness", 2))
     lw_col  = int(options.get("column_thickness", 3))
@@ -259,6 +258,26 @@ def create_interactive_plot(
         if cone is not None:
             data_traces.append(cone)
 
+    # Diaphragm Master Nodes — independent of show_nodes
+    if show_mn and mn_tags:
+        mn_tags_list = [int(t) for t in mn_tags if int(t) in nodes]
+        if mn_tags_list:
+            mx = [nodes[t][0] for t in mn_tags_list]
+            my = [nodes[t][1] for t in mn_tags_list]
+            mz = [nodes[t][2] for t in mn_tags_list]
+            mtext = [f"MN {t}" for t in mn_tags_list]
+            mhover = [f"<b>Master Node</b> {t}<br>x={nodes[t][0]:.3f}, y={nodes[t][1]:.3f}, z={nodes[t][2]:.3f}" for t in mn_tags_list]
+            masters_trace = go.Scatter3d(
+                x=mx, y=my, z=mz,
+                mode="markers",
+                text=mtext,
+                hovertext=mhover,
+                hoverinfo="text",
+                marker=dict(size=mn_size, color="red"),
+                name="Diaphragm Masters"
+            )
+            data_traces.append(masters_trace)
+
     xr, yr, zr = _axis_ranges(nodes)
     scene = dict(
         xaxis=dict(title="X", showgrid=show_grid, zeroline=False, range=xr),
@@ -280,3 +299,4 @@ def create_interactive_plot(
                           yaxis=dict(visible=False),
                           zaxis=dict(visible=False))
     return fig
+

@@ -977,1582 +977,1582 @@
     {
       "point": "56",
       "story": "01_P2_m170",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "791",
       "story": "01_P2_m170",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "34",
       "story": "02_P2",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "794",
       "story": "02_P2",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "795",
       "story": "02_P2",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "827",
       "story": "02_P2",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "56",
       "story": "03_P3_m170",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "59",
       "story": "03_P3_m170",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "659",
       "story": "03_P3_m170",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "34",
       "story": "04_P3",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "794",
       "story": "04_P3",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "795",
       "story": "04_P3",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "827",
       "story": "04_P3",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "780",
       "story": "04_P3",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "786",
       "story": "04_P3",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "792",
       "story": "04_P3",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "20",
       "story": "03_P3_m170",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "57",
       "story": "03_P3_m170",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "40",
       "story": "04_P3",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "41",
       "story": "04_P3",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "42",
       "story": "04_P3",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "34",
       "story": "11_P6",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "795",
       "story": "11_P6",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "827",
       "story": "11_P6",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "847",
       "story": "11_P6",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "20",
       "story": "11_P6",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "40",
       "story": "11_P6",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "41",
       "story": "11_P6",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "42",
       "story": "11_P6",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "780",
       "story": "11_P6",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "792",
       "story": "11_P6",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "851",
       "story": "11_P6",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "852",
       "story": "11_P6",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "853",
       "story": "11_P6",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "56",
       "story": "05_P4_m155",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "59",
       "story": "05_P4_m155",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "659",
       "story": "05_P4_m155",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "34",
       "story": "04_P4",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "794",
       "story": "04_P4",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "795",
       "story": "04_P4",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "827",
       "story": "04_P4",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "780",
       "story": "04_P4",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "786",
       "story": "04_P4",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "792",
       "story": "04_P4",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "20",
       "story": "05_P4_m155",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "57",
       "story": "05_P4_m155",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "40",
       "story": "04_P4",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "41",
       "story": "04_P4",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "42",
       "story": "04_P4",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "56",
       "story": "07_P5_m155",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "59",
       "story": "07_P5_m155",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "659",
       "story": "07_P5_m155",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "34",
       "story": "08_P5",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "794",
       "story": "08_P5",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "795",
       "story": "08_P5",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "827",
       "story": "08_P5",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "780",
       "story": "08_P5",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "786",
       "story": "08_P5",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "792",
       "story": "08_P5",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "20",
       "story": "07_P5_m155",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "57",
       "story": "07_P5_m155",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "40",
       "story": "08_P5",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "41",
       "story": "08_P5",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "42",
       "story": "08_P5",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "786",
       "story": "02_P2",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": "RES_00_75cm",
       "extra": {}
     },
     {
       "point": "792",
       "story": "02_P2",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": "RES_00_75cm",
       "extra": {}
     },
     {
       "point": "221",
       "story": "02_P2",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "225",
       "story": "02_P2",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "229",
       "story": "02_P2",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "233",
       "story": "02_P2",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "237",
       "story": "02_P2",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "241",
       "story": "02_P2",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "809",
       "story": "01_P2_m170",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "813",
       "story": "01_P2_m170",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "814",
       "story": "01_P2_m170",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "817",
       "story": "02_P2",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "818",
       "story": "02_P2",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "821",
       "story": "02_P2",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "18",
       "story": "02_P2",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "17",
       "story": "02_P2",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "16",
       "story": "02_P2",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "14",
       "story": "02_P2",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "12",
       "story": "02_P2",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "221",
       "story": "04_P3",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "225",
       "story": "04_P3",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "229",
       "story": "04_P3",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "233",
       "story": "04_P3",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "237",
       "story": "04_P3",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "241",
       "story": "04_P3",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "815",
       "story": "03_P3_m170",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "819",
       "story": "03_P3_m170",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "823",
       "story": "03_P3_m170",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "828",
       "story": "04_P3",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "829",
       "story": "04_P3",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "833",
       "story": "04_P3",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "834",
       "story": "04_P3",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "835",
       "story": "04_P3",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "839",
       "story": "04_P3",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "840",
       "story": "04_P3",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "841",
       "story": "04_P3",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "349",
       "story": "03_P3_m170",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "351",
       "story": "03_P3_m170",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "353",
       "story": "03_P3_m170",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "355",
       "story": "03_P3_m170",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "357",
       "story": "03_P3_m170",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "359",
       "story": "03_P3_m170",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "374",
       "story": "04_P3",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "375",
       "story": "04_P3",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "376",
       "story": "04_P3",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "377",
       "story": "04_P3",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "378",
       "story": "04_P3",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "379",
       "story": "04_P3",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "380",
       "story": "04_P3",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "381",
       "story": "04_P3",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "382",
       "story": "04_P3",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "383",
       "story": "04_P3",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "384",
       "story": "04_P3",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "385",
       "story": "04_P3",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "400",
       "story": "04_P3",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "401",
       "story": "04_P3",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "221",
       "story": "11_P6",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "225",
       "story": "11_P6",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "229",
       "story": "11_P6",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "233",
       "story": "11_P6",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "237",
       "story": "11_P6",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "241",
       "story": "11_P6",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "375",
       "story": "11_P6",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "377",
       "story": "11_P6",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "379",
       "story": "11_P6",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "381",
       "story": "11_P6",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "383",
       "story": "11_P6",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "385",
       "story": "11_P6",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "841",
       "story": "11_P6",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "840",
       "story": "11_P6",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "839",
       "story": "11_P6",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "835",
       "story": "11_P6",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "834",
       "story": "11_P6",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "833",
       "story": "11_P6",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "829",
       "story": "11_P6",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "828",
       "story": "11_P6",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "845",
       "story": "11_P6",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "823",
       "story": "11_P6",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "819",
       "story": "11_P6",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "815",
       "story": "11_P6",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "221",
       "story": "04_P4",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "225",
       "story": "04_P4",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "229",
       "story": "04_P4",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "233",
       "story": "04_P4",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "237",
       "story": "04_P4",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "241",
       "story": "04_P4",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "815",
       "story": "05_P4_m155",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "819",
       "story": "05_P4_m155",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "823",
       "story": "05_P4_m155",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "828",
       "story": "04_P4",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "829",
       "story": "04_P4",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "833",
       "story": "04_P4",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "834",
       "story": "04_P4",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "835",
       "story": "04_P4",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "839",
       "story": "04_P4",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "840",
       "story": "04_P4",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "841",
       "story": "04_P4",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "349",
       "story": "05_P4_m155",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "351",
       "story": "05_P4_m155",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "353",
       "story": "05_P4_m155",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "355",
       "story": "05_P4_m155",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "357",
       "story": "05_P4_m155",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "359",
       "story": "05_P4_m155",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "374",
       "story": "04_P4",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "375",
       "story": "04_P4",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "376",
       "story": "04_P4",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "377",
       "story": "04_P4",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "378",
       "story": "04_P4",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "379",
       "story": "04_P4",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "380",
       "story": "04_P4",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "381",
       "story": "04_P4",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "382",
       "story": "04_P4",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "383",
       "story": "04_P4",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "384",
       "story": "04_P4",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "385",
       "story": "04_P4",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "400",
       "story": "04_P4",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "401",
       "story": "04_P4",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "221",
       "story": "08_P5",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "225",
       "story": "08_P5",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "229",
       "story": "08_P5",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "233",
       "story": "08_P5",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "237",
       "story": "08_P5",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "241",
       "story": "08_P5",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "815",
       "story": "07_P5_m155",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "819",
       "story": "07_P5_m155",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "823",
       "story": "07_P5_m155",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "828",
       "story": "08_P5",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "829",
       "story": "08_P5",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "833",
       "story": "08_P5",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "834",
       "story": "08_P5",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "835",
       "story": "08_P5",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "839",
       "story": "08_P5",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "840",
       "story": "08_P5",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "841",
       "story": "08_P5",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "349",
       "story": "07_P5_m155",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "351",
       "story": "07_P5_m155",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "353",
       "story": "07_P5_m155",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "355",
       "story": "07_P5_m155",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "357",
       "story": "07_P5_m155",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "359",
       "story": "07_P5_m155",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "374",
       "story": "08_P5",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "375",
       "story": "08_P5",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "376",
       "story": "08_P5",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "377",
       "story": "08_P5",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "378",
       "story": "08_P5",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "379",
       "story": "08_P5",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "380",
       "story": "08_P5",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "381",
       "story": "08_P5",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "382",
       "story": "08_P5",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "383",
       "story": "08_P5",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "384",
       "story": "08_P5",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "385",
       "story": "08_P5",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "400",
       "story": "08_P5",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "401",
       "story": "08_P5",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "20",
       "story": "01_P2_m170",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": "RES_00",
       "extra": {}
     },
     {
       "point": "57",
       "story": "01_P2_m170",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "40",
       "story": "02_P2",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "41",
       "story": "02_P2",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": "RES_00_75cm",
       "extra": {}
     },
     {
       "point": "59",
       "story": "01_P2_m170",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "780",
       "story": "02_P2",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "659",
       "story": "01_P2_m170",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": "RES_00",
       "extra": {}
     },
     {
       "point": "36",
       "story": "Base",
-      "diaphragm": null,
+      "diaphragm": "DISCONNECTED",
       "springprop": "RES_00_75cm",
       "extra": {
         "RESTRAINT": "UX UY UZ RX RY RZ"
@@ -2561,14 +2561,14 @@
     {
       "point": "36",
       "story": "11_P6",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "795",
       "story": "Base",
-      "diaphragm": null,
+      "diaphragm": "DISCONNECTED",
       "springprop": "RES_00_75cm",
       "extra": {
         "RESTRAINT": "UX UY UZ RX RY RZ"
@@ -2577,7 +2577,7 @@
     {
       "point": "794",
       "story": "Base",
-      "diaphragm": null,
+      "diaphragm": "DISCONNECTED",
       "springprop": null,
       "extra": {
         "RESTRAINT": "UX UY UZ RX RY RZ"
@@ -2586,7 +2586,7 @@
     {
       "point": "34",
       "story": "Base",
-      "diaphragm": null,
+      "diaphragm": "DISCONNECTED",
       "springprop": "RES_00_75cm",
       "extra": {
         "RESTRAINT": "UX UY UZ RX RY RZ"
@@ -2595,7 +2595,7 @@
     {
       "point": "827",
       "story": "Base",
-      "diaphragm": null,
+      "diaphragm": "DISCONNECTED",
       "springprop": "RES_00_75cm",
       "extra": {
         "RESTRAINT": "UX UY UZ RX RY RZ"
@@ -2604,1414 +2604,1414 @@
     {
       "point": "15",
       "story": "02_P2",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": "RES_00_75cm",
       "extra": {}
     },
     {
       "point": "15",
       "story": "11_P6",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "1384",
       "story": "02_P2",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": "RES_00_75cm",
       "extra": {}
     },
     {
       "point": "1384",
       "story": "11_P6",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "36",
       "story": "02_P2",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "791",
       "story": "03_P3_m170",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "36",
       "story": "04_P3",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "15",
       "story": "04_P3",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "1384",
       "story": "04_P3",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "659",
       "story": "11_P6",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "786",
       "story": "11_P6",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "791",
       "story": "05_P4_m155",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "36",
       "story": "04_P4",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "15",
       "story": "04_P4",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "1384",
       "story": "04_P4",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "791",
       "story": "07_P5_m155",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "36",
       "story": "08_P5",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "15",
       "story": "08_P5",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "1384",
       "story": "08_P5",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "37",
       "story": "04_P3",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "14",
       "story": "04_P3",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "44",
       "story": "04_P3",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "38",
       "story": "04_P3",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "12",
       "story": "04_P3",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "253",
       "story": "04_P3",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "752",
       "story": "11_P6",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "754",
       "story": "11_P6",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "756",
       "story": "11_P6",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "758",
       "story": "11_P6",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "760",
       "story": "11_P6",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "762",
       "story": "11_P6",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "764",
       "story": "11_P6",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "766",
       "story": "11_P6",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "768",
       "story": "11_P6",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "770",
       "story": "11_P6",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "772",
       "story": "11_P6",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "774",
       "story": "11_P6",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "38",
       "story": "11_P6",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "12",
       "story": "11_P6",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "253",
       "story": "11_P6",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "37",
       "story": "11_P6",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "14",
       "story": "11_P6",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "44",
       "story": "11_P6",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "39",
       "story": "11_P6",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "16",
       "story": "11_P6",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "255",
       "story": "11_P6",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "247",
       "story": "11_P6",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "17",
       "story": "11_P6",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "257",
       "story": "11_P6",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "249",
       "story": "11_P6",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "18",
       "story": "11_P6",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "259",
       "story": "11_P6",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "261",
       "story": "11_P6",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "269",
       "story": "11_P6",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "277",
       "story": "11_P6",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "285",
       "story": "11_P6",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "293",
       "story": "11_P6",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "301",
       "story": "11_P6",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "309",
       "story": "11_P6",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "37",
       "story": "04_P4",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "14",
       "story": "04_P4",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "44",
       "story": "04_P4",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "38",
       "story": "04_P4",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "12",
       "story": "04_P4",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "253",
       "story": "04_P4",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "37",
       "story": "08_P5",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "14",
       "story": "08_P5",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "44",
       "story": "08_P5",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "38",
       "story": "08_P5",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "12",
       "story": "08_P5",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "253",
       "story": "08_P5",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "752",
       "story": "02_P2",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "754",
       "story": "02_P2",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "756",
       "story": "02_P2",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "758",
       "story": "02_P2",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "760",
       "story": "02_P2",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "762",
       "story": "02_P2",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "752",
       "story": "04_P3",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "754",
       "story": "04_P3",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "756",
       "story": "04_P3",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "758",
       "story": "04_P3",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "760",
       "story": "04_P3",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "762",
       "story": "04_P3",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "817",
       "story": "04_P3",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "277",
       "story": "04_P3",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "818",
       "story": "04_P3",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "269",
       "story": "04_P3",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "821",
       "story": "04_P3",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "261",
       "story": "04_P3",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "249",
       "story": "04_P3",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "18",
       "story": "04_P3",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "259",
       "story": "04_P3",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "247",
       "story": "04_P3",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "17",
       "story": "04_P3",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "257",
       "story": "04_P3",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "39",
       "story": "04_P3",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "16",
       "story": "04_P3",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "255",
       "story": "04_P3",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "764",
       "story": "04_P3",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "766",
       "story": "04_P3",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "768",
       "story": "04_P3",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "770",
       "story": "04_P3",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "772",
       "story": "04_P3",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "774",
       "story": "04_P3",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "752",
       "story": "04_P4",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "754",
       "story": "04_P4",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "756",
       "story": "04_P4",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "758",
       "story": "04_P4",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "760",
       "story": "04_P4",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "762",
       "story": "04_P4",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "817",
       "story": "04_P4",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "277",
       "story": "04_P4",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "818",
       "story": "04_P4",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "269",
       "story": "04_P4",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "821",
       "story": "04_P4",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "261",
       "story": "04_P4",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "249",
       "story": "04_P4",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "18",
       "story": "04_P4",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "259",
       "story": "04_P4",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "247",
       "story": "04_P4",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "17",
       "story": "04_P4",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "257",
       "story": "04_P4",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "39",
       "story": "04_P4",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "16",
       "story": "04_P4",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "255",
       "story": "04_P4",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "764",
       "story": "04_P4",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "766",
       "story": "04_P4",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "768",
       "story": "04_P4",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "770",
       "story": "04_P4",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "772",
       "story": "04_P4",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "774",
       "story": "04_P4",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "752",
       "story": "08_P5",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "754",
       "story": "08_P5",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "756",
       "story": "08_P5",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "758",
       "story": "08_P5",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "760",
       "story": "08_P5",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "762",
       "story": "08_P5",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "817",
       "story": "08_P5",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "277",
       "story": "08_P5",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "818",
       "story": "08_P5",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "269",
       "story": "08_P5",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "821",
       "story": "08_P5",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "261",
       "story": "08_P5",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "249",
       "story": "08_P5",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "18",
       "story": "08_P5",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "259",
       "story": "08_P5",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "247",
       "story": "08_P5",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "17",
       "story": "08_P5",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "257",
       "story": "08_P5",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "39",
       "story": "08_P5",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "16",
       "story": "08_P5",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "255",
       "story": "08_P5",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "764",
       "story": "08_P5",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "766",
       "story": "08_P5",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "768",
       "story": "08_P5",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "770",
       "story": "08_P5",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "772",
       "story": "08_P5",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "774",
       "story": "08_P5",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "809",
       "story": "03_P3_m170",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "309",
       "story": "03_P3_m170",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "813",
       "story": "03_P3_m170",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "301",
       "story": "03_P3_m170",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "814",
       "story": "03_P3_m170",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "293",
       "story": "03_P3_m170",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "763",
       "story": "03_P3_m170",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "765",
       "story": "03_P3_m170",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "769",
       "story": "03_P3_m170",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "771",
       "story": "03_P3_m170",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "773",
       "story": "03_P3_m170",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "767",
       "story": "03_P3_m170",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "809",
       "story": "05_P4_m155",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "309",
       "story": "05_P4_m155",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "813",
       "story": "05_P4_m155",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "301",
       "story": "05_P4_m155",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "814",
       "story": "05_P4_m155",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "293",
       "story": "05_P4_m155",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "763",
       "story": "05_P4_m155",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "765",
       "story": "05_P4_m155",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "769",
       "story": "05_P4_m155",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "771",
       "story": "05_P4_m155",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "773",
       "story": "05_P4_m155",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "767",
       "story": "05_P4_m155",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "809",
       "story": "07_P5_m155",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "309",
       "story": "07_P5_m155",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "813",
       "story": "07_P5_m155",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "301",
       "story": "07_P5_m155",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "814",
       "story": "07_P5_m155",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "293",
       "story": "07_P5_m155",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "763",
       "story": "07_P5_m155",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "765",
       "story": "07_P5_m155",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "769",
       "story": "07_P5_m155",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "771",
       "story": "07_P5_m155",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "773",
       "story": "07_P5_m155",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "767",
       "story": "07_P5_m155",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "249",
       "story": "02_P2",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "247",
       "story": "02_P2",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "39",
       "story": "02_P2",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "37",
       "story": "02_P2",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "38",
       "story": "02_P2",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "400",
       "story": "11_P6",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "401",
       "story": "11_P6",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "791",
       "story": "Base",
-      "diaphragm": null,
+      "diaphragm": "DISCONNECTED",
       "springprop": "RES_00",
       "extra": {
         "RESTRAINT": "UX UY UZ RX RY RZ"
@@ -4020,7 +4020,7 @@
     {
       "point": "56",
       "story": "Base",
-      "diaphragm": null,
+      "diaphragm": "DISCONNECTED",
       "springprop": null,
       "extra": {
         "RESTRAINT": "UX UY UZ RX RY RZ"
@@ -4029,7 +4029,7 @@
     {
       "point": "15",
       "story": "Base",
-      "diaphragm": null,
+      "diaphragm": "DISCONNECTED",
       "springprop": "RES_03_150cm",
       "extra": {
         "RESTRAINT": "UX UY UZ RX RY RZ"
@@ -4038,7 +4038,7 @@
     {
       "point": "1384",
       "story": "Base",
-      "diaphragm": null,
+      "diaphragm": "DISCONNECTED",
       "springprop": "RES_03_150cm",
       "extra": {
         "RESTRAINT": "UX UY UZ RX RY RZ"
@@ -4047,7 +4047,7 @@
     {
       "point": "792",
       "story": "Base",
-      "diaphragm": null,
+      "diaphragm": "DISCONNECTED",
       "springprop": "RES_03_150cm",
       "extra": {
         "RESTRAINT": "UX UY UZ RX RY RZ"
@@ -4056,7 +4056,7 @@
     {
       "point": "41",
       "story": "Base",
-      "diaphragm": null,
+      "diaphragm": "DISCONNECTED",
       "springprop": "RES_03_150cm",
       "extra": {
         "RESTRAINT": "UX UY UZ RX RY RZ"
@@ -4065,7 +4065,7 @@
     {
       "point": "786",
       "story": "Base",
-      "diaphragm": null,
+      "diaphragm": "DISCONNECTED",
       "springprop": "RES_03_150cm",
       "extra": {
         "RESTRAINT": "UX UY UZ RX RY RZ"
@@ -4074,7 +4074,7 @@
     {
       "point": "20",
       "story": "Base",
-      "diaphragm": null,
+      "diaphragm": "DISCONNECTED",
       "springprop": "RES_03_150cm",
       "extra": {
         "RESTRAINT": "UX UY UZ RX RY RZ"
@@ -4083,7 +4083,7 @@
     {
       "point": "659",
       "story": "Base",
-      "diaphragm": null,
+      "diaphragm": "DISCONNECTED",
       "springprop": "RES_03_150cm",
       "extra": {
         "RESTRAINT": "UX UY UZ RX RY RZ"
@@ -4092,392 +4092,392 @@
     {
       "point": "815",
       "story": "01_P2_m170",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "819",
       "story": "01_P2_m170",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "823",
       "story": "01_P2_m170",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "349",
       "story": "01_P2_m170",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "351",
       "story": "01_P2_m170",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "353",
       "story": "01_P2_m170",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "355",
       "story": "01_P2_m170",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "357",
       "story": "01_P2_m170",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "359",
       "story": "01_P2_m170",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "309",
       "story": "01_P2_m170",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "301",
       "story": "01_P2_m170",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "293",
       "story": "01_P2_m170",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "763",
       "story": "01_P2_m170",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "765",
       "story": "01_P2_m170",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "769",
       "story": "01_P2_m170",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "771",
       "story": "01_P2_m170",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "773",
       "story": "01_P2_m170",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "767",
       "story": "01_P2_m170",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "42",
       "story": "02_P2",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "828",
       "story": "02_P2",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "829",
       "story": "02_P2",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "833",
       "story": "02_P2",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "834",
       "story": "02_P2",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "835",
       "story": "02_P2",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "839",
       "story": "02_P2",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "840",
       "story": "02_P2",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "841",
       "story": "02_P2",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "374",
       "story": "02_P2",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "375",
       "story": "02_P2",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "376",
       "story": "02_P2",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "377",
       "story": "02_P2",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "378",
       "story": "02_P2",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "379",
       "story": "02_P2",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "380",
       "story": "02_P2",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "381",
       "story": "02_P2",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "382",
       "story": "02_P2",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "383",
       "story": "02_P2",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "384",
       "story": "02_P2",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "385",
       "story": "02_P2",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "401",
       "story": "02_P2",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "44",
       "story": "02_P2",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "253",
       "story": "02_P2",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "277",
       "story": "02_P2",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "269",
       "story": "02_P2",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "261",
       "story": "02_P2",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "259",
       "story": "02_P2",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "257",
       "story": "02_P2",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "255",
       "story": "02_P2",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "764",
       "story": "02_P2",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "766",
       "story": "02_P2",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "768",
       "story": "02_P2",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "770",
       "story": "02_P2",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "772",
       "story": "02_P2",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "774",
       "story": "02_P2",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "400",
       "story": "02_P2",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "40",
       "story": "Base",
-      "diaphragm": null,
+      "diaphragm": "DISCONNECTED",
       "springprop": null,
       "extra": {
         "RESTRAINT": "UX UY UZ RX RY RZ"
@@ -4486,7 +4486,7 @@
     {
       "point": "780",
       "story": "Base",
-      "diaphragm": null,
+      "diaphragm": "DISCONNECTED",
       "springprop": null,
       "extra": {
         "RESTRAINT": "UX UY UZ RX RY RZ"
@@ -4495,7 +4495,7 @@
     {
       "point": "57",
       "story": "Base",
-      "diaphragm": null,
+      "diaphragm": "DISCONNECTED",
       "springprop": null,
       "extra": {
         "RESTRAINT": "UX UY UZ RX RY RZ"
@@ -4504,7 +4504,7 @@
     {
       "point": "59",
       "story": "Base",
-      "diaphragm": null,
+      "diaphragm": "DISCONNECTED",
       "springprop": null,
       "extra": {
         "RESTRAINT": "UX UY UZ RX RY RZ"
@@ -4513,1463 +4513,1463 @@
     {
       "point": "597",
       "story": "11_P6",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "598",
       "story": "11_P6",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "599",
       "story": "11_P6",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "600",
       "story": "11_P6",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "602",
       "story": "11_P6",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "603",
       "story": "11_P6",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "604",
       "story": "11_P6",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "605",
       "story": "11_P6",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "607",
       "story": "11_P6",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "613",
       "story": "11_P6",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "614",
       "story": "11_P6",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "615",
       "story": "11_P6",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "617",
       "story": "11_P6",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "618",
       "story": "11_P6",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "619",
       "story": "11_P6",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "620",
       "story": "11_P6",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "622",
       "story": "11_P6",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "623",
       "story": "11_P6",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "624",
       "story": "11_P6",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "625",
       "story": "11_P6",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "627",
       "story": "11_P6",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "628",
       "story": "11_P6",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "629",
       "story": "11_P6",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "630",
       "story": "11_P6",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "598",
       "story": "04_P3",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "599",
       "story": "04_P3",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "600",
       "story": "04_P3",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "603",
       "story": "04_P3",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "604",
       "story": "04_P3",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "605",
       "story": "04_P3",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "613",
       "story": "04_P3",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "614",
       "story": "04_P3",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "615",
       "story": "04_P3",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "618",
       "story": "04_P3",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "619",
       "story": "04_P3",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "620",
       "story": "04_P3",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "623",
       "story": "04_P3",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "624",
       "story": "04_P3",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "625",
       "story": "04_P3",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "628",
       "story": "04_P3",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "629",
       "story": "04_P3",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "630",
       "story": "04_P3",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "598",
       "story": "04_P4",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "599",
       "story": "04_P4",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "600",
       "story": "04_P4",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "603",
       "story": "04_P4",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "604",
       "story": "04_P4",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "605",
       "story": "04_P4",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "613",
       "story": "04_P4",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "614",
       "story": "04_P4",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "615",
       "story": "04_P4",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "618",
       "story": "04_P4",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "619",
       "story": "04_P4",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "620",
       "story": "04_P4",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "623",
       "story": "04_P4",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "624",
       "story": "04_P4",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "625",
       "story": "04_P4",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "628",
       "story": "04_P4",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "629",
       "story": "04_P4",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "630",
       "story": "04_P4",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "598",
       "story": "08_P5",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "599",
       "story": "08_P5",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "600",
       "story": "08_P5",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "603",
       "story": "08_P5",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "604",
       "story": "08_P5",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "605",
       "story": "08_P5",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "613",
       "story": "08_P5",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "614",
       "story": "08_P5",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "615",
       "story": "08_P5",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "618",
       "story": "08_P5",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "619",
       "story": "08_P5",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "620",
       "story": "08_P5",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "623",
       "story": "08_P5",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "624",
       "story": "08_P5",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "625",
       "story": "08_P5",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "628",
       "story": "08_P5",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "629",
       "story": "08_P5",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "630",
       "story": "08_P5",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "597",
       "story": "03_P3_m170",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "602",
       "story": "03_P3_m170",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "607",
       "story": "03_P3_m170",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "617",
       "story": "03_P3_m170",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "622",
       "story": "03_P3_m170",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "627",
       "story": "03_P3_m170",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "597",
       "story": "05_P4_m155",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "602",
       "story": "05_P4_m155",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "607",
       "story": "05_P4_m155",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "617",
       "story": "05_P4_m155",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "622",
       "story": "05_P4_m155",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "627",
       "story": "05_P4_m155",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "597",
       "story": "07_P5_m155",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "602",
       "story": "07_P5_m155",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "607",
       "story": "07_P5_m155",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "617",
       "story": "07_P5_m155",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "622",
       "story": "07_P5_m155",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "627",
       "story": "07_P5_m155",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "597",
       "story": "01_P2_m170",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "602",
       "story": "01_P2_m170",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "607",
       "story": "01_P2_m170",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "617",
       "story": "01_P2_m170",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "622",
       "story": "01_P2_m170",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "627",
       "story": "01_P2_m170",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "598",
       "story": "02_P2",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "599",
       "story": "02_P2",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "600",
       "story": "02_P2",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "603",
       "story": "02_P2",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "604",
       "story": "02_P2",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "605",
       "story": "02_P2",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "613",
       "story": "02_P2",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "614",
       "story": "02_P2",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "615",
       "story": "02_P2",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "618",
       "story": "02_P2",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "619",
       "story": "02_P2",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "620",
       "story": "02_P2",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "623",
       "story": "02_P2",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "624",
       "story": "02_P2",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "625",
       "story": "02_P2",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "628",
       "story": "02_P2",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "629",
       "story": "02_P2",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "630",
       "story": "02_P2",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "633",
       "story": "03_P3_m170",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "634",
       "story": "03_P3_m170",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "638",
       "story": "03_P3_m170",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "667",
       "story": "03_P3_m170",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "887",
       "story": "03_P3_m170",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "888",
       "story": "03_P3_m170",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "633",
       "story": "05_P4_m155",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "634",
       "story": "05_P4_m155",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "638",
       "story": "05_P4_m155",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "667",
       "story": "05_P4_m155",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "887",
       "story": "05_P4_m155",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "888",
       "story": "05_P4_m155",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "633",
       "story": "07_P5_m155",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "634",
       "story": "07_P5_m155",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "638",
       "story": "07_P5_m155",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "667",
       "story": "07_P5_m155",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "887",
       "story": "07_P5_m155",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "888",
       "story": "07_P5_m155",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "633",
       "story": "01_P2_m170",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "634",
       "story": "01_P2_m170",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "638",
       "story": "01_P2_m170",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "667",
       "story": "01_P2_m170",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "887",
       "story": "01_P2_m170",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "888",
       "story": "01_P2_m170",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "536",
       "story": "11_P6",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "537",
       "story": "11_P6",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "538",
       "story": "11_P6",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "539",
       "story": "11_P6",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "540",
       "story": "11_P6",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "541",
       "story": "11_P6",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "542",
       "story": "11_P6",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "543",
       "story": "11_P6",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "544",
       "story": "11_P6",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "545",
       "story": "11_P6",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "546",
       "story": "11_P6",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "547",
       "story": "11_P6",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "847",
       "story": "08_P5",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "851",
       "story": "08_P5",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "852",
       "story": "08_P5",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "536",
       "story": "08_P5",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "537",
       "story": "08_P5",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "538",
       "story": "08_P5",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "539",
       "story": "08_P5",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "540",
       "story": "08_P5",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "541",
       "story": "08_P5",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "542",
       "story": "08_P5",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "543",
       "story": "08_P5",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "847",
       "story": "04_P4",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "851",
       "story": "04_P4",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "852",
       "story": "04_P4",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "536",
       "story": "04_P4",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "537",
       "story": "04_P4",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "538",
       "story": "04_P4",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "539",
       "story": "04_P4",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "540",
       "story": "04_P4",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "541",
       "story": "04_P4",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "542",
       "story": "04_P4",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "543",
       "story": "04_P4",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "847",
       "story": "04_P3",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "851",
       "story": "04_P3",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "852",
       "story": "04_P3",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "536",
       "story": "04_P3",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "537",
       "story": "04_P3",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "538",
       "story": "04_P3",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "539",
       "story": "04_P3",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "540",
       "story": "04_P3",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "541",
       "story": "04_P3",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "542",
       "story": "04_P3",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "543",
       "story": "04_P3",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "853",
       "story": "01_P2_m170",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "545",
       "story": "01_P2_m170",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "546",
       "story": "01_P2_m170",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "547",
       "story": "01_P2_m170",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "553",
       "story": "01_P2_m170",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "853",
       "story": "07_P5_m155",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "545",
       "story": "07_P5_m155",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "546",
       "story": "07_P5_m155",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "547",
       "story": "07_P5_m155",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "553",
       "story": "07_P5_m155",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "853",
       "story": "05_P4_m155",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "545",
       "story": "05_P4_m155",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "546",
       "story": "05_P4_m155",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "547",
       "story": "05_P4_m155",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "553",
       "story": "05_P4_m155",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "853",
       "story": "03_P3_m170",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "545",
       "story": "03_P3_m170",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "546",
       "story": "03_P3_m170",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "547",
       "story": "03_P3_m170",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     },
     {
       "point": "553",
       "story": "03_P3_m170",
-      "diaphragm": null,
+      "diaphragm": "D1",
       "springprop": null,
       "extra": {}
     }
@@ -12573,5 +12573,9 @@
       "section": null,
       "extra": {}
     }
+  ],
+  "diaphragm_names": [
+    "D1",
+    "FONDO_PIS"
   ]
 }

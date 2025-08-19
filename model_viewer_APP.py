@@ -5,8 +5,12 @@ Streamlit viewer for ETABS->OpenSees models.
 Workflow:
   1) Upload a Python model file that exposes build_model(stage='...').
   2) Choose a build stage (Nodes only / Nodes+Columns / Nodes+Columns+Beams).
-  3) Choose a view filter (Columns only / Beams only / Nodes+Beams / Columns+Beams).
+  3) Choose a view filter (Columns only / Beams only / Nodes + Beams / Columns + Beams).
   4) Build and visualize. Story filtering is available if ./out/story_graph.json exists.
+
+New:
+- Optional visualization of Rigid Diaphragm Master Nodes (centroid nodes)
+  read from ./out/diaphragms.json written by the translator during build.
 """
 
 import streamlit as st
@@ -148,6 +152,16 @@ def filter_by_story_range(nodes, elements, story_start, story_end, story_elev, t
             out[tag] = (ni, nj)
     return out
 
+def load_diaphragms_meta(path: str = os.path.join(APP_DIR, "out", "diaphragms.json")) -> List[int]:
+    """Return list of diaphragm master-node tags if file exists, else []."""
+    try:
+        with open(path, "r", encoding="utf-8") as f:
+            data = json.load(f)
+        masters = [int(rec["master"]) for rec in data.get("diaphragms", []) if "master" in rec]
+        return masters
+    except Exception:
+        return []
+
 # -----------------------
 # UI
 # -----------------------
@@ -194,8 +208,11 @@ with st.sidebar:
     default_show_nodes = (view_param == "nodes_beams") or (stage_param == "nodes")
     show_nodes = st.checkbox("6) Show nodes (markers)", value=default_show_nodes)
 
-    # NEW: Toggle local longitudinal axes (i -> j)
+    # Toggle local longitudinal axes (i -> j)
     show_local_axes = st.checkbox("7) Show local longitudinal axes (i → j)", value=False)
+
+    # NEW: Diaphragm Master Nodes toggle (independent of regular nodes)
+    show_master_nodes = st.checkbox("8) Show diaphragm master nodes", value=True)
 
     st.caption("Tip: build in stages and filter the view to diagnose issues.")
 
@@ -222,6 +239,9 @@ if build_btn:
 
             elements = filter_elements_by_orientation(nodes, all_elements, view_param)
 
+            # Load master nodes metadata written by diaphragms.py (if present)
+            master_nodes = load_diaphragms_meta()
+
             st.session_state.model_built = True
             st.session_state.nodes = nodes
             st.session_state.elements_all = elements
@@ -229,6 +249,8 @@ if build_btn:
             st.session_state.show_axes_grid = show_axes_grid
             st.session_state.show_nodes = show_nodes
             st.session_state.show_local_axes = show_local_axes
+            st.session_state.show_master_nodes = show_master_nodes
+            st.session_state.master_nodes = master_nodes
 
             st.success("Model built successfully. Use story filters below if needed.")
         except Exception as e:
@@ -240,7 +262,8 @@ if "model_built" not in st.session_state:
     st.session_state.model_built = False
 for key, default in [
     ("nodes", {}), ("elements_all", {}), ("plot_height", 800),
-    ("show_axes_grid", True), ("show_nodes", True), ("show_local_axes", False)
+    ("show_axes_grid", True), ("show_nodes", True), ("show_local_axes", False),
+    ("show_master_nodes", True), ("master_nodes", []),
 ]:
     if key not in st.session_state:
         st.session_state[key] = default
@@ -248,13 +271,13 @@ for key, default in [
 # -----------------------
 # Story Filter Panel (post-build)
 # -----------------------
-story_names, story_elev = load_story_meta()
+names, elevs = load_story_meta()
 st.subheader("Story Filter")
 if not st.session_state.model_built:
     st.info("Build a model to enable story filtering.")
     st.session_state.elements = {}
 else:
-    if not story_names:
+    if not names:
         st.caption("No `out/story_graph.json` detected — story-based filtering is unavailable.")
         st.session_state.elements = st.session_state.elements_all.copy()
     else:
@@ -271,22 +294,22 @@ else:
         elif mode == "Select specific stories":
             selection = st.multiselect(
                 "Pick one or more stories (top to bottom)",
-                options=story_names,
+                options=names,
                 default=[],
                 help="Keeps members that touch ANY of the selected story planes."
             )
             if selection:
-                elements = filter_by_stories_any(st.session_state.nodes, elements, selection, story_elev, tol=1e-9)
+                elements = filter_by_stories_any(st.session_state.nodes, elements, selection, elevs, tol=1e-9)
                 st.caption(f"Active: {', '.join(selection)}")
             else:
                 st.caption("No stories selected → showing all.")
         else:
             c1, c2 = st.columns(2)
             with c1:
-                start_story = st.selectbox("Start story", options=story_names, index=0)
+                start_story = st.selectbox("Start story", options=names, index=0)
             with c2:
-                end_story = st.selectbox("End story", options=story_names, index=len(story_names)-1)
-            elements = filter_by_story_range(st.session_state.nodes, elements, start_story, end_story, story_elev, tol=1e-9)
+                end_story = st.selectbox("End story", options=names, index=len(names)-1)
+            elements = filter_by_story_range(st.session_state.nodes, elements, start_story, end_story, elevs, tol=1e-9)
             st.caption(f"Active range: {start_story} ↔ {end_story}")
 
         st.session_state.elements = elements
@@ -304,9 +327,11 @@ if st.session_state.model_built:
         "show_axes": st.session_state.show_axes_grid,
         "show_grid": st.session_state.show_axes_grid,
         "show_nodes": show_nodes_effective,
-        "show_local_axes": bool(st.session_state.show_local_axes),  # <-- NEW
-        # Tweakable internal default fraction for arrow length (use if you later expose a control)
+        "show_local_axes": bool(st.session_state.show_local_axes),
         "local_axis_frac": 0.25,
+        "show_master_nodes": bool(st.session_state.show_master_nodes),
+        "master_nodes": st.session_state.master_nodes,
+        "master_node_size": 10,
         "node_size": 3,
         "beam_thickness": 2,
         "column_thickness": 3,
@@ -330,6 +355,8 @@ if st.session_state.model_built:
     elems = st.session_state.elements if "elements" in st.session_state else st.session_state.elements_all
     st.write(f"**Nodes:** {len(st.session_state.nodes)}")
     st.write(f"**Elements (after filters):** {len(elems)}")
+    if st.session_state.master_nodes:
+        st.write(f"**Diaphragm Masters:** {len(st.session_state.master_nodes)}")
     if st.session_state.nodes and elems:
         summary = summarize_elements(st.session_state.nodes, elems)
         m1, m2, m3, m4 = st.columns(4)

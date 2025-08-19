@@ -1,22 +1,34 @@
 # e2k_parser.py
 """
 Phase 1: Robust parser for ETABS .e2k essentials.
+
 Extracts:
 - STORIES (top->bottom listing; we will compute absolute elevations later)
 - POINT COORDINATES
-- POINT ASSIGNS
+- POINT ASSIGNS  (now recognizes DIAPH and DIAPHRAGM)
 - LINE CONNECTIVITIES
 - LINE ASSIGNS
-Implements the user's SPRINGPROP rule for interpreting the third point number.
+- DIAPHRAGM NAMES
+
+Notes
+-----
+ETABS examples observed in the wild:
+    POINTASSIGN "56" "01_P2_m170" DIAPH "D1"
+Some exports use DIAPHRAGM instead of DIAPH. We accept BOTH and normalize to
+the unified key 'diaphragm' in the output.
 """
 from __future__ import annotations
 import re
 from typing import Dict, Any, List
-from collections import defaultdict
 
 SECTION_HDR = re.compile(r'^\s*\$[^\n]*\n', re.IGNORECASE | re.MULTILINE)
 
+
 def _extract_section(text: str, title_regex: str) -> str:
+    """
+    Return the text between a section header matching title_regex and the next
+    section header, or the end of file if none.
+    """
     m = re.search(title_regex + r'[^\n]*\n', text, flags=re.IGNORECASE | re.MULTILINE)
     if not m:
         return ""
@@ -25,8 +37,23 @@ def _extract_section(text: str, title_regex: str) -> str:
     end = start + n.start() if n else len(text)
     return text[start:end]
 
+
 def parse_e2k(text: str) -> Dict[str, Any]:
-    # STORIES: top->bottom listing in file
+    """
+    Parse ETABS .e2k text into a normalized dict used by Phase-1.
+
+    Returns
+    -------
+    {
+      "stories":        [ { "name", "height", "elev", "similar_to", "masterstory" }, ... ],
+      "points":         { pid: { "x", "y", "third", "has_three" }, ... },
+      "point_assigns":  [ { "point", "story", "diaphragm", "springprop", "extra" }, ... ],
+      "lines":          { lname: { "name", "kind", "i", "j" }, ... },
+      "line_assigns":   [ { "line", "story", "section", "extra" }, ... ],
+      "diaphragm_names":[ "D1", "D2", ... ]
+    }
+    """
+    # STORIES
     stories_txt = _extract_section(text, r'^\s*\$ STORIES')
     story_lines = [ln for ln in stories_txt.splitlines() if ln.strip()]
     story_pat = re.compile(
@@ -34,7 +61,7 @@ def parse_e2k(text: str) -> Dict[str, Any]:
         r'(?:\s+HEIGHT\s+([-+]?\d+(?:\.\d+)?))?'     # height
         r'(?:\s+ELEV\s+([-+]?\d+(?:\.\d+)?))?'       # explicit elev
         r'(?:\s+SIMILARTO\s+"([^"]+)")?'             # similar_to
-        r'(?:\s+MASTERSTORY\s+"([^"]+)")?',          # masterstory flag
+        r'(?:\s+MASTERSTORY\s+"([^"]+)")?',          # masterstory
         re.IGNORECASE
     )
     stories: List[Dict[str, Any]] = []
@@ -69,24 +96,35 @@ def parse_e2k(text: str) -> Dict[str, Any]:
             "has_three": m.group(4) is not None,
         }
 
-    # POINT ASSIGNS
+    # POINT ASSIGNS  (recognize DIAPH and DIAPHRAGM)
     pa_txt = _extract_section(text, r'^\s*\$ POINT ASSIGNS')
     pa_lines = [ln for ln in pa_txt.splitlines() if ln.strip()]
     pa_head = re.compile(r'^\s*POINTASSIGN\s+"([^"]+)"\s+"([^"]+)"(.*)$', re.IGNORECASE)
-    token = re.compile(r'\b(DIAPHRAGM|SPRINGPROP|POINTMASS|RESTRAINT|FRAMEPROP|JOINTPATTERN|SPCONSTRAINT)\b\s+"([^"]+)"', re.IGNORECASE)
+    # Tokens of the form: TOKEN "value"
+    token = re.compile(
+        r'\b('
+        r'DIAPHRAGM|DIAPH|'         # diaphragm synonyms
+        r'SPRINGPROP|POINTMASS|RESTRAINT|FRAMEPROP|JOINTPATTERN|SPCONSTRAINT'
+        r')\b\s+"([^"]+)"',
+        re.IGNORECASE
+    )
     point_assigns: List[Dict[str, Any]] = []
     for ln in pa_lines:
         m = pa_head.match(ln)
         if not m:
             continue
         pid, story, tail = m.group(1), m.group(2), m.group(3) or ""
-        found = {k.upper(): v for k, v in token.findall(tail)}
+        # Build a dict of tokens; if duplicates appear, the last one wins
+        found: Dict[str, str] = {}
+        for k, v in token.findall(tail):
+            found[k.upper()] = v
+        diaphragm = found.get("DIAPHRAGM") or found.get("DIAPH")  # normalize
         point_assigns.append({
             "point": pid,
             "story": story,
-            "diaphragm": found.get("DIAPHRAGM"),
+            "diaphragm": diaphragm,
             "springprop": found.get("SPRINGPROP"),
-            "extra": {k: v for k, v in found.items() if k not in ("DIAPHRAGM", "SPRINGPROP")},
+            "extra": {k: v for k, v in found.items() if k not in ("DIAPHRAGM", "DIAPH", "SPRINGPROP")},
         })
 
     # LINE CONNECTIVITIES
@@ -125,10 +163,21 @@ def parse_e2k(text: str) -> Dict[str, Any]:
             "extra": found
         })
 
+    # DIAPHRAGM NAMES
+    dn_txt = _extract_section(text, r'^\s*\$ DIAPHRAGM NAMES')
+    dn_lines = [ln for ln in dn_txt.splitlines() if ln.strip()]
+    dn_pat = re.compile(r'^\s*DIAPHRAGM\s+"([^"]+)"', re.IGNORECASE)
+    diaphragm_names: List[str] = []
+    for ln in dn_lines:
+        m = dn_pat.match(ln)
+        if m:
+            diaphragm_names.append(m.group(1))
+
     return {
         "stories": stories,
         "points": points,
         "point_assigns": point_assigns,
         "lines": lines,
         "line_assigns": line_assigns,
+        "diaphragm_names": diaphragm_names,
     }

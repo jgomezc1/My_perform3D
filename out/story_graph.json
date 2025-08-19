@@ -31,7 +31,7 @@
         "y": 15.575,
         "z": 2.0,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -40,7 +40,7 @@
         "y": 11.0,
         "z": 2.0,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -49,7 +49,7 @@
         "y": 12.275,
         "z": 2.0,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -58,7 +58,7 @@
         "y": 13.325,
         "z": 2.0,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -67,7 +67,7 @@
         "y": 14.375,
         "z": 2.0,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -76,7 +76,7 @@
         "y": 11.0,
         "z": 2.0,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": "RES_00"
       },
       {
@@ -85,7 +85,7 @@
         "y": 15.575,
         "z": 2.0,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -94,7 +94,7 @@
         "y": 15.575,
         "z": 2.0,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -103,7 +103,7 @@
         "y": 11.0,
         "z": 2.0,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": "RES_00"
       },
       {
@@ -112,7 +112,7 @@
         "y": 12.275,
         "z": 2.0,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -121,7 +121,7 @@
         "y": 13.325,
         "z": 2.0,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -130,7 +130,7 @@
         "y": 14.375,
         "z": 2.0,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -139,7 +139,7 @@
         "y": 15.575,
         "z": 2.0,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -148,7 +148,7 @@
         "y": 15.575,
         "z": 2.0,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -157,7 +157,7 @@
         "y": 15.575,
         "z": 2.0,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -166,7 +166,7 @@
         "y": 15.575,
         "z": 2.0,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -175,7 +175,7 @@
         "y": 15.575,
         "z": 2.0,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -184,7 +184,7 @@
         "y": 15.575,
         "z": 2.0,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -193,7 +193,7 @@
         "y": 12.275,
         "z": 2.0,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -202,7 +202,7 @@
         "y": 13.325,
         "z": 2.0,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -211,7 +211,7 @@
         "y": 14.375,
         "z": 2.0,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -220,7 +220,7 @@
         "y": 11.0,
         "z": 2.0,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -229,7 +229,7 @@
         "y": 11.0,
         "z": 2.0,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -238,7 +238,7 @@
         "y": 11.0,
         "z": 2.0,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -247,7 +247,7 @@
         "y": 11.0,
         "z": 2.0,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -256,7 +256,7 @@
         "y": 11.0,
         "z": 2.0,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -265,7 +265,7 @@
         "y": 11.0,
         "z": 2.0,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -274,7 +274,7 @@
         "y": 11.0,
         "z": 2.0,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -283,7 +283,7 @@
         "y": 11.0,
         "z": 2.0,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -292,7 +292,7 @@
         "y": 11.0,
         "z": 2.0,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -301,7 +301,7 @@
         "y": 11.0,
         "z": 2.0,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -310,7 +310,7 @@
         "y": 11.0,
         "z": 2.0,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -319,7 +319,7 @@
         "y": 11.0,
         "z": 2.0,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -328,7 +328,7 @@
         "y": 15.575,
         "z": 2.0,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -337,7 +337,7 @@
         "y": 15.575,
         "z": 2.0,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -346,7 +346,7 @@
         "y": 15.575,
         "z": 2.0,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -355,7 +355,7 @@
         "y": 15.575,
         "z": 2.0,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -364,7 +364,7 @@
         "y": 15.575,
         "z": 2.0,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -373,7 +373,7 @@
         "y": 15.575,
         "z": 2.0,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -382,7 +382,7 @@
         "y": 11.0,
         "z": 2.0,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -391,7 +391,7 @@
         "y": 14.375,
         "z": 2.0,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -400,7 +400,7 @@
         "y": 13.325,
         "z": 2.0,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -409,7 +409,7 @@
         "y": 12.275,
         "z": 2.0,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -418,7 +418,7 @@
         "y": 15.575,
         "z": 2.0,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       }
     ],
@@ -429,7 +429,7 @@
         "y": 27.45,
         "z": 3.7,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -438,7 +438,7 @@
         "y": 16.175,
         "z": 3.7,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -447,7 +447,7 @@
         "y": 20.75,
         "z": 3.7,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -456,7 +456,7 @@
         "y": 27.45,
         "z": 3.7,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -465,7 +465,7 @@
         "y": 20.75,
         "z": 3.7,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": "RES_00_75cm"
       },
       {
@@ -474,7 +474,7 @@
         "y": 27.45,
         "z": 3.7,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": "RES_00_75cm"
       },
       {
@@ -483,7 +483,7 @@
         "y": 27.45,
         "z": 3.7,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -492,7 +492,7 @@
         "y": 27.45,
         "z": 3.7,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -501,7 +501,7 @@
         "y": 27.45,
         "z": 3.7,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -510,7 +510,7 @@
         "y": 27.45,
         "z": 3.7,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -519,7 +519,7 @@
         "y": 27.45,
         "z": 3.7,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -528,7 +528,7 @@
         "y": 27.45,
         "z": 3.7,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -537,7 +537,7 @@
         "y": 17.375,
         "z": 3.7,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -546,7 +546,7 @@
         "y": 18.425,
         "z": 3.7,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -555,7 +555,7 @@
         "y": 19.475,
         "z": 3.7,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -564,7 +564,7 @@
         "y": 21.95,
         "z": 3.7,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -573,7 +573,7 @@
         "y": 23.0,
         "z": 3.7,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -582,7 +582,7 @@
         "y": 24.05,
         "z": 3.7,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -591,7 +591,7 @@
         "y": 25.1,
         "z": 3.7,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -600,7 +600,7 @@
         "y": 26.15,
         "z": 3.7,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -609,7 +609,7 @@
         "y": 16.175,
         "z": 3.7,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -618,7 +618,7 @@
         "y": 20.75,
         "z": 3.7,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": "RES_00_75cm"
       },
       {
@@ -627,7 +627,7 @@
         "y": 16.175,
         "z": 3.7,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -636,7 +636,7 @@
         "y": 27.45,
         "z": 3.7,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": "RES_00_75cm"
       },
       {
@@ -645,7 +645,7 @@
         "y": 27.45,
         "z": 3.7,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": "RES_00_75cm"
       },
       {
@@ -654,7 +654,7 @@
         "y": 20.75,
         "z": 3.7,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -663,7 +663,7 @@
         "y": 20.75,
         "z": 3.7,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -672,7 +672,7 @@
         "y": 20.75,
         "z": 3.7,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -681,7 +681,7 @@
         "y": 20.75,
         "z": 3.7,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -690,7 +690,7 @@
         "y": 20.75,
         "z": 3.7,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -699,7 +699,7 @@
         "y": 20.75,
         "z": 3.7,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -708,7 +708,7 @@
         "y": 20.75,
         "z": 3.7,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -717,7 +717,7 @@
         "y": 21.95,
         "z": 3.7,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -726,7 +726,7 @@
         "y": 23.0,
         "z": 3.7,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -735,7 +735,7 @@
         "y": 24.05,
         "z": 3.7,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -744,7 +744,7 @@
         "y": 25.1,
         "z": 3.7,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -753,7 +753,7 @@
         "y": 26.15,
         "z": 3.7,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -762,7 +762,7 @@
         "y": 27.45,
         "z": 3.7,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -771,7 +771,7 @@
         "y": 17.375,
         "z": 3.7,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -780,7 +780,7 @@
         "y": 18.425,
         "z": 3.7,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -789,7 +789,7 @@
         "y": 19.475,
         "z": 3.7,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -798,7 +798,7 @@
         "y": 21.95,
         "z": 3.7,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -807,7 +807,7 @@
         "y": 23.0,
         "z": 3.7,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -816,7 +816,7 @@
         "y": 24.05,
         "z": 3.7,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -825,7 +825,7 @@
         "y": 25.1,
         "z": 3.7,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -834,7 +834,7 @@
         "y": 26.15,
         "z": 3.7,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -843,7 +843,7 @@
         "y": 16.175,
         "z": 3.7,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -852,7 +852,7 @@
         "y": 27.45,
         "z": 3.7,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -861,7 +861,7 @@
         "y": 16.175,
         "z": 3.7,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -870,7 +870,7 @@
         "y": 27.45,
         "z": 3.7,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -879,7 +879,7 @@
         "y": 16.175,
         "z": 3.7,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -888,7 +888,7 @@
         "y": 27.45,
         "z": 3.7,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -897,7 +897,7 @@
         "y": 16.175,
         "z": 3.7,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -906,7 +906,7 @@
         "y": 27.45,
         "z": 3.7,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -915,7 +915,7 @@
         "y": 16.175,
         "z": 3.7,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -924,7 +924,7 @@
         "y": 27.45,
         "z": 3.7,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -933,7 +933,7 @@
         "y": 16.175,
         "z": 3.7,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -942,7 +942,7 @@
         "y": 27.45,
         "z": 3.7,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -951,7 +951,7 @@
         "y": 27.45,
         "z": 3.7,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -960,7 +960,7 @@
         "y": 25.1,
         "z": 3.7,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -969,7 +969,7 @@
         "y": 26.15,
         "z": 3.7,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -978,7 +978,7 @@
         "y": 17.375,
         "z": 3.7,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -987,7 +987,7 @@
         "y": 18.425,
         "z": 3.7,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -996,7 +996,7 @@
         "y": 19.475,
         "z": 3.7,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -1005,7 +1005,7 @@
         "y": 21.95,
         "z": 3.7,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -1014,7 +1014,7 @@
         "y": 23.0,
         "z": 3.7,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -1023,7 +1023,7 @@
         "y": 24.05,
         "z": 3.7,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -1032,7 +1032,7 @@
         "y": 20.75,
         "z": 3.7,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -1041,7 +1041,7 @@
         "y": 20.75,
         "z": 3.7,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -1050,7 +1050,7 @@
         "y": 20.75,
         "z": 3.7,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -1059,7 +1059,7 @@
         "y": 20.75,
         "z": 3.7,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -1068,7 +1068,7 @@
         "y": 20.75,
         "z": 3.7,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -1077,7 +1077,7 @@
         "y": 20.75,
         "z": 3.7,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -1086,7 +1086,7 @@
         "y": 20.75,
         "z": 3.7,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -1095,7 +1095,7 @@
         "y": 16.175,
         "z": 3.7,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -1104,7 +1104,7 @@
         "y": 20.75,
         "z": 3.7,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -1113,7 +1113,7 @@
         "y": 27.45,
         "z": 3.7,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -1122,7 +1122,7 @@
         "y": 16.175,
         "z": 3.7,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -1131,7 +1131,7 @@
         "y": 20.75,
         "z": 3.7,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -1140,7 +1140,7 @@
         "y": 27.45,
         "z": 3.7,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -1149,7 +1149,7 @@
         "y": 16.175,
         "z": 3.7,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -1158,7 +1158,7 @@
         "y": 20.75,
         "z": 3.7,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -1167,7 +1167,7 @@
         "y": 27.45,
         "z": 3.7,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -1176,7 +1176,7 @@
         "y": 16.175,
         "z": 3.7,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -1185,7 +1185,7 @@
         "y": 20.75,
         "z": 3.7,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -1194,7 +1194,7 @@
         "y": 27.45,
         "z": 3.7,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -1203,7 +1203,7 @@
         "y": 16.175,
         "z": 3.7,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -1212,7 +1212,7 @@
         "y": 20.75,
         "z": 3.7,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -1221,7 +1221,7 @@
         "y": 27.45,
         "z": 3.7,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -1230,7 +1230,7 @@
         "y": 16.175,
         "z": 3.7,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -1239,7 +1239,7 @@
         "y": 20.75,
         "z": 3.7,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -1248,7 +1248,7 @@
         "y": 27.45,
         "z": 3.7,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       }
     ],
@@ -1259,7 +1259,7 @@
         "y": 15.575,
         "z": 5.4,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -1268,7 +1268,7 @@
         "y": 15.575,
         "z": 5.4,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -1277,7 +1277,7 @@
         "y": 11.0,
         "z": 5.4,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -1286,7 +1286,7 @@
         "y": 11.0,
         "z": 5.4,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -1295,7 +1295,7 @@
         "y": 15.575,
         "z": 5.4,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -1304,7 +1304,7 @@
         "y": 12.275,
         "z": 5.4,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -1313,7 +1313,7 @@
         "y": 13.325,
         "z": 5.4,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -1322,7 +1322,7 @@
         "y": 14.375,
         "z": 5.4,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -1331,7 +1331,7 @@
         "y": 15.575,
         "z": 5.4,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -1340,7 +1340,7 @@
         "y": 15.575,
         "z": 5.4,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -1349,7 +1349,7 @@
         "y": 15.575,
         "z": 5.4,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -1358,7 +1358,7 @@
         "y": 15.575,
         "z": 5.4,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -1367,7 +1367,7 @@
         "y": 15.575,
         "z": 5.4,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -1376,7 +1376,7 @@
         "y": 15.575,
         "z": 5.4,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -1385,7 +1385,7 @@
         "y": 11.0,
         "z": 5.4,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -1394,7 +1394,7 @@
         "y": 12.275,
         "z": 5.4,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -1403,7 +1403,7 @@
         "y": 12.275,
         "z": 5.4,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -1412,7 +1412,7 @@
         "y": 13.325,
         "z": 5.4,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -1421,7 +1421,7 @@
         "y": 13.325,
         "z": 5.4,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -1430,7 +1430,7 @@
         "y": 14.375,
         "z": 5.4,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -1439,7 +1439,7 @@
         "y": 14.375,
         "z": 5.4,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -1448,7 +1448,7 @@
         "y": 11.0,
         "z": 5.4,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -1457,7 +1457,7 @@
         "y": 11.0,
         "z": 5.4,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -1466,7 +1466,7 @@
         "y": 11.0,
         "z": 5.4,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -1475,7 +1475,7 @@
         "y": 11.0,
         "z": 5.4,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -1484,7 +1484,7 @@
         "y": 11.0,
         "z": 5.4,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -1493,7 +1493,7 @@
         "y": 11.0,
         "z": 5.4,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -1502,7 +1502,7 @@
         "y": 11.0,
         "z": 5.4,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -1511,7 +1511,7 @@
         "y": 11.0,
         "z": 5.4,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -1520,7 +1520,7 @@
         "y": 11.0,
         "z": 5.4,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -1529,7 +1529,7 @@
         "y": 11.0,
         "z": 5.4,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -1538,7 +1538,7 @@
         "y": 11.0,
         "z": 5.4,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -1547,7 +1547,7 @@
         "y": 11.0,
         "z": 5.4,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -1556,7 +1556,7 @@
         "y": 15.575,
         "z": 5.4,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -1565,7 +1565,7 @@
         "y": 15.575,
         "z": 5.4,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -1574,7 +1574,7 @@
         "y": 15.575,
         "z": 5.4,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -1583,7 +1583,7 @@
         "y": 15.575,
         "z": 5.4,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -1592,7 +1592,7 @@
         "y": 15.575,
         "z": 5.4,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -1601,7 +1601,7 @@
         "y": 15.575,
         "z": 5.4,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -1610,7 +1610,7 @@
         "y": 11.0,
         "z": 5.4,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -1619,7 +1619,7 @@
         "y": 14.375,
         "z": 5.4,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -1628,7 +1628,7 @@
         "y": 13.325,
         "z": 5.4,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -1637,7 +1637,7 @@
         "y": 12.275,
         "z": 5.4,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -1646,7 +1646,7 @@
         "y": 15.575,
         "z": 5.4,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       }
     ],
@@ -1657,7 +1657,7 @@
         "y": 27.45,
         "z": 7.1000000000000005,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -1666,7 +1666,7 @@
         "y": 16.175,
         "z": 7.1000000000000005,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -1675,7 +1675,7 @@
         "y": 20.75,
         "z": 7.1000000000000005,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -1684,7 +1684,7 @@
         "y": 27.45,
         "z": 7.1000000000000005,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -1693,7 +1693,7 @@
         "y": 16.175,
         "z": 7.1000000000000005,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -1702,7 +1702,7 @@
         "y": 20.75,
         "z": 7.1000000000000005,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -1711,7 +1711,7 @@
         "y": 27.45,
         "z": 7.1000000000000005,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -1720,7 +1720,7 @@
         "y": 16.175,
         "z": 7.1000000000000005,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -1729,7 +1729,7 @@
         "y": 20.75,
         "z": 7.1000000000000005,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -1738,7 +1738,7 @@
         "y": 27.45,
         "z": 7.1000000000000005,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -1747,7 +1747,7 @@
         "y": 27.45,
         "z": 7.1000000000000005,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -1756,7 +1756,7 @@
         "y": 27.45,
         "z": 7.1000000000000005,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -1765,7 +1765,7 @@
         "y": 27.45,
         "z": 7.1000000000000005,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -1774,7 +1774,7 @@
         "y": 27.45,
         "z": 7.1000000000000005,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -1783,7 +1783,7 @@
         "y": 27.45,
         "z": 7.1000000000000005,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -1792,7 +1792,7 @@
         "y": 27.45,
         "z": 7.1000000000000005,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -1801,7 +1801,7 @@
         "y": 17.375,
         "z": 7.1000000000000005,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -1810,7 +1810,7 @@
         "y": 18.425,
         "z": 7.1000000000000005,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -1819,7 +1819,7 @@
         "y": 19.475,
         "z": 7.1000000000000005,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -1828,7 +1828,7 @@
         "y": 21.95,
         "z": 7.1000000000000005,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -1837,7 +1837,7 @@
         "y": 23.0,
         "z": 7.1000000000000005,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -1846,7 +1846,7 @@
         "y": 24.05,
         "z": 7.1000000000000005,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -1855,7 +1855,7 @@
         "y": 25.1,
         "z": 7.1000000000000005,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -1864,7 +1864,7 @@
         "y": 26.15,
         "z": 7.1000000000000005,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -1873,7 +1873,7 @@
         "y": 16.175,
         "z": 7.1000000000000005,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -1882,7 +1882,7 @@
         "y": 27.45,
         "z": 7.1000000000000005,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -1891,7 +1891,7 @@
         "y": 16.175,
         "z": 7.1000000000000005,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -1900,7 +1900,7 @@
         "y": 27.45,
         "z": 7.1000000000000005,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -1909,7 +1909,7 @@
         "y": 16.175,
         "z": 7.1000000000000005,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -1918,7 +1918,7 @@
         "y": 27.45,
         "z": 7.1000000000000005,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -1927,7 +1927,7 @@
         "y": 16.175,
         "z": 7.1000000000000005,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -1936,7 +1936,7 @@
         "y": 27.45,
         "z": 7.1000000000000005,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -1945,7 +1945,7 @@
         "y": 16.175,
         "z": 7.1000000000000005,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -1954,7 +1954,7 @@
         "y": 27.45,
         "z": 7.1000000000000005,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -1963,7 +1963,7 @@
         "y": 16.175,
         "z": 7.1000000000000005,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -1972,7 +1972,7 @@
         "y": 27.45,
         "z": 7.1000000000000005,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -1981,7 +1981,7 @@
         "y": 20.75,
         "z": 7.1000000000000005,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -1990,7 +1990,7 @@
         "y": 27.45,
         "z": 7.1000000000000005,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -1999,7 +1999,7 @@
         "y": 20.75,
         "z": 7.1000000000000005,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -2008,7 +2008,7 @@
         "y": 27.45,
         "z": 7.1000000000000005,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -2017,7 +2017,7 @@
         "y": 27.45,
         "z": 7.1000000000000005,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -2026,7 +2026,7 @@
         "y": 25.1,
         "z": 7.1000000000000005,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -2035,7 +2035,7 @@
         "y": 25.1,
         "z": 7.1000000000000005,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -2044,7 +2044,7 @@
         "y": 25.1,
         "z": 7.1000000000000005,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -2053,7 +2053,7 @@
         "y": 26.15,
         "z": 7.1000000000000005,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -2062,7 +2062,7 @@
         "y": 26.15,
         "z": 7.1000000000000005,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -2071,7 +2071,7 @@
         "y": 26.15,
         "z": 7.1000000000000005,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -2080,7 +2080,7 @@
         "y": 20.75,
         "z": 7.1000000000000005,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -2089,7 +2089,7 @@
         "y": 20.75,
         "z": 7.1000000000000005,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -2098,7 +2098,7 @@
         "y": 20.75,
         "z": 7.1000000000000005,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -2107,7 +2107,7 @@
         "y": 20.75,
         "z": 7.1000000000000005,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -2116,7 +2116,7 @@
         "y": 20.75,
         "z": 7.1000000000000005,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -2125,7 +2125,7 @@
         "y": 20.75,
         "z": 7.1000000000000005,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -2134,7 +2134,7 @@
         "y": 17.375,
         "z": 7.1000000000000005,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -2143,7 +2143,7 @@
         "y": 17.375,
         "z": 7.1000000000000005,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -2152,7 +2152,7 @@
         "y": 18.425,
         "z": 7.1000000000000005,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -2161,7 +2161,7 @@
         "y": 18.425,
         "z": 7.1000000000000005,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -2170,7 +2170,7 @@
         "y": 19.475,
         "z": 7.1000000000000005,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -2179,7 +2179,7 @@
         "y": 19.475,
         "z": 7.1000000000000005,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -2188,7 +2188,7 @@
         "y": 21.95,
         "z": 7.1000000000000005,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -2197,7 +2197,7 @@
         "y": 21.95,
         "z": 7.1000000000000005,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -2206,7 +2206,7 @@
         "y": 21.95,
         "z": 7.1000000000000005,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -2215,7 +2215,7 @@
         "y": 23.0,
         "z": 7.1000000000000005,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -2224,7 +2224,7 @@
         "y": 23.0,
         "z": 7.1000000000000005,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -2233,7 +2233,7 @@
         "y": 23.0,
         "z": 7.1000000000000005,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -2242,7 +2242,7 @@
         "y": 24.05,
         "z": 7.1000000000000005,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -2251,7 +2251,7 @@
         "y": 24.05,
         "z": 7.1000000000000005,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -2260,7 +2260,7 @@
         "y": 24.05,
         "z": 7.1000000000000005,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -2269,7 +2269,7 @@
         "y": 20.75,
         "z": 7.1000000000000005,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -2278,7 +2278,7 @@
         "y": 20.75,
         "z": 7.1000000000000005,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -2287,7 +2287,7 @@
         "y": 20.75,
         "z": 7.1000000000000005,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -2296,7 +2296,7 @@
         "y": 20.75,
         "z": 7.1000000000000005,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -2305,7 +2305,7 @@
         "y": 20.75,
         "z": 7.1000000000000005,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -2314,7 +2314,7 @@
         "y": 20.75,
         "z": 7.1000000000000005,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -2323,7 +2323,7 @@
         "y": 16.175,
         "z": 7.1000000000000005,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -2332,7 +2332,7 @@
         "y": 20.75,
         "z": 7.1000000000000005,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -2341,7 +2341,7 @@
         "y": 27.45,
         "z": 7.1000000000000005,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -2350,7 +2350,7 @@
         "y": 16.175,
         "z": 7.1000000000000005,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -2359,7 +2359,7 @@
         "y": 20.75,
         "z": 7.1000000000000005,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -2368,7 +2368,7 @@
         "y": 27.45,
         "z": 7.1000000000000005,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -2377,7 +2377,7 @@
         "y": 16.175,
         "z": 7.1000000000000005,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -2386,7 +2386,7 @@
         "y": 20.75,
         "z": 7.1000000000000005,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -2395,7 +2395,7 @@
         "y": 27.45,
         "z": 7.1000000000000005,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -2404,7 +2404,7 @@
         "y": 16.175,
         "z": 7.1000000000000005,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -2413,7 +2413,7 @@
         "y": 20.75,
         "z": 7.1000000000000005,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -2422,7 +2422,7 @@
         "y": 27.45,
         "z": 7.1000000000000005,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -2431,7 +2431,7 @@
         "y": 16.175,
         "z": 7.1000000000000005,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -2440,7 +2440,7 @@
         "y": 20.75,
         "z": 7.1000000000000005,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -2449,7 +2449,7 @@
         "y": 27.45,
         "z": 7.1000000000000005,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -2458,7 +2458,7 @@
         "y": 16.175,
         "z": 7.1000000000000005,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -2467,7 +2467,7 @@
         "y": 20.75,
         "z": 7.1000000000000005,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -2476,7 +2476,7 @@
         "y": 27.45,
         "z": 7.1000000000000005,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -2485,7 +2485,7 @@
         "y": 27.45,
         "z": 7.1000000000000005,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -2494,7 +2494,7 @@
         "y": 20.75,
         "z": 7.1000000000000005,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -2503,7 +2503,7 @@
         "y": 16.175,
         "z": 7.1000000000000005,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -2512,7 +2512,7 @@
         "y": 26.15,
         "z": 7.1000000000000005,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -2521,7 +2521,7 @@
         "y": 25.1,
         "z": 7.1000000000000005,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -2530,7 +2530,7 @@
         "y": 24.05,
         "z": 7.1000000000000005,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -2539,7 +2539,7 @@
         "y": 23.0,
         "z": 7.1000000000000005,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -2548,7 +2548,7 @@
         "y": 21.95,
         "z": 7.1000000000000005,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -2557,7 +2557,7 @@
         "y": 19.475,
         "z": 7.1000000000000005,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -2566,7 +2566,7 @@
         "y": 18.425,
         "z": 7.1000000000000005,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -2575,7 +2575,7 @@
         "y": 17.375,
         "z": 7.1000000000000005,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       }
     ],
@@ -2586,7 +2586,7 @@
         "y": 27.45,
         "z": 14.775000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -2595,7 +2595,7 @@
         "y": 20.75,
         "z": 14.775000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -2604,7 +2604,7 @@
         "y": 27.45,
         "z": 14.775000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -2613,7 +2613,7 @@
         "y": 27.45,
         "z": 14.775000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -2622,7 +2622,7 @@
         "y": 11.0,
         "z": 14.775000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -2631,7 +2631,7 @@
         "y": 16.175,
         "z": 14.775000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -2640,7 +2640,7 @@
         "y": 20.75,
         "z": 14.775000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -2649,7 +2649,7 @@
         "y": 27.45,
         "z": 14.775000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -2658,7 +2658,7 @@
         "y": 16.175,
         "z": 14.775000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -2667,7 +2667,7 @@
         "y": 27.45,
         "z": 14.775000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -2676,7 +2676,7 @@
         "y": 20.75,
         "z": 14.775000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -2685,7 +2685,7 @@
         "y": 16.175,
         "z": 14.775000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -2694,7 +2694,7 @@
         "y": 11.0,
         "z": 14.775000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -2703,7 +2703,7 @@
         "y": 27.45,
         "z": 14.775000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -2712,7 +2712,7 @@
         "y": 27.45,
         "z": 14.775000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -2721,7 +2721,7 @@
         "y": 27.45,
         "z": 14.775000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -2730,7 +2730,7 @@
         "y": 27.45,
         "z": 14.775000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -2739,7 +2739,7 @@
         "y": 27.45,
         "z": 14.775000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -2748,7 +2748,7 @@
         "y": 27.45,
         "z": 14.775000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -2757,7 +2757,7 @@
         "y": 27.45,
         "z": 14.775000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -2766,7 +2766,7 @@
         "y": 27.45,
         "z": 14.775000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -2775,7 +2775,7 @@
         "y": 27.45,
         "z": 14.775000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -2784,7 +2784,7 @@
         "y": 27.45,
         "z": 14.775000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -2793,7 +2793,7 @@
         "y": 27.45,
         "z": 14.775000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -2802,7 +2802,7 @@
         "y": 27.45,
         "z": 14.775000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -2811,7 +2811,7 @@
         "y": 26.15,
         "z": 14.775000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -2820,7 +2820,7 @@
         "y": 25.1,
         "z": 14.775000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -2829,7 +2829,7 @@
         "y": 24.05,
         "z": 14.775000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -2838,7 +2838,7 @@
         "y": 23.0,
         "z": 14.775000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -2847,7 +2847,7 @@
         "y": 21.95,
         "z": 14.775000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -2856,7 +2856,7 @@
         "y": 19.475,
         "z": 14.775000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -2865,7 +2865,7 @@
         "y": 18.425,
         "z": 14.775000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -2874,7 +2874,7 @@
         "y": 17.375,
         "z": 14.775000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -2883,7 +2883,7 @@
         "y": 15.425,
         "z": 14.775000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -2892,7 +2892,7 @@
         "y": 14.375,
         "z": 14.775000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -2901,7 +2901,7 @@
         "y": 13.325,
         "z": 14.775000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -2910,7 +2910,7 @@
         "y": 12.275,
         "z": 14.775000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -2919,7 +2919,7 @@
         "y": 20.75,
         "z": 14.775000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -2928,7 +2928,7 @@
         "y": 27.45,
         "z": 14.775000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -2937,7 +2937,7 @@
         "y": 27.45,
         "z": 14.775000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -2946,7 +2946,7 @@
         "y": 11.0,
         "z": 14.775000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -2955,7 +2955,7 @@
         "y": 20.75,
         "z": 14.775000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -2964,7 +2964,7 @@
         "y": 20.75,
         "z": 14.775000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -2973,7 +2973,7 @@
         "y": 20.75,
         "z": 14.775000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -2982,7 +2982,7 @@
         "y": 20.75,
         "z": 14.775000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -2991,7 +2991,7 @@
         "y": 20.75,
         "z": 14.775000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -3000,7 +3000,7 @@
         "y": 20.75,
         "z": 14.775000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -3009,7 +3009,7 @@
         "y": 20.75,
         "z": 14.775000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -3018,7 +3018,7 @@
         "y": 20.75,
         "z": 14.775000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -3027,7 +3027,7 @@
         "y": 20.75,
         "z": 14.775000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -3036,7 +3036,7 @@
         "y": 20.75,
         "z": 14.775000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -3045,7 +3045,7 @@
         "y": 20.75,
         "z": 14.775000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -3054,7 +3054,7 @@
         "y": 20.75,
         "z": 14.775000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -3063,7 +3063,7 @@
         "y": 20.75,
         "z": 14.775000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -3072,7 +3072,7 @@
         "y": 26.15,
         "z": 14.775000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -3081,7 +3081,7 @@
         "y": 26.15,
         "z": 14.775000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -3090,7 +3090,7 @@
         "y": 26.15,
         "z": 14.775000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -3099,7 +3099,7 @@
         "y": 25.1,
         "z": 14.775000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -3108,7 +3108,7 @@
         "y": 25.1,
         "z": 14.775000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -3117,7 +3117,7 @@
         "y": 25.1,
         "z": 14.775000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -3126,7 +3126,7 @@
         "y": 24.05,
         "z": 14.775000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -3135,7 +3135,7 @@
         "y": 24.05,
         "z": 14.775000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -3144,7 +3144,7 @@
         "y": 24.05,
         "z": 14.775000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -3153,7 +3153,7 @@
         "y": 23.0,
         "z": 14.775000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -3162,7 +3162,7 @@
         "y": 23.0,
         "z": 14.775000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -3171,7 +3171,7 @@
         "y": 23.0,
         "z": 14.775000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -3180,7 +3180,7 @@
         "y": 21.95,
         "z": 14.775000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -3189,7 +3189,7 @@
         "y": 21.95,
         "z": 14.775000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -3198,7 +3198,7 @@
         "y": 21.95,
         "z": 14.775000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -3207,7 +3207,7 @@
         "y": 19.475,
         "z": 14.775000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -3216,7 +3216,7 @@
         "y": 18.425,
         "z": 14.775000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -3225,7 +3225,7 @@
         "y": 17.375,
         "z": 14.775000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -3234,7 +3234,7 @@
         "y": 15.425,
         "z": 14.775000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -3243,7 +3243,7 @@
         "y": 14.375,
         "z": 14.775000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -3252,7 +3252,7 @@
         "y": 13.325,
         "z": 14.775000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -3261,7 +3261,7 @@
         "y": 12.275,
         "z": 14.775000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -3270,7 +3270,7 @@
         "y": 20.75,
         "z": 14.775000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -3279,7 +3279,7 @@
         "y": 27.45,
         "z": 14.775000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -3288,7 +3288,7 @@
         "y": 11.0,
         "z": 14.775000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -3297,7 +3297,7 @@
         "y": 16.175,
         "z": 14.775000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -3306,7 +3306,7 @@
         "y": 20.75,
         "z": 14.775000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -3315,7 +3315,7 @@
         "y": 27.45,
         "z": 14.775000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -3324,7 +3324,7 @@
         "y": 11.0,
         "z": 14.775000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -3333,7 +3333,7 @@
         "y": 16.175,
         "z": 14.775000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -3342,7 +3342,7 @@
         "y": 20.75,
         "z": 14.775000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -3351,7 +3351,7 @@
         "y": 27.45,
         "z": 14.775000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -3360,7 +3360,7 @@
         "y": 11.0,
         "z": 14.775000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -3369,7 +3369,7 @@
         "y": 16.175,
         "z": 14.775000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -3378,7 +3378,7 @@
         "y": 20.75,
         "z": 14.775000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -3387,7 +3387,7 @@
         "y": 27.45,
         "z": 14.775000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -3396,7 +3396,7 @@
         "y": 11.0,
         "z": 14.775000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -3405,7 +3405,7 @@
         "y": 16.175,
         "z": 14.775000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -3414,7 +3414,7 @@
         "y": 20.75,
         "z": 14.775000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -3423,7 +3423,7 @@
         "y": 27.45,
         "z": 14.775000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -3432,7 +3432,7 @@
         "y": 11.0,
         "z": 14.775000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -3441,7 +3441,7 @@
         "y": 16.175,
         "z": 14.775000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -3450,7 +3450,7 @@
         "y": 20.75,
         "z": 14.775000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -3459,7 +3459,7 @@
         "y": 27.45,
         "z": 14.775000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -3468,7 +3468,7 @@
         "y": 11.0,
         "z": 14.775000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -3477,7 +3477,7 @@
         "y": 16.175,
         "z": 14.775000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -3486,7 +3486,7 @@
         "y": 20.75,
         "z": 14.775000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -3495,7 +3495,7 @@
         "y": 27.45,
         "z": 14.775000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -3504,7 +3504,7 @@
         "y": 26.15,
         "z": 14.775000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -3513,7 +3513,7 @@
         "y": 25.1,
         "z": 14.775000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -3522,7 +3522,7 @@
         "y": 24.05,
         "z": 14.775000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -3531,7 +3531,7 @@
         "y": 23.0,
         "z": 14.775000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -3540,7 +3540,7 @@
         "y": 21.95,
         "z": 14.775000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -3549,7 +3549,7 @@
         "y": 19.475,
         "z": 14.775000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -3558,7 +3558,7 @@
         "y": 18.425,
         "z": 14.775000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -3567,7 +3567,7 @@
         "y": 17.375,
         "z": 14.775000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -3576,7 +3576,7 @@
         "y": 15.425,
         "z": 14.775000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -3585,7 +3585,7 @@
         "y": 14.375,
         "z": 14.775000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -3594,7 +3594,7 @@
         "y": 13.325,
         "z": 14.775000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -3603,7 +3603,7 @@
         "y": 12.275,
         "z": 14.775000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       }
     ],
@@ -3614,7 +3614,7 @@
         "y": 15.575,
         "z": 8.65,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -3623,7 +3623,7 @@
         "y": 15.575,
         "z": 8.65,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -3632,7 +3632,7 @@
         "y": 11.0,
         "z": 8.65,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -3641,7 +3641,7 @@
         "y": 11.0,
         "z": 8.65,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -3650,7 +3650,7 @@
         "y": 15.575,
         "z": 8.65,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -3659,7 +3659,7 @@
         "y": 12.275,
         "z": 8.65,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -3668,7 +3668,7 @@
         "y": 13.325,
         "z": 8.65,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -3677,7 +3677,7 @@
         "y": 14.375,
         "z": 8.65,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -3686,7 +3686,7 @@
         "y": 15.575,
         "z": 8.65,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -3695,7 +3695,7 @@
         "y": 15.575,
         "z": 8.65,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -3704,7 +3704,7 @@
         "y": 15.575,
         "z": 8.65,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -3713,7 +3713,7 @@
         "y": 15.575,
         "z": 8.65,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -3722,7 +3722,7 @@
         "y": 15.575,
         "z": 8.65,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -3731,7 +3731,7 @@
         "y": 15.575,
         "z": 8.65,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -3740,7 +3740,7 @@
         "y": 11.0,
         "z": 8.65,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -3749,7 +3749,7 @@
         "y": 12.275,
         "z": 8.65,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -3758,7 +3758,7 @@
         "y": 12.275,
         "z": 8.65,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -3767,7 +3767,7 @@
         "y": 13.325,
         "z": 8.65,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -3776,7 +3776,7 @@
         "y": 13.325,
         "z": 8.65,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -3785,7 +3785,7 @@
         "y": 14.375,
         "z": 8.65,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -3794,7 +3794,7 @@
         "y": 14.375,
         "z": 8.65,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -3803,7 +3803,7 @@
         "y": 11.0,
         "z": 8.65,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -3812,7 +3812,7 @@
         "y": 11.0,
         "z": 8.65,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -3821,7 +3821,7 @@
         "y": 11.0,
         "z": 8.65,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -3830,7 +3830,7 @@
         "y": 11.0,
         "z": 8.65,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -3839,7 +3839,7 @@
         "y": 11.0,
         "z": 8.65,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -3848,7 +3848,7 @@
         "y": 11.0,
         "z": 8.65,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -3857,7 +3857,7 @@
         "y": 11.0,
         "z": 8.65,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -3866,7 +3866,7 @@
         "y": 11.0,
         "z": 8.65,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -3875,7 +3875,7 @@
         "y": 11.0,
         "z": 8.65,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -3884,7 +3884,7 @@
         "y": 11.0,
         "z": 8.65,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -3893,7 +3893,7 @@
         "y": 11.0,
         "z": 8.65,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -3902,7 +3902,7 @@
         "y": 11.0,
         "z": 8.65,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -3911,7 +3911,7 @@
         "y": 15.575,
         "z": 8.65,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -3920,7 +3920,7 @@
         "y": 15.575,
         "z": 8.65,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -3929,7 +3929,7 @@
         "y": 15.575,
         "z": 8.65,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -3938,7 +3938,7 @@
         "y": 15.575,
         "z": 8.65,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -3947,7 +3947,7 @@
         "y": 15.575,
         "z": 8.65,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -3956,7 +3956,7 @@
         "y": 15.575,
         "z": 8.65,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -3965,7 +3965,7 @@
         "y": 11.0,
         "z": 8.65,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -3974,7 +3974,7 @@
         "y": 14.375,
         "z": 8.65,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -3983,7 +3983,7 @@
         "y": 13.325,
         "z": 8.65,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -3992,7 +3992,7 @@
         "y": 12.275,
         "z": 8.65,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -4001,7 +4001,7 @@
         "y": 15.575,
         "z": 8.65,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       }
     ],
@@ -4012,7 +4012,7 @@
         "y": 27.45,
         "z": 10.200000000000001,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -4021,7 +4021,7 @@
         "y": 16.175,
         "z": 10.200000000000001,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -4030,7 +4030,7 @@
         "y": 20.75,
         "z": 10.200000000000001,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -4039,7 +4039,7 @@
         "y": 27.45,
         "z": 10.200000000000001,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -4048,7 +4048,7 @@
         "y": 16.175,
         "z": 10.200000000000001,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -4057,7 +4057,7 @@
         "y": 20.75,
         "z": 10.200000000000001,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -4066,7 +4066,7 @@
         "y": 27.45,
         "z": 10.200000000000001,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -4075,7 +4075,7 @@
         "y": 16.175,
         "z": 10.200000000000001,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -4084,7 +4084,7 @@
         "y": 20.75,
         "z": 10.200000000000001,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -4093,7 +4093,7 @@
         "y": 27.45,
         "z": 10.200000000000001,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -4102,7 +4102,7 @@
         "y": 27.45,
         "z": 10.200000000000001,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -4111,7 +4111,7 @@
         "y": 27.45,
         "z": 10.200000000000001,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -4120,7 +4120,7 @@
         "y": 27.45,
         "z": 10.200000000000001,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -4129,7 +4129,7 @@
         "y": 27.45,
         "z": 10.200000000000001,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -4138,7 +4138,7 @@
         "y": 27.45,
         "z": 10.200000000000001,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -4147,7 +4147,7 @@
         "y": 27.45,
         "z": 10.200000000000001,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -4156,7 +4156,7 @@
         "y": 17.375,
         "z": 10.200000000000001,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -4165,7 +4165,7 @@
         "y": 18.425,
         "z": 10.200000000000001,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -4174,7 +4174,7 @@
         "y": 19.475,
         "z": 10.200000000000001,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -4183,7 +4183,7 @@
         "y": 21.95,
         "z": 10.200000000000001,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -4192,7 +4192,7 @@
         "y": 23.0,
         "z": 10.200000000000001,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -4201,7 +4201,7 @@
         "y": 24.05,
         "z": 10.200000000000001,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -4210,7 +4210,7 @@
         "y": 25.1,
         "z": 10.200000000000001,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -4219,7 +4219,7 @@
         "y": 26.15,
         "z": 10.200000000000001,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -4228,7 +4228,7 @@
         "y": 16.175,
         "z": 10.200000000000001,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -4237,7 +4237,7 @@
         "y": 27.45,
         "z": 10.200000000000001,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -4246,7 +4246,7 @@
         "y": 16.175,
         "z": 10.200000000000001,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -4255,7 +4255,7 @@
         "y": 27.45,
         "z": 10.200000000000001,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -4264,7 +4264,7 @@
         "y": 16.175,
         "z": 10.200000000000001,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -4273,7 +4273,7 @@
         "y": 27.45,
         "z": 10.200000000000001,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -4282,7 +4282,7 @@
         "y": 16.175,
         "z": 10.200000000000001,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -4291,7 +4291,7 @@
         "y": 27.45,
         "z": 10.200000000000001,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -4300,7 +4300,7 @@
         "y": 16.175,
         "z": 10.200000000000001,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -4309,7 +4309,7 @@
         "y": 27.45,
         "z": 10.200000000000001,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -4318,7 +4318,7 @@
         "y": 16.175,
         "z": 10.200000000000001,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -4327,7 +4327,7 @@
         "y": 27.45,
         "z": 10.200000000000001,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -4336,7 +4336,7 @@
         "y": 20.75,
         "z": 10.200000000000001,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -4345,7 +4345,7 @@
         "y": 27.45,
         "z": 10.200000000000001,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -4354,7 +4354,7 @@
         "y": 20.75,
         "z": 10.200000000000001,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -4363,7 +4363,7 @@
         "y": 27.45,
         "z": 10.200000000000001,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -4372,7 +4372,7 @@
         "y": 27.45,
         "z": 10.200000000000001,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -4381,7 +4381,7 @@
         "y": 25.1,
         "z": 10.200000000000001,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -4390,7 +4390,7 @@
         "y": 25.1,
         "z": 10.200000000000001,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -4399,7 +4399,7 @@
         "y": 25.1,
         "z": 10.200000000000001,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -4408,7 +4408,7 @@
         "y": 26.15,
         "z": 10.200000000000001,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -4417,7 +4417,7 @@
         "y": 26.15,
         "z": 10.200000000000001,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -4426,7 +4426,7 @@
         "y": 26.15,
         "z": 10.200000000000001,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -4435,7 +4435,7 @@
         "y": 20.75,
         "z": 10.200000000000001,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -4444,7 +4444,7 @@
         "y": 20.75,
         "z": 10.200000000000001,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -4453,7 +4453,7 @@
         "y": 20.75,
         "z": 10.200000000000001,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -4462,7 +4462,7 @@
         "y": 20.75,
         "z": 10.200000000000001,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -4471,7 +4471,7 @@
         "y": 20.75,
         "z": 10.200000000000001,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -4480,7 +4480,7 @@
         "y": 20.75,
         "z": 10.200000000000001,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -4489,7 +4489,7 @@
         "y": 17.375,
         "z": 10.200000000000001,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -4498,7 +4498,7 @@
         "y": 17.375,
         "z": 10.200000000000001,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -4507,7 +4507,7 @@
         "y": 18.425,
         "z": 10.200000000000001,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -4516,7 +4516,7 @@
         "y": 18.425,
         "z": 10.200000000000001,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -4525,7 +4525,7 @@
         "y": 19.475,
         "z": 10.200000000000001,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -4534,7 +4534,7 @@
         "y": 19.475,
         "z": 10.200000000000001,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -4543,7 +4543,7 @@
         "y": 21.95,
         "z": 10.200000000000001,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -4552,7 +4552,7 @@
         "y": 21.95,
         "z": 10.200000000000001,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -4561,7 +4561,7 @@
         "y": 21.95,
         "z": 10.200000000000001,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -4570,7 +4570,7 @@
         "y": 23.0,
         "z": 10.200000000000001,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -4579,7 +4579,7 @@
         "y": 23.0,
         "z": 10.200000000000001,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -4588,7 +4588,7 @@
         "y": 23.0,
         "z": 10.200000000000001,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -4597,7 +4597,7 @@
         "y": 24.05,
         "z": 10.200000000000001,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -4606,7 +4606,7 @@
         "y": 24.05,
         "z": 10.200000000000001,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -4615,7 +4615,7 @@
         "y": 24.05,
         "z": 10.200000000000001,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -4624,7 +4624,7 @@
         "y": 20.75,
         "z": 10.200000000000001,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -4633,7 +4633,7 @@
         "y": 20.75,
         "z": 10.200000000000001,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -4642,7 +4642,7 @@
         "y": 20.75,
         "z": 10.200000000000001,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -4651,7 +4651,7 @@
         "y": 20.75,
         "z": 10.200000000000001,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -4660,7 +4660,7 @@
         "y": 20.75,
         "z": 10.200000000000001,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -4669,7 +4669,7 @@
         "y": 20.75,
         "z": 10.200000000000001,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -4678,7 +4678,7 @@
         "y": 16.175,
         "z": 10.200000000000001,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -4687,7 +4687,7 @@
         "y": 20.75,
         "z": 10.200000000000001,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -4696,7 +4696,7 @@
         "y": 27.45,
         "z": 10.200000000000001,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -4705,7 +4705,7 @@
         "y": 16.175,
         "z": 10.200000000000001,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -4714,7 +4714,7 @@
         "y": 20.75,
         "z": 10.200000000000001,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -4723,7 +4723,7 @@
         "y": 27.45,
         "z": 10.200000000000001,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -4732,7 +4732,7 @@
         "y": 16.175,
         "z": 10.200000000000001,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -4741,7 +4741,7 @@
         "y": 20.75,
         "z": 10.200000000000001,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -4750,7 +4750,7 @@
         "y": 27.45,
         "z": 10.200000000000001,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -4759,7 +4759,7 @@
         "y": 16.175,
         "z": 10.200000000000001,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -4768,7 +4768,7 @@
         "y": 20.75,
         "z": 10.200000000000001,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -4777,7 +4777,7 @@
         "y": 27.45,
         "z": 10.200000000000001,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -4786,7 +4786,7 @@
         "y": 16.175,
         "z": 10.200000000000001,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -4795,7 +4795,7 @@
         "y": 20.75,
         "z": 10.200000000000001,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -4804,7 +4804,7 @@
         "y": 27.45,
         "z": 10.200000000000001,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -4813,7 +4813,7 @@
         "y": 16.175,
         "z": 10.200000000000001,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -4822,7 +4822,7 @@
         "y": 20.75,
         "z": 10.200000000000001,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -4831,7 +4831,7 @@
         "y": 27.45,
         "z": 10.200000000000001,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -4840,7 +4840,7 @@
         "y": 27.45,
         "z": 10.200000000000001,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -4849,7 +4849,7 @@
         "y": 20.75,
         "z": 10.200000000000001,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -4858,7 +4858,7 @@
         "y": 16.175,
         "z": 10.200000000000001,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -4867,7 +4867,7 @@
         "y": 26.15,
         "z": 10.200000000000001,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -4876,7 +4876,7 @@
         "y": 25.1,
         "z": 10.200000000000001,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -4885,7 +4885,7 @@
         "y": 24.05,
         "z": 10.200000000000001,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -4894,7 +4894,7 @@
         "y": 23.0,
         "z": 10.200000000000001,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -4903,7 +4903,7 @@
         "y": 21.95,
         "z": 10.200000000000001,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -4912,7 +4912,7 @@
         "y": 19.475,
         "z": 10.200000000000001,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -4921,7 +4921,7 @@
         "y": 18.425,
         "z": 10.200000000000001,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -4930,7 +4930,7 @@
         "y": 17.375,
         "z": 10.200000000000001,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       }
     ],
@@ -4941,7 +4941,7 @@
         "y": 15.575,
         "z": 11.750000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -4950,7 +4950,7 @@
         "y": 15.575,
         "z": 11.750000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -4959,7 +4959,7 @@
         "y": 11.0,
         "z": 11.750000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -4968,7 +4968,7 @@
         "y": 11.0,
         "z": 11.750000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -4977,7 +4977,7 @@
         "y": 15.575,
         "z": 11.750000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -4986,7 +4986,7 @@
         "y": 12.275,
         "z": 11.750000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -4995,7 +4995,7 @@
         "y": 13.325,
         "z": 11.750000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -5004,7 +5004,7 @@
         "y": 14.375,
         "z": 11.750000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -5013,7 +5013,7 @@
         "y": 15.575,
         "z": 11.750000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -5022,7 +5022,7 @@
         "y": 15.575,
         "z": 11.750000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -5031,7 +5031,7 @@
         "y": 15.575,
         "z": 11.750000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -5040,7 +5040,7 @@
         "y": 15.575,
         "z": 11.750000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -5049,7 +5049,7 @@
         "y": 15.575,
         "z": 11.750000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -5058,7 +5058,7 @@
         "y": 15.575,
         "z": 11.750000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -5067,7 +5067,7 @@
         "y": 11.0,
         "z": 11.750000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -5076,7 +5076,7 @@
         "y": 12.275,
         "z": 11.750000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -5085,7 +5085,7 @@
         "y": 12.275,
         "z": 11.750000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -5094,7 +5094,7 @@
         "y": 13.325,
         "z": 11.750000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -5103,7 +5103,7 @@
         "y": 13.325,
         "z": 11.750000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -5112,7 +5112,7 @@
         "y": 14.375,
         "z": 11.750000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -5121,7 +5121,7 @@
         "y": 14.375,
         "z": 11.750000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -5130,7 +5130,7 @@
         "y": 11.0,
         "z": 11.750000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -5139,7 +5139,7 @@
         "y": 11.0,
         "z": 11.750000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -5148,7 +5148,7 @@
         "y": 11.0,
         "z": 11.750000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -5157,7 +5157,7 @@
         "y": 11.0,
         "z": 11.750000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -5166,7 +5166,7 @@
         "y": 11.0,
         "z": 11.750000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -5175,7 +5175,7 @@
         "y": 11.0,
         "z": 11.750000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -5184,7 +5184,7 @@
         "y": 11.0,
         "z": 11.750000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -5193,7 +5193,7 @@
         "y": 11.0,
         "z": 11.750000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -5202,7 +5202,7 @@
         "y": 11.0,
         "z": 11.750000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -5211,7 +5211,7 @@
         "y": 11.0,
         "z": 11.750000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -5220,7 +5220,7 @@
         "y": 11.0,
         "z": 11.750000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -5229,7 +5229,7 @@
         "y": 11.0,
         "z": 11.750000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -5238,7 +5238,7 @@
         "y": 15.575,
         "z": 11.750000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -5247,7 +5247,7 @@
         "y": 15.575,
         "z": 11.750000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -5256,7 +5256,7 @@
         "y": 15.575,
         "z": 11.750000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -5265,7 +5265,7 @@
         "y": 15.575,
         "z": 11.750000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -5274,7 +5274,7 @@
         "y": 15.575,
         "z": 11.750000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -5283,7 +5283,7 @@
         "y": 15.575,
         "z": 11.750000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -5292,7 +5292,7 @@
         "y": 11.0,
         "z": 11.750000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -5301,7 +5301,7 @@
         "y": 14.375,
         "z": 11.750000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -5310,7 +5310,7 @@
         "y": 13.325,
         "z": 11.750000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -5319,7 +5319,7 @@
         "y": 12.275,
         "z": 11.750000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -5328,7 +5328,7 @@
         "y": 15.575,
         "z": 11.750000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       }
     ],
@@ -5339,7 +5339,7 @@
         "y": 27.45,
         "z": 13.300000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -5348,7 +5348,7 @@
         "y": 16.175,
         "z": 13.300000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -5357,7 +5357,7 @@
         "y": 20.75,
         "z": 13.300000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -5366,7 +5366,7 @@
         "y": 27.45,
         "z": 13.300000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -5375,7 +5375,7 @@
         "y": 16.175,
         "z": 13.300000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -5384,7 +5384,7 @@
         "y": 20.75,
         "z": 13.300000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -5393,7 +5393,7 @@
         "y": 27.45,
         "z": 13.300000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -5402,7 +5402,7 @@
         "y": 16.175,
         "z": 13.300000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -5411,7 +5411,7 @@
         "y": 20.75,
         "z": 13.300000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -5420,7 +5420,7 @@
         "y": 27.45,
         "z": 13.300000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -5429,7 +5429,7 @@
         "y": 27.45,
         "z": 13.300000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -5438,7 +5438,7 @@
         "y": 27.45,
         "z": 13.300000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -5447,7 +5447,7 @@
         "y": 27.45,
         "z": 13.300000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -5456,7 +5456,7 @@
         "y": 27.45,
         "z": 13.300000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -5465,7 +5465,7 @@
         "y": 27.45,
         "z": 13.300000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -5474,7 +5474,7 @@
         "y": 27.45,
         "z": 13.300000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -5483,7 +5483,7 @@
         "y": 17.375,
         "z": 13.300000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -5492,7 +5492,7 @@
         "y": 18.425,
         "z": 13.300000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -5501,7 +5501,7 @@
         "y": 19.475,
         "z": 13.300000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -5510,7 +5510,7 @@
         "y": 21.95,
         "z": 13.300000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -5519,7 +5519,7 @@
         "y": 23.0,
         "z": 13.300000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -5528,7 +5528,7 @@
         "y": 24.05,
         "z": 13.300000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -5537,7 +5537,7 @@
         "y": 25.1,
         "z": 13.300000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -5546,7 +5546,7 @@
         "y": 26.15,
         "z": 13.300000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -5555,7 +5555,7 @@
         "y": 16.175,
         "z": 13.300000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -5564,7 +5564,7 @@
         "y": 27.45,
         "z": 13.300000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -5573,7 +5573,7 @@
         "y": 16.175,
         "z": 13.300000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -5582,7 +5582,7 @@
         "y": 27.45,
         "z": 13.300000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -5591,7 +5591,7 @@
         "y": 16.175,
         "z": 13.300000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -5600,7 +5600,7 @@
         "y": 27.45,
         "z": 13.300000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -5609,7 +5609,7 @@
         "y": 16.175,
         "z": 13.300000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -5618,7 +5618,7 @@
         "y": 27.45,
         "z": 13.300000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -5627,7 +5627,7 @@
         "y": 16.175,
         "z": 13.300000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -5636,7 +5636,7 @@
         "y": 27.45,
         "z": 13.300000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -5645,7 +5645,7 @@
         "y": 16.175,
         "z": 13.300000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -5654,7 +5654,7 @@
         "y": 27.45,
         "z": 13.300000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -5663,7 +5663,7 @@
         "y": 20.75,
         "z": 13.300000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -5672,7 +5672,7 @@
         "y": 27.45,
         "z": 13.300000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -5681,7 +5681,7 @@
         "y": 20.75,
         "z": 13.300000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -5690,7 +5690,7 @@
         "y": 27.45,
         "z": 13.300000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -5699,7 +5699,7 @@
         "y": 27.45,
         "z": 13.300000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -5708,7 +5708,7 @@
         "y": 25.1,
         "z": 13.300000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -5717,7 +5717,7 @@
         "y": 25.1,
         "z": 13.300000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -5726,7 +5726,7 @@
         "y": 25.1,
         "z": 13.300000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -5735,7 +5735,7 @@
         "y": 26.15,
         "z": 13.300000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -5744,7 +5744,7 @@
         "y": 26.15,
         "z": 13.300000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -5753,7 +5753,7 @@
         "y": 26.15,
         "z": 13.300000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -5762,7 +5762,7 @@
         "y": 20.75,
         "z": 13.300000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -5771,7 +5771,7 @@
         "y": 20.75,
         "z": 13.300000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -5780,7 +5780,7 @@
         "y": 20.75,
         "z": 13.300000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -5789,7 +5789,7 @@
         "y": 20.75,
         "z": 13.300000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -5798,7 +5798,7 @@
         "y": 20.75,
         "z": 13.300000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -5807,7 +5807,7 @@
         "y": 20.75,
         "z": 13.300000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -5816,7 +5816,7 @@
         "y": 17.375,
         "z": 13.300000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -5825,7 +5825,7 @@
         "y": 17.375,
         "z": 13.300000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -5834,7 +5834,7 @@
         "y": 18.425,
         "z": 13.300000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -5843,7 +5843,7 @@
         "y": 18.425,
         "z": 13.300000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -5852,7 +5852,7 @@
         "y": 19.475,
         "z": 13.300000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -5861,7 +5861,7 @@
         "y": 19.475,
         "z": 13.300000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -5870,7 +5870,7 @@
         "y": 21.95,
         "z": 13.300000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -5879,7 +5879,7 @@
         "y": 21.95,
         "z": 13.300000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -5888,7 +5888,7 @@
         "y": 21.95,
         "z": 13.300000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -5897,7 +5897,7 @@
         "y": 23.0,
         "z": 13.300000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -5906,7 +5906,7 @@
         "y": 23.0,
         "z": 13.300000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -5915,7 +5915,7 @@
         "y": 23.0,
         "z": 13.300000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -5924,7 +5924,7 @@
         "y": 24.05,
         "z": 13.300000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -5933,7 +5933,7 @@
         "y": 24.05,
         "z": 13.300000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -5942,7 +5942,7 @@
         "y": 24.05,
         "z": 13.300000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -5951,7 +5951,7 @@
         "y": 20.75,
         "z": 13.300000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -5960,7 +5960,7 @@
         "y": 20.75,
         "z": 13.300000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -5969,7 +5969,7 @@
         "y": 20.75,
         "z": 13.300000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -5978,7 +5978,7 @@
         "y": 20.75,
         "z": 13.300000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -5987,7 +5987,7 @@
         "y": 20.75,
         "z": 13.300000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -5996,7 +5996,7 @@
         "y": 20.75,
         "z": 13.300000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -6005,7 +6005,7 @@
         "y": 16.175,
         "z": 13.300000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -6014,7 +6014,7 @@
         "y": 20.75,
         "z": 13.300000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -6023,7 +6023,7 @@
         "y": 27.45,
         "z": 13.300000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -6032,7 +6032,7 @@
         "y": 16.175,
         "z": 13.300000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -6041,7 +6041,7 @@
         "y": 20.75,
         "z": 13.300000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -6050,7 +6050,7 @@
         "y": 27.45,
         "z": 13.300000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -6059,7 +6059,7 @@
         "y": 16.175,
         "z": 13.300000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -6068,7 +6068,7 @@
         "y": 20.75,
         "z": 13.300000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -6077,7 +6077,7 @@
         "y": 27.45,
         "z": 13.300000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -6086,7 +6086,7 @@
         "y": 16.175,
         "z": 13.300000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -6095,7 +6095,7 @@
         "y": 20.75,
         "z": 13.300000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -6104,7 +6104,7 @@
         "y": 27.45,
         "z": 13.300000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -6113,7 +6113,7 @@
         "y": 16.175,
         "z": 13.300000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -6122,7 +6122,7 @@
         "y": 20.75,
         "z": 13.300000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -6131,7 +6131,7 @@
         "y": 27.45,
         "z": 13.300000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -6140,7 +6140,7 @@
         "y": 16.175,
         "z": 13.300000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -6149,7 +6149,7 @@
         "y": 20.75,
         "z": 13.300000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -6158,7 +6158,7 @@
         "y": 27.45,
         "z": 13.300000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -6167,7 +6167,7 @@
         "y": 27.45,
         "z": 13.300000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -6176,7 +6176,7 @@
         "y": 20.75,
         "z": 13.300000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -6185,7 +6185,7 @@
         "y": 16.175,
         "z": 13.300000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -6194,7 +6194,7 @@
         "y": 26.15,
         "z": 13.300000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -6203,7 +6203,7 @@
         "y": 25.1,
         "z": 13.300000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -6212,7 +6212,7 @@
         "y": 24.05,
         "z": 13.300000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -6221,7 +6221,7 @@
         "y": 23.0,
         "z": 13.300000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -6230,7 +6230,7 @@
         "y": 21.95,
         "z": 13.300000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -6239,7 +6239,7 @@
         "y": 19.475,
         "z": 13.300000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -6248,7 +6248,7 @@
         "y": 18.425,
         "z": 13.300000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       },
       {
@@ -6257,7 +6257,7 @@
         "y": 17.375,
         "z": 13.300000000000002,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "D1",
         "springprop": null
       }
     ],
@@ -6268,7 +6268,7 @@
         "y": 20.75,
         "z": 0.0,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "DISCONNECTED",
         "springprop": "RES_00_75cm"
       },
       {
@@ -6277,7 +6277,7 @@
         "y": 20.75,
         "z": 0.0,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "DISCONNECTED",
         "springprop": "RES_00_75cm"
       },
       {
@@ -6286,7 +6286,7 @@
         "y": 16.175,
         "z": 0.0,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "DISCONNECTED",
         "springprop": null
       },
       {
@@ -6295,7 +6295,7 @@
         "y": 27.45,
         "z": 0.0,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "DISCONNECTED",
         "springprop": "RES_00_75cm"
       },
       {
@@ -6304,7 +6304,7 @@
         "y": 27.45,
         "z": 0.0,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "DISCONNECTED",
         "springprop": "RES_00_75cm"
       },
       {
@@ -6313,7 +6313,7 @@
         "y": 11.0,
         "z": 0.0,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "DISCONNECTED",
         "springprop": "RES_00"
       },
       {
@@ -6322,7 +6322,7 @@
         "y": 15.575,
         "z": 0.0,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "DISCONNECTED",
         "springprop": null
       },
       {
@@ -6331,7 +6331,7 @@
         "y": 27.45,
         "z": 0.0,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "DISCONNECTED",
         "springprop": "RES_03_150cm"
       },
       {
@@ -6340,7 +6340,7 @@
         "y": 27.45,
         "z": 0.0,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "DISCONNECTED",
         "springprop": "RES_03_150cm"
       },
       {
@@ -6349,7 +6349,7 @@
         "y": 27.45,
         "z": 0.0,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "DISCONNECTED",
         "springprop": "RES_03_150cm"
       },
       {
@@ -6358,7 +6358,7 @@
         "y": 20.75,
         "z": 0.0,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "DISCONNECTED",
         "springprop": "RES_03_150cm"
       },
       {
@@ -6367,7 +6367,7 @@
         "y": 20.75,
         "z": 0.0,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "DISCONNECTED",
         "springprop": "RES_03_150cm"
       },
       {
@@ -6376,7 +6376,7 @@
         "y": 11.0,
         "z": 0.0,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "DISCONNECTED",
         "springprop": "RES_03_150cm"
       },
       {
@@ -6385,7 +6385,7 @@
         "y": 11.0,
         "z": 0.0,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "DISCONNECTED",
         "springprop": "RES_03_150cm"
       },
       {
@@ -6394,7 +6394,7 @@
         "y": 16.175,
         "z": 0.0,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "DISCONNECTED",
         "springprop": null
       },
       {
@@ -6403,7 +6403,7 @@
         "y": 16.175,
         "z": 0.0,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "DISCONNECTED",
         "springprop": null
       },
       {
@@ -6412,7 +6412,7 @@
         "y": 15.575,
         "z": 0.0,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "DISCONNECTED",
         "springprop": null
       },
       {
@@ -6421,7 +6421,7 @@
         "y": 15.575,
         "z": 0.0,
         "explicit_z": false,
-        "diaphragm": null,
+        "diaphragm": "DISCONNECTED",
         "springprop": null
       }
     ]
