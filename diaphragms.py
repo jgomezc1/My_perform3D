@@ -31,6 +31,7 @@ from openseespy.opensees import (
     rigidDiaphragm as _ops_rigidDiaphragm,
     node as _ops_node,
     getNodeTags as _ops_getNodeTags,
+    fix as _ops_fix,  # <-- ADDED
 )
 
 # Tolerance (available if expanded checks are needed)
@@ -39,7 +40,7 @@ try:
 except Exception:
     EPS = 1e-9
 
-# Output directory for deterministic metadata
+# Output dir (if present in config, use it; otherwise default to ./out)
 try:
     from config import OUT_DIR  # type: ignore
 except Exception:
@@ -111,14 +112,6 @@ def define_rigid_diaphragms(
         if None in names or "" in names:
             skips.append(f"{sname}: not all points have DIAPHRAGM assigned")
             continue
-
-        # Optional: verify names against parsed list (if provided)
-        if valid_names and not names.issubset(valid_names):
-            bad = sorted(list(names - valid_names))
-            skips.append(f"{sname}: unknown diaphragm name(s): {bad}")
-            continue
-
-        # For safety (and per spec), require a single diaphragm per story
         if len(names) != 1:
             skips.append(f"{sname}: multiple diaphragms present ({sorted(list(names))}); skipped")
             continue
@@ -145,10 +138,19 @@ def define_rigid_diaphragms(
         next_tag += 1
         _ops_node(master_tag, cx, cy, cz)
 
+        # Constrain master node DOFs per rigid-diaphragm convention:
+        # UX, UY, RZ = free (0); UZ, RX, RY = fixed (1)
+        try:
+            _ops_fix(master_tag, 0, 0, 1, 1, 1, 0)
+            print(f"[diaphragms] fix({master_tag}, 0,0,1,1,1,0)")
+        except Exception as e:
+            print(f"[diaphragms] WARN: fix() failed for master {master_tag}: {e}")
+
         slave_tags = [t for (t, _, _, _) in tags_coords]
         print(f"[diaphragms] {sname}: created centroid master node tag={master_tag} "
               f"at ({cx:.3f},{cy:.3f},{cz:.3f}); slaves={len(slave_tags)}")
 
+        # Apply rigid diaphragm constraint (prefer perpDirn=3 signature)
         try:
             _call_rigid_diaphragm(master_tag, slave_tags)
             created.append((sname, master_tag, slave_tags))
@@ -163,7 +165,7 @@ def define_rigid_diaphragms(
             "version": 1,
             "stories_top_to_bottom": story_names,
             "diaphragms": [
-                {"story": s, "master": m, "slaves": sl}
+                {"story": s, "master": m, "slaves": sl, "master_fix": [0,0,1,1,1,0]}
                 for (s, m, sl) in created
             ],
         }
