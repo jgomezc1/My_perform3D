@@ -11,6 +11,8 @@ Workflow:
 New:
 - Optional visualization of Rigid Diaphragm Master Nodes (centroid nodes)
   read from ./out/diaphragms.json written by the translator during build.
+- NEW: Boundary Conditions overlay (from ./out/supports.json) with per-DOF toggles.
+  Master nodes, if any, are excluded from the overlay.
 """
 
 import streamlit as st
@@ -34,6 +36,7 @@ except Exception:
 
 # Plotting utilities
 import view_utils_App as vu
+
 
 # -----------------------
 # Helpers
@@ -162,6 +165,25 @@ def load_diaphragms_meta(path: str = os.path.join(APP_DIR, "out", "diaphragms.js
     except Exception:
         return []
 
+def load_supports_meta(path: str = os.path.join(APP_DIR, "out", "supports.json")) -> Dict[int, Tuple[int, int, int, int, int, int]]:
+    """
+    Return {node_tag: (UX, UY, UZ, RX, RY, RZ)} from out/supports.json if present.
+    If missing/invalid, returns {}.
+    """
+    try:
+        with open(path, "r", encoding="utf-8") as f:
+            data = json.load(f)
+        out: Dict[int, Tuple[int, int, int, int, int, int]] = {}
+        for rec in data.get("applied", []):
+            n = int(rec.get("node"))
+            mask = tuple(int(v) for v in rec.get("mask", []))
+            if len(mask) == 6:
+                out[n] = mask  # type: ignore[assignment]
+        return out
+    except Exception:
+        return {}
+
+
 # -----------------------
 # UI
 # -----------------------
@@ -211,8 +233,24 @@ with st.sidebar:
     # Toggle local longitudinal axes (i -> j)
     show_local_axes = st.checkbox("7) Show local longitudinal axes (i → j)", value=False)
 
-    # NEW: Diaphragm Master Nodes toggle (independent of regular nodes)
+    # Diaphragm Master Nodes toggle (independent of regular nodes)
     show_master_nodes = st.checkbox("8) Show diaphragm master nodes", value=True)
+
+    # NEW: Boundary Conditions overlay controls
+    st.markdown("---")
+    st.subheader("Boundary Conditions")
+    show_supports = st.checkbox("Show boundary-condition overlay", value=True)
+    c1, c2 = st.columns(2)
+    with c1:
+        bc_size = st.slider("Symbol size", min_value=0.05, max_value=1.00, value=0.25, step=0.05)
+    with c2:
+        st.caption("Per-DOF (1 = fixed)")
+        dof_UX = st.checkbox("UX", value=True)
+        dof_UY = st.checkbox("UY", value=True)
+        dof_UZ = st.checkbox("UZ", value=True)
+        dof_RX = st.checkbox("RX", value=True)
+        dof_RY = st.checkbox("RY", value=True)
+        dof_RZ = st.checkbox("RZ", value=True)
 
     st.caption("Tip: build in stages and filter the view to diagnose issues.")
 
@@ -242,6 +280,9 @@ if build_btn:
             # Load master nodes metadata written by diaphragms.py (if present)
             master_nodes = load_diaphragms_meta()
 
+            # Load BC metadata (supports) if present
+            supports_by_node = load_supports_meta()
+
             st.session_state.model_built = True
             st.session_state.nodes = nodes
             st.session_state.elements_all = elements
@@ -251,6 +292,19 @@ if build_btn:
             st.session_state.show_local_axes = show_local_axes
             st.session_state.show_master_nodes = show_master_nodes
             st.session_state.master_nodes = master_nodes
+
+            # Persist supports overlay state
+            st.session_state.show_supports = show_supports
+            st.session_state.supports_by_node = supports_by_node
+            st.session_state.bc_size = bc_size
+            st.session_state.bc_dofs = {
+                "UX": bool(dof_UX),
+                "UY": bool(dof_UY),
+                "UZ": bool(dof_UZ),
+                "RX": bool(dof_RX),
+                "RY": bool(dof_RY),
+                "RZ": bool(dof_RZ),
+            }
 
             st.success("Model built successfully. Use story filters below if needed.")
         except Exception as e:
@@ -264,6 +318,9 @@ for key, default in [
     ("nodes", {}), ("elements_all", {}), ("plot_height", 800),
     ("show_axes_grid", True), ("show_nodes", True), ("show_local_axes", False),
     ("show_master_nodes", True), ("master_nodes", []),
+    # supports defaults
+    ("show_supports", True), ("supports_by_node", {}), ("bc_size", 0.25),
+    ("bc_dofs", {"UX": True, "UY": True, "UZ": True, "RX": True, "RY": True, "RZ": True}),
 ]:
     if key not in st.session_state:
         st.session_state[key] = default
@@ -335,6 +392,12 @@ if st.session_state.model_built:
         "node_size": 3,
         "beam_thickness": 2,
         "column_thickness": 3,
+        # NEW: supports overlay
+        "show_supports": bool(st.session_state.show_supports),
+        "supports_by_node": st.session_state.supports_by_node,
+        "supports_dofs": st.session_state.bc_dofs,
+        "supports_size": float(st.session_state.bc_size),
+        "supports_exclude": set(st.session_state.master_nodes or []),  # <-- exclude masters explicitly
     }
     elems = st.session_state.elements if "elements" in st.session_state else st.session_state.elements_all
     fig = vu.create_interactive_plot(
@@ -357,6 +420,11 @@ if st.session_state.model_built:
     st.write(f"**Elements (after filters):** {len(elems)}")
     if st.session_state.master_nodes:
         st.write(f"**Diaphragm Masters:** {len(st.session_state.master_nodes)}")
+    # Show number of BC nodes (excluding masters)
+    if st.session_state.supports_by_node:
+        masters = set(st.session_state.master_nodes or [])
+        bc_nodes = [n for n in st.session_state.supports_by_node.keys() if n not in masters]
+        st.write(f"**Boundary-Conditioned Nodes (excluding masters):** {len(bc_nodes)}")
     if st.session_state.nodes and elems:
         summary = summarize_elements(st.session_state.nodes, elems)
         m1, m2, m3, m4 = st.columns(4)

@@ -12,16 +12,28 @@ Options:
     show_axes, show_grid, show_nodes
     show_local_axes, local_axis_frac
     show_master_nodes, master_nodes (Iterable[int]), master_node_size
+    # Boundary-condition (supports) overlay:
+    show_supports: bool
+    supports_by_node: Dict[int, Tuple[int,int,int,int,int,int]]
+    supports_dofs: Dict[str,bool]  # keys: UX, UY, UZ, RX, RY, RZ
+    supports_size: float           # glyph scale
+    supports_exclude: Iterable[int]  # node tags to ignore (e.g., master nodes)
 
 Notes:
-- We auto-separate "beams" vs "columns" by orientation (dominant axis).
+- Beams vs columns separated by dominant axis (Z -> columns).
 - Local longitudinal axes (i -> j) optional, batched as a single Cone trace.
 - Diaphragm master nodes are rendered as distinct markers, independent of "show_nodes".
+- Boundary conditions overlay:
+    * Translational (UX/UY/UZ): **triangles** in the plane perpendicular to the constrained axis.
+      - UX: triangle in YZ-plane
+      - UY: triangle in XZ-plane
+      - UZ: triangle in XY-plane
+    * Rotational (RX/RY/RZ): **'x' symbols** (two short crossing line segments) in the plane perpendicular to the rotation axis.
 - No external deps beyond Plotly.
 """
 
 from __future__ import annotations
-from typing import Dict, Tuple, Any, List, Iterable
+from typing import Dict, Tuple, Any, List, Iterable, Optional, Set
 import math
 from plotly import graph_objects as go
 
@@ -67,7 +79,7 @@ def _segment_lists(
     Build two polyline traces (beams vs columns) by separating with None breaks.
     Returns:
         beams_x, beams_y, beams_z, beams_text, beams_hover,
-        cols_x,  cols_y,  cols_z,  cols_text,  cols_hover
+        cols_x,  cols_y,  cols_z, cols_text,  cols_hover
     """
     beams_x: List[float]; beams_y: List[float]; beams_z: List[float]
     beams_x, beams_y, beams_z, beams_text, beams_hover = [], [], [], [], []
@@ -84,28 +96,27 @@ def _segment_lists(
         yseq = [p1[1], p2[1], None]
         zseq = [p1[2], p2[2], None]
         txt  = f"Ele {etag} | nI={ni}, nJ={nj}"
-        hov  = f"<b>Element</b> {etag}<br>nI={ni} → nJ={nj}<br>Δx={p2[0]-p1[0]:.3f}, Δy={p2[1]-p1[1]:.3f}, Δz={p2[2]-p1[2]:.3f}"
-
+        hov  = (f"<b>Element</b> {etag}<br>nI={ni} → nJ={nj}"
+                f"<br>Δx={p2[0]-p1[0]:.3f}, Δy={p2[1]-p1[1]:.3f}, Δz={p2[2]-p1[2]:.3f}")
         if dom == "Z":
             cols_x += xseq; cols_y += yseq; cols_z += zseq
-            cols_text += [txt, txt, ""]
-            cols_hover += [hov, hov, ""]
+            cols_text += [txt, "", ""]
+            cols_hover += [hov, "", ""]
         else:
             beams_x += xseq; beams_y += yseq; beams_z += zseq
-            beams_text += [txt, txt, ""]
-            beams_hover += [hov, hov, ""]
+            beams_text += [txt, "", ""]
+            beams_hover += [hov, "", ""]
 
     return beams_x, beams_y, beams_z, beams_text, beams_hover, cols_x, cols_y, cols_z, cols_text, cols_hover
 
 
-def _median(values: List[float]) -> float:
-    if not values: return 0.0
-    s = sorted(values)
+def _median(vals: List[float]) -> float:
+    if not vals:
+        return 0.0
+    s = sorted(vals)
     n = len(s)
-    mid = n // 2
-    if n % 2 == 1:
-        return s[mid]
-    return 0.5 * (s[mid - 1] + s[mid])
+    m = n // 2
+    return (s[m] if n % 2 == 1 else 0.5 * (s[m-1] + s[m]))
 
 
 def _local_axes_trace(
@@ -167,6 +178,137 @@ def _local_axes_trace(
     return cone
 
 
+# ---------- Boundary-condition overlay helpers ----------
+def _triangle(center: Vec3, axis: str, r: float) -> Tuple[List[float], List[float], List[float]]:
+    """
+    Return a closed triangle polyline centered at node, lying in the plane
+    perpendicular to 'axis'. The triangle is wireframe (Scatter3d lines).
+      - UX: triangle in YZ-plane
+      - UY: triangle in XZ-plane
+      - UZ: triangle in XY-plane
+    """
+    x, y, z = center
+    if axis == "X":  # YZ-plane
+        p1 = (x, y - r, z - r)
+        p2 = (x, y + r, z - r)
+        p3 = (x, y,     z + r)
+    elif axis == "Y":  # XZ-plane
+        p1 = (x - r, y, z - r)
+        p2 = (x + r, y, z - r)
+        p3 = (x,     y, z + r)
+    else:  # "Z" -> XY-plane
+        p1 = (x - r, y - r, z)
+        p2 = (x + r, y - r, z)
+        p3 = (x,     y + r, z)
+    xs = [p1[0], p2[0], p3[0], p1[0], None]
+    ys = [p1[1], p2[1], p3[1], p1[1], None]
+    zs = [p1[2], p2[2], p3[2], p1[2], None]
+    return xs, ys, zs
+
+def _x_symbol(center: Vec3, axis: str, r: float) -> Tuple[List[float], List[float], List[float]]:
+    """
+    Return an 'x' symbol (two short crossing line segments) centered at node,
+    lying in the plane perpendicular to 'axis'.
+      - RX: 'x' in YZ-plane
+      - RY: 'x' in XZ-plane
+      - RZ: 'x' in XY-plane
+    """
+    x, y, z = center
+    if axis == "X":  # YZ-plane
+        a1 = (x, y - r, z - r); b1 = (x, y + r, z + r)
+        a2 = (x, y - r, z + r); b2 = (x, y + r, z - r)
+    elif axis == "Y":  # XZ-plane
+        a1 = (x - r, y, z - r); b1 = (x + r, y, z + r)
+        a2 = (x - r, y, z + r); b2 = (x + r, y, z - r)
+    else:  # "Z" -> XY-plane
+        a1 = (x - r, y - r, z); b1 = (x + r, y + r, z)
+        a2 = (x - r, y + r, z); b2 = (x + r, y - r, z)
+
+    xs = [a1[0], b1[0], None, a2[0], b2[0], None]
+    ys = [a1[1], b1[1], None, a2[1], b2[1], None]
+    zs = [a1[2], b1[2], None, a2[2], b2[2], None]
+    return xs, ys, zs
+
+def _supports_traces(
+    nodes: Dict[int, Vec3],
+    supports_by_node: Dict[int, Tuple[int,int,int,int,int,int]],
+    dofs: Dict[str, bool],
+    size: float = 0.25,
+    exclude: Optional[Iterable[int]] = None,
+) -> List[go.Scatter3d]:
+    """
+    Build per-DOF traces for supports.
+      - **Translational (UX/UY/UZ): triangles** in plane ⟂ to axis.
+      - **Rotational (RX/RY/RZ): 'x' symbols** in plane ⟂ to axis.
+    Excludes any node tags provided in 'exclude'.
+    """
+    if not nodes or not supports_by_node:
+        return []
+
+    excl: Set[int] = set(exclude or [])
+
+    # Per-DOF buffers (polyline coordinates with None breaks)
+    tri = { "UX": ([], [], []), "UY": ([], [], []), "UZ": ([], [], []) }
+    xsy = { "RX": ([], [], []), "RY": ([], [], []), "RZ": ([], [], []) }
+
+    # Auto scale: use a fraction of global bbox size
+    xr, yr, zr = _axis_ranges(nodes)
+    bbox = max(xr[1]-xr[0], yr[1]-yr[0], zr[1]-zr[0])
+    L = max(bbox * max(size, 0.01), 1e-6)
+    r_tri = 0.5 * L     # triangle "radius"
+    r_x   = 0.5 * L     # x-symbol half-length
+
+    for n, mask in supports_by_node.items():
+        if n in excl or n not in nodes:
+            continue
+        cx, cy, cz = nodes[n]
+        ux, uy, uz, rx, ry, rz = mask
+
+        # Translational: triangles
+        if dofs.get("UX", True) and ux:
+            xs, ys, zs = _triangle((cx, cy, cz), "X", r_tri)
+            X, Y, Z = tri["UX"]; X += xs; Y += ys; Z += zs
+        if dofs.get("UY", True) and uy:
+            xs, ys, zs = _triangle((cx, cy, cz), "Y", r_tri)
+            X, Y, Z = tri["UY"]; X += xs; Y += ys; Z += zs
+        if dofs.get("UZ", True) and uz:
+            xs, ys, zs = _triangle((cx, cy, cz), "Z", r_tri)
+            X, Y, Z = tri["UZ"]; X += xs; Y += ys; Z += zs
+
+        # Rotational: 'x' symbols
+        if dofs.get("RX", True) and rx:
+            xs, ys, zs = _x_symbol((cx, cy, cz), "X", r_x)
+            X, Y, Z = xsy["RX"]; X += xs; Y += ys; Z += zs
+        if dofs.get("RY", True) and ry:
+            xs, ys, zs = _x_symbol((cx, cy, cz), "Y", r_x)
+            X, Y, Z = xsy["RY"]; X += xs; Y += ys; Z += zs
+        if dofs.get("RZ", True) and rz:
+            xs, ys, zs = _x_symbol((cx, cy, cz), "Z", r_x)
+            X, Y, Z = xsy["RZ"]; X += xs; Y += ys; Z += zs
+
+    traces: List[go.Scatter3d] = []
+
+    # Build triangle traces for UX/UY/UZ
+    for key, (xs, ys, zs) in tri.items():
+        if dofs.get(key, False) and xs:
+            traces.append(go.Scatter3d(
+                x=xs, y=ys, z=zs, mode="lines",
+                hoverinfo="skip", name=f"BC {key} (tri)",
+                line=dict(width=3)
+            ))
+
+    # Build 'x' traces for RX/RY/RZ
+    for key, (xs, ys, zs) in xsy.items():
+        if dofs.get(key, False) and xs:
+            traces.append(go.Scatter3d(
+                x=xs, y=ys, z=zs, mode="lines",
+                hoverinfo="skip", name=f"BC {key} (x)",
+                line=dict(width=3)
+            ))
+
+    return traces
+
+
 def create_interactive_plot(
     nodes: Dict[int, Vec3],
     elements: Dict[int, Tuple[int, int]],
@@ -181,12 +323,17 @@ def create_interactive_plot(
       - show_nodes: bool
       - show_local_axes: bool
       - local_axis_frac: float
-      - show_master_nodes: bool       <-- NEW
-      - master_nodes: Iterable[int]   <-- NEW (tags)
-      - master_node_size: int         <-- NEW
+      - show_master_nodes: bool
+      - master_nodes: Iterable[int]
+      - master_node_size: int
       - node_size: int
       - beam_thickness: int
       - column_thickness: int
+      - show_supports: bool
+      - supports_by_node: Dict[...]
+      - supports_dofs: Dict[str,bool]
+      - supports_size: float
+      - supports_exclude: Iterable[int]
     """
     options = options or {}
     show_axes = bool(options.get("show_axes", True))
@@ -203,9 +350,16 @@ def create_interactive_plot(
     lw_beam = int(options.get("beam_thickness", 2))
     lw_col  = int(options.get("column_thickness", 3))
 
+    # Supports overlay options
+    show_supports = bool(options.get("show_supports", False))
+    supports_by_node = options.get("supports_by_node", {}) or {}
+    supports_dofs = options.get("supports_dofs", {"UX": True,"UY":True,"UZ":True,"RX":True,"RY":True,"RZ":True})
+    supports_size = float(options.get("supports_size", 0.25))
+    supports_exclude = options.get("supports_exclude", set()) or set()
+
     data_traces = []
 
-    # Nodes (markers) — only if requested
+    # Nodes (markers)
     if show_nodes and nodes:
         n_tags = sorted(nodes.keys())
         nx = [nodes[i][0] for i in n_tags]
@@ -252,7 +406,7 @@ def create_interactive_plot(
         )
         data_traces.append(cols_trace)
 
-    # Local longitudinal axes (i -> j), batched as one cone trace
+    # Local longitudinal axes (i -> j)
     if show_local_axes:
         cone = _local_axes_trace(nodes, elements, frac=max(0.01, local_axis_frac))
         if cone is not None:
@@ -278,6 +432,17 @@ def create_interactive_plot(
             )
             data_traces.append(masters_trace)
 
+    # Supports overlay (triangles for U*, 'x' for R*)
+    if show_supports and supports_by_node:
+        bc_traces = _supports_traces(
+            nodes=nodes,
+            supports_by_node=supports_by_node,
+            dofs=supports_dofs,
+            size=supports_size,
+            exclude=supports_exclude,
+        )
+        data_traces.extend(bc_traces)
+
     xr, yr, zr = _axis_ranges(nodes)
     scene = dict(
         xaxis=dict(title="X", showgrid=show_grid, zeroline=False, range=xr),
@@ -299,4 +464,3 @@ def create_interactive_plot(
                           yaxis=dict(visible=False),
                           zaxis=dict(visible=False))
     return fig
-
