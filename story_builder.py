@@ -2,16 +2,16 @@
 """
 Builds the STORY-centered view needed for Phase 2.
 
-Rules implemented (UPDATED):
+Rules implemented:
 - Story elevations:
   * File order is top->bottom.
   * The base story is the one with ELEV == 0 (if none, the last entry is treated as base).
   * Elevations accumulate via HEIGHT unless an explicit ELEV is provided for a story.
 
-- Point Z rule (NEW, overrides prior logic):
+- Point Z rule:
   * If a point in $ POINT COORDINATES has a third value `d`, then its absolute Z at story S is:
         Z = Z_story(S) - d
-    This applies ALWAYS (SPRINGPROP is IGNORED).
+    This applies ALWAYS.
   * If a point does not have a third value, then:
         Z = Z_story(S)
 
