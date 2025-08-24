@@ -20,7 +20,7 @@ Definitions implemented:
 3) Node creation:
    Nodes should typically exist after define_nodes(). For robustness, this file
    can also create any missing node on demand using the coordinates in
-   story_graph.json (active_points already carry x,y,z resolved with the new rule:
+   story_graph.json (active_points already carry x,y,z resolved with the rule:
        Z = Z_story - d  (if the point has a third value d)
        Z = Z_story      (otherwise)
    ).
