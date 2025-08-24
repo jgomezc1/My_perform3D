@@ -3,4 +3,4 @@
 .venv/
 .env
 .DS_Store
-.json
+out/*.json
