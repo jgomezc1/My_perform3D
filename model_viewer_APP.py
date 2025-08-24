@@ -8,11 +8,11 @@ Workflow:
   3) Choose a view filter (Columns only / Beams only / Nodes + Beams / Columns + Beams).
   4) Build and visualize. Story filtering is available if ./out/story_graph.json exists.
 
-New:
+Visualization:
 - Optional visualization of Rigid Diaphragm Master Nodes (centroid nodes)
   read from ./out/diaphragms.json written by the translator during build.
-- NEW: Boundary Conditions overlay (from ./out/supports.json) with per-DOF toggles.
-  Master nodes, if any, are excluded from the overlay.
+- Boundary Conditions overlay (from ./out/supports.json) with per-DOF toggles.
+  BCs at the Master nodes, if any, are excluded from the overlay.
 """
 
 import streamlit as st
