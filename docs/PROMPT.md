@@ -1,12 +1,12 @@
 \*\*Repo digest:\*\* https://gitingest.com/jgomezc1/My\_perform3D.git
 
-\*\*Today’s goal:\*\* Verify that all the parts of the model have been built
+\*\*Today’s goal:\*\* <short goal>
 
 \*\*Constraints:\*\* Python 3.11+, OpenSeesPy 3D/6DOF; phase-1 artifacts in `out/`; no heavy refactors unless asked.
 
 \*\*Non-negotiables:\*\* small PRs; Conventional Commits; runnable diffs; explain “why” in PR description; keep docs updated.
 
-\*\*Deliverables this session:\*\* <An explicit model file>
+\*\*Deliverables this session:\*\* <bulleted list>
 
 
 
@@ -40,3 +40,12 @@
 
 
 
+## New-Chat Kit
+
+**Context**: https://gitingest.com/jgomezc1/My_perform3D  
+**Today’s goal**: Verify that the translated OpenSees model has been consistently built.  
+**Deliverables**: *An explicit model file containing every OpenSeesPy instruction that can be ported inot an independent application*  
+**Guardrails**: small PRs; runnable snippets; tests or smoke steps included.
+
+Read first: `README.md`, `docs/ARCHITECTURE.md`, latest `docs/ADR/*`, and `docs/TODO_NEXT.md`.  
+Then: propose a concise 3-step plan and ask any *targeted* file requests. After I OK the plan, give minimal diffs + smoke steps.
