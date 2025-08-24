@@ -1,9 +1,9 @@
 # nodes.py
 """
-Define OpenSeesPy nodes from Phase-1 artifacts using the NEW Z rule.
+Define OpenSeesPy nodes from Phase-1 artifacts.
 
 Key points:
-- There are no global "free" explicit-Z nodes anymore. If a point has a third value `d`,
+- There are no global "free" explicit-Z nodes. If a point has a third value `d`,
   then at each story S where it appears:
       Z = Z_story(S) - d
   We therefore create a grid node per (point, story) as needed, using the grid tag rule.
