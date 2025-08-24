@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
-# -*- coding: utf-8 -*-
 """
-MODEL_translated.py
+MODEL_translator.py
 Builds the OpenSees model for visualization inside the Streamlit app.
 
 Staged build supported via build_model(stage=...):
