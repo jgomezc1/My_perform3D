@@ -1,6 +1,6 @@
 # columns.py
 """
-Create COLUMN elements as OpenSeesPy elasticBeamColumn members using the NEW
+Create COLUMN elements as OpenSeesPy elasticBeamColumn members using the following
 Local axis orientation: enforced i=bottom, j=top for columns (configurable).
 "find-next-lower-story" rule:
 
