@@ -19,6 +19,8 @@ Outputs:
 Adds checks:
   - story_elev_order: story elevations are monotone from top->bottom
   - node_z_consistency: nodes.json grid Z equals story_elev[story] - offset(point)
+
+NOTE: To keep JSON serialization robust across OSes, all paths stored in the report are str.
 """
 from __future__ import annotations
 
@@ -48,6 +50,7 @@ def _story_index_map(story_graph: Dict[str, Any]) -> Tuple[List[str], Dict[str, 
 
 
 def _active_point_tag_set(story_graph: Dict[str, Any]) -> Set[int]:
+    """Compute all expected grid node tags from active_points using the deterministic rule."""
     names, sidx = _story_index_map(story_graph)
     out: Set[int] = set()
     for sname, pts in (story_graph.get("active_points") or {}).items():
@@ -87,15 +90,18 @@ def verify_model(
     *,
     strict: bool = False,
 ) -> Dict[str, Any]:
-    sg = _load(os.path.join(artifacts_dir, "story_graph.json")) or {}
-    sp = _load(os.path.join(artifacts_dir, "supports.json")) or {}
-    dg = _load(os.path.join(artifacts_dir, "diaphragms.json")) or {}
-    cj = _load(os.path.join(artifacts_dir, "columns.json")) or {}
-    bj = _load(os.path.join(artifacts_dir, "beams.json")) or {}
-    nj = _load(os.path.join(artifacts_dir, "nodes.json")) or {}
+    # Normalize to str to avoid WindowsPath leaking into JSON
+    artifacts_dir_str = str(artifacts_dir)
+
+    sg = _load(os.path.join(artifacts_dir_str, "story_graph.json")) or {}
+    sp = _load(os.path.join(artifacts_dir_str, "supports.json")) or {}
+    dg = _load(os.path.join(artifacts_dir_str, "diaphragms.json")) or {}
+    cj = _load(os.path.join(artifacts_dir_str, "columns.json")) or {}
+    bj = _load(os.path.join(artifacts_dir_str, "beams.json")) or {}
+    nj = _load(os.path.join(artifacts_dir_str, "nodes.json")) or {}
 
     report: Dict[str, Any] = {
-        "artifacts_dir": artifacts_dir,
+        "artifacts_dir": artifacts_dir_str,
         "present": {
             "story_graph": bool(sg),
             "supports": bool(sp),
@@ -222,7 +228,6 @@ def verify_model(
                 pid_raw = p.get("id", p.get("tag"))
                 pid_str = str(pid_raw) if pid_raw is not None else ""
                 if pid_str:
-                    # offset is explicit_z if present; otherwise legacy p["z"] may be an offset in some inputs
                     v = p.get("explicit_z")
                     if isinstance(v, (int, float)):
                         offset_map[(sname, pid_str)] = float(v)
@@ -312,12 +317,13 @@ def verify_model(
     summary = ["PASS", "WARN", "FAIL"][worst]
     report["summary"] = summary
 
-    _save(os.path.join(artifacts_dir, "verify_report.json"), report)
+    out_path = os.path.join(artifacts_dir_str, "verify_report.json")
+    _save(out_path, report)
 
     print("=== Verification Summary ===")
     print(f"Summary: {summary}")
-    print(f"Artifacts dir: {artifacts_dir}")
-    print(f"Report: {os.path.join(artifacts_dir, 'verify_report.json')}")
+    print(f"Artifacts dir: {artifacts_dir_str}")
+    print(f"Report: {out_path}")
     print("\nChecks:")
     for name, res in report["checks"].items():
         details = res.get("details") or []
