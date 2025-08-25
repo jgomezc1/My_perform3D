@@ -3,8 +3,8 @@ from pathlib import Path
 
 # Input .e2k path (adjust if needed)
 #E2K_PATH = Path("models/KOSMOS_Plat.e2k")
-E2K_PATH = Path("models/Ejemplo.e2k")
-#E2K_PATH = Path("models/EjemploNew.e2k")
+#E2K_PATH = Path("models/Ejemplo.e2k")
+E2K_PATH = Path("models/EjemploNew.e2k")
 
 # Output folder
 OUT_DIR = Path("out")

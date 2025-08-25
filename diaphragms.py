@@ -1,25 +1,38 @@
 # diaphragms.py
 """
-Rigid diaphragm creation for OpenSeesPy.
+Rigid diaphragm creation for OpenSeesPy, with master-node **mass()** and **fix()**
+application, and emission of Phase-2 artifact `diaphragms.json`.
 
-Bug fix (requested):
+Rules
+-----
 - Treat the diaphragm label **"DISCONNECTED"** (any case) as **no diaphragm**.
-- Additionally, **any story that contains restraint/support nodes must NOT get a diaphragm**.
-
-General rules (kept consistent with the project):
-- Stories are processed in the order given by story_graph.json["story_order_top_to_bottom"]
-  (index 0 = top story).
-- Candidate nodes per story come from story_graph.json["active_points"][story], with
-  points having explicit_z==True excluded (they are not on the story plane).
-- (All-or-nothing per story) A rigid diaphragm is created only if **every candidate**
-  on that story carries a *valid diaphragm name* that is **not** "DISCONNECTED".
-  We do not split a story into multiple diaphragm groups.
-- Master node is a NEW node at the XY centroid (Z = mean candidates' z).
+- Any story that contains restraint/support nodes must **NOT** get a diaphragm.
+- All-or-nothing per story: create a SINGLE diaphragm per story only if every
+  candidate point on that story has a valid diaphragm label (not DISCONNECTED).
+- Master node is a NEW node at the XY centroid (Z = mean of candidates' z).
 - Constraint: rigidDiaphragm 3 <master> <slaves...>  (3 = plane ⟂ to Z)
+- Fixities on master: fix(master, 0, 0, 1, 1, 1, 0)  (free UX, UY, RZ)
+- Mass on master: mass(master, M, M, 0, 0, 0, Izz) with
+      M = ρ * t * A     and     Izz = RZ_MASS_FACTOR * M
 
-Outputs:
-- Returns a list of (story_name, master_tag, [slave_tags...]).
-- Writes a compact JSON summary to OUT_DIR/diaphragms.json for the viewer.
+Config (overridable in config.py)
+---------------------------------
+OUT_DIR: str = "out"
+SLAB_THICKNESS: float = 0.10        # m
+CONCRETE_DENSITY: float = 2500.0    # kg/m^3
+RZ_MASS_FACTOR: float = 100.0       # Izz = factor * M
+EPS: float = 1e-9
+
+Outputs
+-------
+Writes OUT_DIR/diaphragms.json with one record per created diaphragm:
+{
+  "story": "Story-1",
+  "master": 9001,
+  "slaves": [101000, 102000, ...],
+  "mass": {"M": ..., "Izz": ..., "A": ..., "t": ..., "rho": ..., "applied": true/false},
+  "fix":  {"ux": 0, "uy": 0, "uz": 1, "rx": 1, "ry": 1, "rz": 0, "applied": true/false}
+}
 """
 from __future__ import annotations
 
@@ -31,6 +44,8 @@ from openseespy.opensees import (
     rigidDiaphragm as _ops_rigidDiaphragm,
     node as _ops_node,
     getNodeTags as _ops_getNodeTags,
+    fix as _ops_fix,
+    mass as _ops_mass,
 )
 
 # Optional config hooks
@@ -43,6 +58,21 @@ try:
     from config import EPS  # type: ignore
 except Exception:
     EPS = 1e-9
+
+try:
+    from config import SLAB_THICKNESS  # type: ignore
+except Exception:
+    SLAB_THICKNESS = 0.10  # m
+
+try:
+    from config import CONCRETE_DENSITY  # type: ignore
+except Exception:
+    CONCRETE_DENSITY = 2500.0  # kg/m^3
+
+try:
+    from config import RZ_MASS_FACTOR  # type: ignore
+except Exception:
+    RZ_MASS_FACTOR = 100.0  # Izz = factor * M
 
 
 def _read_json(path: str) -> Dict[str, Any]:
@@ -68,6 +98,40 @@ def _centroid_xy(pts_xy: List[Tuple[float, float]]) -> Tuple[float, float]:
     return sx / n, sy / n
 
 
+def _cross(o: Tuple[float, float], a: Tuple[float, float], b: Tuple[float, float]) -> float:
+    return (a[0] - o[0]) * (b[1] - o[1]) - (a[1] - o[1]) * (b[0] - o[0])
+
+
+def _convex_hull(points: List[Tuple[float, float]]) -> List[Tuple[float, float]]:
+    """Monotone chain convex hull. Returns vertices in CCW order (first==last not repeated)."""
+    pts = sorted(set(points))
+    if len(pts) <= 2:
+        return pts
+    lower: List[Tuple[float, float]] = []
+    for p in pts:
+        while len(lower) >= 2 and _cross(lower[-2], lower[-1], p) <= 0.0:
+            lower.pop()
+        lower.append(p)
+    upper: List[Tuple[float, float]] = []
+    for p in reversed(pts):
+        while len(upper) >= 2 and _cross(upper[-2], upper[-1], p) <= 0.0:
+            upper.pop()
+        upper.append(p)
+    return lower[:-1] + upper[:-1]
+
+
+def _polygon_area(pts_ccw: List[Tuple[float, float]]) -> float:
+    n = len(pts_ccw)
+    if n < 3:
+        return 0.0
+    a = 0.0
+    for i in range(n):
+        x1, y1 = pts_ccw[i]
+        x2, y2 = pts_ccw[(i + 1) % n]
+        a += x1 * y2 - x2 * y1
+    return abs(a) * 0.5
+
+
 def _story_indices_with_supports(supports_path: str, story_count: int) -> Set[int]:
     """Return the set of story indices (0=top) that contain restraint nodes.
 
@@ -83,7 +147,6 @@ def _story_indices_with_supports(supports_path: str, story_count: int) -> Set[in
         for rec in data.get("applied", []):
             tag = int(rec.get("node"))
             sidx = tag % 1000
-            # only keep sensible indices
             if 0 <= sidx < max(story_count, 1):
                 idxs.add(sidx)
     except Exception as e:
@@ -93,7 +156,7 @@ def _story_indices_with_supports(supports_path: str, story_count: int) -> Set[in
 
 def define_rigid_diaphragms(
     story_path: str = os.path.join(OUT_DIR, "story_graph.json"),
-    raw_path: str   = os.path.join(OUT_DIR, "parsed_raw.json"),
+    raw_path: str = os.path.join(OUT_DIR, "parsed_raw.json"),
     supports_path: str = os.path.join(OUT_DIR, "supports.json"),
 ) -> List[Tuple[str, int, List[int]]]:
     """Identify and create rigid diaphragms per story (single group per story).
@@ -106,7 +169,6 @@ def define_rigid_diaphragms(
     pr = _read_json(raw_path)
 
     story_order: List[str] = list(sg.get("story_order_top_to_bottom", []))
-    story_elev: Dict[str, float] = {str(k): float(v) for k, v in sg.get("story_elev", {}).items()}
     active_points: Dict[str, List[Dict[str, Any]]] = sg.get("active_points", {})
 
     # Known diaphragm names from the .e2k (if present)
@@ -127,6 +189,9 @@ def define_rigid_diaphragms(
     except Exception:
         existing_tags = []
     next_tag_base = max(existing_tags) + 1 if existing_tags else 1
+
+    # Accumulate meta for JSON (mass, inertia, area, fix)
+    meta: List[Dict[str, Any]] = []
 
     for sname in story_order:
         pts = list(active_points.get(sname, []))
@@ -155,13 +220,12 @@ def define_rigid_diaphragms(
             lbl_raw = p.get("diaphragm")
             lbl = str(lbl_raw).strip() if lbl_raw is not None else ""
             if lbl.upper() == "DISCONNECTED" or lbl == "":
-                # Treat as unlabeled; keep disconnected_only flag true unless a valid label shows up
                 labels.append(None)
             else:
                 labels.append(lbl)
                 disconnected_only = False
                 if known_diaph and (lbl not in known_diaph):
-                    all_valid_named = False  # unknown label
+                    all_valid_named = False
         if disconnected_only:
             skips.append(f"{sname}: DIAPH='DISCONNECTED' → no rigid diaphragm")
             continue
@@ -177,8 +241,7 @@ def define_rigid_diaphragms(
         # Gather slave node tags and coordinates
         tags_coords: List[Tuple[int, float, float, float]] = []
         for p in plane_pts:
-            # Deterministic tag rule: tag = point_int*1000 + story_index
-            p_id = int(p.get("tag", p["id"]))
+            p_id = int(p.get("tag", p.get("id")))
             tag = int(p_id) * 1000 + int(sidx) if "tag" not in p else int(p["tag"])
             tags_coords.append((tag, float(p["x"]), float(p["y"]), float(p["z"])))
 
@@ -193,10 +256,33 @@ def define_rigid_diaphragms(
         cx, cy = _centroid_xy(list(zip(xs, ys)))
         cz = sum(zs) / len(zs)
 
+        # Compute convex-hull area for mass proxy
+        hull = _convex_hull(list(zip(xs, ys)))
+        area = _polygon_area(hull)  # m^2
+        M = CONCRETE_DENSITY * SLAB_THICKNESS * area  # kg (lumped translational mass)
+        Izz = RZ_MASS_FACTOR * M                       # crude proxy for polar inertia
+
         # Create master node with a fresh tag
         master_tag = next_tag_base
         next_tag_base += 1
         _ops_node(master_tag, cx, cy, cz)
+
+        # Apply lumped mass and out-of-plane fixities to the master
+        mass_applied = False
+        fix_applied = False
+        try:
+            _ops_mass(master_tag, M, M, 0.0, 0.0, 0.0, Izz)
+            mass_applied = True
+            print(f"[diaphragms] mass(master={master_tag}, M={M:.3f}, Izz={Izz:.3f}) (t={SLAB_THICKNESS}, ρ={CONCRETE_DENSITY}, A={area:.3f})")
+        except Exception as e:
+            print(f"[diaphragms] WARN: failed applying mass to master {master_tag}: {e}")
+
+        try:
+            _ops_fix(master_tag, 0, 0, 1, 1, 1, 0)
+            fix_applied = True
+            print(f"[diaphragms] fix(master={master_tag}, ux=0, uy=0, uz=1, rx=1, ry=1, rz=0)")
+        except Exception as e:
+            print(f"[diaphragms] WARN: failed applying fix to master {master_tag}: {e}")
 
         # Slaves are the existing story nodes
         slave_tags = [t for (t, _, _, _) in tags_coords]
@@ -205,22 +291,21 @@ def define_rigid_diaphragms(
         _call_rigid(master_tag, slave_tags)
 
         created.append((sname, master_tag, slave_tags))
+        meta.append({
+            "story": sname,
+            "master": master_tag,
+            "slaves": slave_tags,
+            "mass": {"M": M, "Izz": Izz, "A": area, "t": SLAB_THICKNESS, "rho": CONCRETE_DENSITY, "applied": mass_applied},
+            "fix":  {"ux": 0, "uy": 0, "uz": 1, "rx": 1, "ry": 1, "rz": 0, "applied": fix_applied}
+        })
 
     # Persist viewer metadata
-    out_json = {
-        "diaphragms": [
-            {
-                "story": sname,
-                "master": master,
-                "slaves": slaves,
-            }
-            for (sname, master, slaves) in created
-        ]
-    }
+    out_json = {"diaphragms": meta}
     try:
         os.makedirs(OUT_DIR, exist_ok=True)
         with open(os.path.join(OUT_DIR, "diaphragms.json"), "w", encoding="utf-8") as f:
             json.dump(out_json, f, indent=2)
+        print(f"[diaphragms] Wrote {OUT_DIR}/diaphragms.json")
     except Exception as e:
         print(f"[diaphragms] WARN: failed to write {OUT_DIR}/diaphragms.json: {e}")
 
