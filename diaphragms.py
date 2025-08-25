@@ -1,34 +1,38 @@
 # diaphragms.py
 """
-Rigid diaphragm creation for OpenSeesPy.
+Rigid diaphragm creation for OpenSeesPy, with master-node **mass()** and **fix()**
+application, and emission of Phase-2 artifact `diaphragms.json`.
 
-Bug fix (kept):
+Rules
+-----
 - Treat the diaphragm label **"DISCONNECTED"** (any case) as **no diaphragm**.
-- Additionally, **any story that contains restraint/support nodes must NOT get a diaphragm**.
+- Any story that contains restraint/support nodes must **NOT** get a diaphragm.
+- All-or-nothing per story: create a SINGLE diaphragm per story only if every
+  candidate point on that story has a valid diaphragm label (not DISCONNECTED).
+- Master node is a NEW node at the XY centroid (Z = mean of candidates' z).
+- Constraint: rigidDiaphragm 3 <master> <slaves...>  (3 = plane ⟂ to Z)
+- Fixities on master: fix(master, 0, 0, 1, 1, 1, 0)  (free UX, UY, RZ)
+- Mass on master: mass(master, M, M, 0, 0, 0, Izz) with
+      M = ρ * t * A     and     Izz = RZ_MASS_FACTOR * M
 
-Behavior (this module now also handles master-node BCs and mass):
-- For each eligible story (all-or-nothing labeling rule), create ONE **master node**
-  at the (x,y)-centroid of the story’s active points and tie all story nodes to it
-  with `rigidDiaphragm 3 master slaves...` (plane ⟂ Z; ties UX, UY, RZ).
-- Apply **fix(master, 0, 0, 1, 1, 1, 0)** so masters cannot move vertically (UZ)
-  nor rock about X,Y (RX, RY). In-plane DOFs (UX, UY, RZ) remain free.
-- Assign a **lumped translational mass** to the master:
-      M = ρ * t * A
-  where A is the convex-hull area of the candidate points on that story,
-  t is the assumed slab thickness, and ρ is the concrete mass density.
-  Rotational inertia about Z is set to **Izz = RZ_MASS_FACTOR * M** (simple proxy).
+Config (overridable in config.py)
+---------------------------------
+OUT_DIR: str = "out"
+SLAB_THICKNESS: float = 0.10        # m
+CONCRETE_DENSITY: float = 2500.0    # kg/m^3
+RZ_MASS_FACTOR: float = 100.0       # Izz = factor * M
+EPS: float = 1e-9
 
-Config (overrides via config.py if present):
-- OUT_DIR: output folder (default "out")
-- EPS: tolerance (default 1e-9) — not critical here
-- SLAB_THICKNESS: float meters (default 0.10)
-- CONCRETE_DENSITY: float kg/m^3 (default 2500.0)
-- RZ_MASS_FACTOR: float dimensionless (default 100.0)
-
-Outputs:
-- Returns a list of (story_name, master_tag, [slave_tags...]).
-- Writes a compact JSON summary to OUT_DIR/diaphragms.json for the viewer.
-  Each record also includes "mass" and "izz" for transparency.
+Outputs
+-------
+Writes OUT_DIR/diaphragms.json with one record per created diaphragm:
+{
+  "story": "Story-1",
+  "master": 9001,
+  "slaves": [101000, 102000, ...],
+  "mass": {"M": ..., "Izz": ..., "A": ..., "t": ..., "rho": ..., "applied": true/false},
+  "fix":  {"ux": 0, "uy": 0, "uz": 1, "rx": 1, "ry": 1, "rz": 0, "applied": true/false}
+}
 """
 from __future__ import annotations
 
@@ -113,12 +117,10 @@ def _convex_hull(points: List[Tuple[float, float]]) -> List[Tuple[float, float]]
         while len(upper) >= 2 and _cross(upper[-2], upper[-1], p) <= 0.0:
             upper.pop()
         upper.append(p)
-    # Concatenate without duplicating first/last point
     return lower[:-1] + upper[:-1]
 
 
 def _polygon_area(pts_ccw: List[Tuple[float, float]]) -> float:
-    """Signed area (positive for CCW)."""
     n = len(pts_ccw)
     if n < 3:
         return 0.0
@@ -188,7 +190,7 @@ def define_rigid_diaphragms(
         existing_tags = []
     next_tag_base = max(existing_tags) + 1 if existing_tags else 1
 
-    # We'll also accumulate meta for JSON (mass, inertia, area)
+    # Accumulate meta for JSON (mass, inertia, area, fix)
     meta: List[Dict[str, Any]] = []
 
     for sname in story_order:
@@ -218,13 +220,12 @@ def define_rigid_diaphragms(
             lbl_raw = p.get("diaphragm")
             lbl = str(lbl_raw).strip() if lbl_raw is not None else ""
             if lbl.upper() == "DISCONNECTED" or lbl == "":
-                # Treat as unlabeled; keep disconnected_only flag true unless a valid label shows up
                 labels.append(None)
             else:
                 labels.append(lbl)
                 disconnected_only = False
                 if known_diaph and (lbl not in known_diaph):
-                    all_valid_named = False  # unknown label
+                    all_valid_named = False
         if disconnected_only:
             skips.append(f"{sname}: DIAPH='DISCONNECTED' → no rigid diaphragm")
             continue
@@ -240,8 +241,7 @@ def define_rigid_diaphragms(
         # Gather slave node tags and coordinates
         tags_coords: List[Tuple[int, float, float, float]] = []
         for p in plane_pts:
-            # Deterministic tag rule: tag = point_int*1000 + story_index
-            p_id = int(p.get("tag", p["id"]))
+            p_id = int(p.get("tag", p.get("id")))
             tag = int(p_id) * 1000 + int(sidx) if "tag" not in p else int(p["tag"])
             tags_coords.append((tag, float(p["x"]), float(p["y"]), float(p["z"])))
 
@@ -268,14 +268,18 @@ def define_rigid_diaphragms(
         _ops_node(master_tag, cx, cy, cz)
 
         # Apply lumped mass and out-of-plane fixities to the master
+        mass_applied = False
+        fix_applied = False
         try:
             _ops_mass(master_tag, M, M, 0.0, 0.0, 0.0, Izz)
+            mass_applied = True
             print(f"[diaphragms] mass(master={master_tag}, M={M:.3f}, Izz={Izz:.3f}) (t={SLAB_THICKNESS}, ρ={CONCRETE_DENSITY}, A={area:.3f})")
         except Exception as e:
             print(f"[diaphragms] WARN: failed applying mass to master {master_tag}: {e}")
 
         try:
             _ops_fix(master_tag, 0, 0, 1, 1, 1, 0)
+            fix_applied = True
             print(f"[diaphragms] fix(master={master_tag}, ux=0, uy=0, uz=1, rx=1, ry=1, rz=0)")
         except Exception as e:
             print(f"[diaphragms] WARN: failed applying fix to master {master_tag}: {e}")
@@ -291,7 +295,8 @@ def define_rigid_diaphragms(
             "story": sname,
             "master": master_tag,
             "slaves": slave_tags,
-            "mass": {"M": M, "Izz": Izz, "A": area, "t": SLAB_THICKNESS, "rho": CONCRETE_DENSITY}
+            "mass": {"M": M, "Izz": Izz, "A": area, "t": SLAB_THICKNESS, "rho": CONCRETE_DENSITY, "applied": mass_applied},
+            "fix":  {"ux": 0, "uy": 0, "uz": 1, "rx": 1, "ry": 1, "rz": 0, "applied": fix_applied}
         })
 
     # Persist viewer metadata
@@ -300,6 +305,7 @@ def define_rigid_diaphragms(
         os.makedirs(OUT_DIR, exist_ok=True)
         with open(os.path.join(OUT_DIR, "diaphragms.json"), "w", encoding="utf-8") as f:
             json.dump(out_json, f, indent=2)
+        print(f"[diaphragms] Wrote {OUT_DIR}/diaphragms.json")
     except Exception as e:
         print(f"[diaphragms] WARN: failed to write {OUT_DIR}/diaphragms.json: {e}")
 
