@@ -8,12 +8,14 @@ against Phase-1/2 artifacts. Writes a machine-readable report:
   out/verify_runtime_report.json
 
 All path fields stored in JSON are strings to avoid WindowsPath serialization issues.
+Includes robust write with retry/fallback to avoid Windows file locks.
 """
 from __future__ import annotations
 
 import argparse
 import json
 import os
+import time
 from typing import Any, Dict, List, Tuple, Set
 
 from ops_capture import capture_session, get_capture, save_capture
@@ -30,6 +32,40 @@ def _load_json(path: str) -> Dict[str, Any]:
             return json.load(f)
     except Exception:
         return {}
+
+
+def _safe_write_json(path: str, data: Dict[str, Any], *, attempts: int = 6, delay: float = 0.25) -> str:
+    """
+    Write JSON to 'path' using a temp file and atomic replace. On Windows, if the
+    target is locked by another process, retry a few times; if still failing,
+    fall back to a unique filename with PID suffix. Returns the actual file path.
+    """
+    path = str(path)
+    os.makedirs(os.path.dirname(path) or ".", exist_ok=True)
+    tmp = f"{path}.tmp.{os.getpid()}"
+    with open(tmp, "w", encoding="utf-8") as f:
+        json.dump(data, f, indent=2)
+    # Try to replace with retries
+    for i in range(attempts):
+        try:
+            os.replace(tmp, path)
+            return path
+        except PermissionError:
+            if i == attempts - 1:
+                break
+            time.sleep(delay)
+    # Fallback: unique name
+    fallback = path.replace(".json", f".{os.getpid()}.json")
+    with open(fallback, "w", encoding="utf-8") as f:
+        json.dump(data, f, indent=2)
+    print(f"[WARN] Could not overwrite locked file: {path}. Wrote fallback: {fallback}")
+    # Best-effort cleanup of tmp
+    try:
+        if os.path.exists(tmp):
+            os.remove(tmp)
+    except Exception:
+        pass
+    return fallback
 
 
 def _nodes_dict(nodes_json: Dict[str, Any]) -> Dict[int, Tuple[float, float, float]]:
@@ -79,7 +115,8 @@ def _diaphragms_dict(diaphragms_json: Dict[str, Any]) -> Dict[int, Set[int]]:
 def _diaphragm_fix_spec(diaphragms_json: Dict[str, Any]) -> Dict[int, Tuple[int, int, int, int, int, int]]:
     """
     master -> fix tuple from artifacts, but only where fix.applied == True.
-    If missing, fall back to DIAPH_FIX to match repo spec.
+    If flags are omitted, we still require 'applied' to be True, and we fill
+    unspecified fields with the repo spec defaults (0,0,1,1,1,0).
     """
     out: Dict[int, Tuple[int, int, int, int, int, int]] = {}
     for d in diaphragms_json.get("diaphragms", []):
@@ -277,8 +314,8 @@ def compare_runtime_vs_artifacts(artifacts_dir: str, stage: str = "all", strict:
             if len(slave_mismatches) < 10:
                 slave_mismatches.append({"master": m, "art_diff": sorted(list(a ^ c))})
 
-    # Master fixity validation (new)
-    fx_spec = _diaphragm_fix_spec(diaph_json)  # only for stories where fix.applied == True
+    # Master fixity validation (IMPORTANT: use diaph_json here)
+    fx_spec = _diaphragm_fix_spec(diaph_json)  # only where fix.applied == True
     cap_fix_map = {int(f["node"]): (f["ux"], f["uy"], f["uz"], f["rx"], f["ry"], f["rz"]) for f in cap["fixes"]}
 
     missing_fix = []
@@ -306,7 +343,6 @@ def compare_runtime_vs_artifacts(artifacts_dir: str, stage: str = "all", strict:
     if slave_mismatches:
         status = "fail" if strict else "warn"
         details.append(f"{len(slave_mismatches)} master(s) with slave set mismatch (sample shown)")
-    # Add fixity results
     if missing_fix:
         status = "fail" if strict else "warn"
         details.append(f"{len(missing_fix)} master(s) missing required diaphragm fixity")
@@ -401,14 +437,14 @@ def compare_runtime_vs_artifacts(artifacts_dir: str, stage: str = "all", strict:
     summary = ["PASS", "WARN", "FAIL"][worst]
     report["summary"] = summary
 
+    # Robust write (handles Windows locks)
     out_path = os.path.join(artifacts_dir_str, "verify_runtime_report.json")
-    with open(out_path, "w", encoding="utf-8") as f:
-        json.dump(report, f, indent=2)
+    final_path = _safe_write_json(out_path, report)
 
     print("=== Runtime vs Artifacts Verification ===")
     print(f"Summary: {summary}")
     print(f"Artifacts dir: {artifacts_dir_str}")
-    print(f"Report: {out_path}")
+    print(f"Report: {final_path}")
     print("\nChecks:")
     for name, res in report["checks"].items():
         det = res.get("details", [])

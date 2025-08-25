@@ -6,12 +6,12 @@ One-shot orchestrator for MyPerform3D:
   1) Phase-1 parsing (phase1_run.py)
   2) Phase-2 build (MODEL_translator.build_model)
   3) Static artifact verification (verify_model.verify_model)
-  4) Runtime-vs-artifacts verification (verify_domain_vs_artifacts.py)  <-- now via subprocess
+  4) Runtime-vs-artifacts verification (verify_domain_vs_artifacts.py)  <-- subprocess, robust reader
 
 Writes:
   - out/verify_report.json
   - out/domain_capture.json
-  - out/verify_runtime_report.json
+  - out/verify_runtime_report.json (or fallback verify_runtime_report_<pid>.json)
   - out/pipeline_summary.json
 
 All paths written to JSON are strings (avoid WindowsPath serialization issues).
@@ -19,6 +19,7 @@ All paths written to JSON are strings (avoid WindowsPath serialization issues).
 from __future__ import annotations
 
 import argparse
+import glob
 import json
 import os
 import subprocess
@@ -63,6 +64,26 @@ def run_static_verify(out_dir: str, strict: bool) -> Dict[str, Any]:
     return rep
 
 
+def _load_runtime_report(out_dir: str) -> Dict[str, Any]:
+    """
+    Prefer canonical 'verify_runtime_report.json'. If missing (fallback was used),
+    load the newest 'verify_runtime_report*.json' instead.
+    """
+    out_dir = str(out_dir)
+    canonical = os.path.join(out_dir, "verify_runtime_report.json")
+    if os.path.exists(canonical):
+        return _load(canonical) or {"summary": "FAIL"}
+    candidates = sorted(
+        glob.glob(os.path.join(out_dir, "verify_runtime_report*.json")),
+        key=lambda p: os.path.getmtime(p),
+    )
+    if candidates:
+        print(f"[PIPELINE] Using fallback runtime report: {candidates[-1]}")
+        return _load(candidates[-1]) or {"summary": "FAIL"}
+    print("[PIPELINE] No runtime report found.")
+    return {"summary": "FAIL"}
+
+
 def run_runtime_verify(out_dir: str, stage: str, strict: bool) -> Dict[str, Any]:
     """
     Run runtime verification in a FRESH subprocess so capture sees patched ops
@@ -75,9 +96,8 @@ def run_runtime_verify(out_dir: str, stage: str, strict: bool) -> Dict[str, Any]
     res = subprocess.run(cmd, check=False)
     if res.returncode != 0:
         print(f"[PIPELINE] Runtime verify returned non-zero exit code: {res.returncode}")
-    # Load the generated report
-    rep_path = os.path.join(str(out_dir), "verify_runtime_report.json")
-    rep = _load(rep_path) or {"summary": "FAIL"}
+    # Load the generated report (canonical or fallback)
+    rep = _load_runtime_report(out_dir)
     print("[PIPELINE] Runtime verify: done.")
     return rep
 
@@ -150,3 +170,4 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+
