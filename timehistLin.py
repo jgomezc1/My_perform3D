@@ -199,8 +199,9 @@ tolerance = 1.0e-3
 constraints('Transformation')    
 numberer('RCM')                                    # Reverse Cuthill-McKee DOF numbering
 system('SparseGeneral')                            # Solver for large systems
-test('EnergyIncr', tolerance, 20 , 1)              # Convergence test: energy norm, tolerance, max iterations
-algorithm('ModifiedNewton', '-initial')            # Modified Newton-Raphson algorithm
+#test('EnergyIncr', tolerance, 20 , 1)              # Convergence test: energy norm, tolerance, max iterations
+#algorithm('ModifiedNewton', '-initial')            # Modified Newton-Raphson algorithm
+algorithm('Linear')
 integrator('Newmark', 0.5, 0.25)                   # Newmark method (β=0.25, γ=0.5 for constant average)
 analysis('Transient')                              # Type of analysis: transient (time history)  
 
@@ -219,8 +220,8 @@ for i, lam in enumerate(eigenValues):
 # --- Example usage (mirrors your loop) ---
 # Assumes your analysis stack (constraints('Transformation'), numberer, system, test, algorithm, integrator, analysis)
 # is already configured in previous cells.
-npts = 4000
-dt = 0.005
+npts = 4502
+dt = 0.02
 tolerance = 1e-8
 node_ref = 1384010  # your reference node (e.g., diaphragm master)
 
