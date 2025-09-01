@@ -189,7 +189,18 @@ def load_supports_meta(path: str = os.path.join(APP_DIR, "out", "supports.json")
 # -----------------------
 st.set_page_config(layout="wide", page_title="ETABS → OpenSees Viewer")
 
-st.title("R&DC Perform3D")
+c1, c2, c3 = st.columns([1, 4, 1])
+
+with c1:
+    st.image("company_logo.png", width=120)
+
+with c2:
+    st.title("R&DC Nonlinear Time History Analysis")
+    st.subheader("Powered by OpenSeesPy")
+
+with c3:
+    st.image("company_logo.png", width=120)
+
 st.write(
     "Upload a **model script** (e.g., `MODEL_translated.py`), choose a build stage, "
     "and visualize the resulting OpenSees domain."
