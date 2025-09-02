@@ -1,4 +1,3 @@
-# beams.py
 """
 Create BEAM elements as OpenSeesPy elasticBeamColumn members using the
 **per-story / last section wins** behavior, and emit Phase-2 artifact
@@ -11,6 +10,17 @@ Assumptions
   where story_index is 0 for the **top** story and increases downward.
 - Deterministic element tags via tagging.element_tag(kind, name, story_index). If
   tagging.py is not available, we fall back to an internal stable hash.
+
+Update (per-element transforms)
+-------------------------------
+Previously a single global transform (tag=222, vec=(0,0,1)) was used for all beams.
+We now create **one geomTransf per element** so we can later attach -jntOffset
+safely on a per-element basis. The transform tag is derived from the element tag
+in a disjoint namespace to avoid collisions with columns:
+
+    transf_tag = 1000000000 + element_tag
+
+Orientation vector (unchanged): vecXZ = (0, 0, 1)
 """
 from __future__ import annotations
 
@@ -116,10 +126,6 @@ def define_beams(
     story = _load_json(story_path)
     _raw  = _load_json(raw_path)  # kept for parity/debugging; not required here
 
-    # Geometric transformation (exact)
-    geomTransf('Linear', 222, 0, 0, 1)
-    transf_tag = 222
-
     # --- Placeholder Material and Section Properties ---
     G_beam  = E_beam / (2.0 * (1.0 + nu_beam))
     A_beam  = b_sec * h_sec
@@ -162,6 +168,10 @@ def define_beams(
             # Deterministic element tag (stable)
             tag = element_tag("BEAM", str(ln.get("name","?")), int(sidx))
 
+            # Per-element transformation: Linear with vecXZ = (0,0,1)
+            transf_tag = 1000000000 + tag
+            geomTransf('Linear', transf_tag, 0, 0, 1)
+
             # Create element
             element('elasticBeamColumn', tag, nI, nJ,
                     A_beam, E_beam, G_beam, J_beam, Iy_beam, Iz_beam, transf_tag)
@@ -173,11 +183,11 @@ def define_beams(
                 "line": str(ln.get("name", "?")),
                 "i_node": nI,
                 "j_node": nJ,
-                "section": ln.get("section"),
+                "section": ln.get("section"),  # may be None
                 "transf_tag": transf_tag,
                 "A": A_beam, "E": E_beam, "G": G_beam, "J": J_beam,
                 "Iy": Iy_beam, "Iz": Iz_beam,
-                # NEW fields (only if present in ln)
+                # Pass-through of parsed offsets (present only if provided upstream)
                 **({"length_off_i": ln["length_off_i"]} if "length_off_i" in ln else {}),
                 **({"length_off_j": ln["length_off_j"]} if "length_off_j" in ln else {}),
                 **({"offsets_i": ln["offsets_i"]} if "offsets_i" in ln else {}),

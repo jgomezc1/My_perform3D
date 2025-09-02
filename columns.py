@@ -1,4 +1,3 @@
-# columns.py
 """
 Create COLUMN elements as OpenSeesPy elasticBeamColumn members using the following
 rules, and emit Phase-2 artifact `columns.json`.
@@ -15,9 +14,20 @@ For each COLUMN LINEASSIGN at story S:
   - Intermediate stories without endpoints are skipped by design.
 
 OpenSeesPy signatures (exact):
-    geomTransf('Linear', 111, 1, 0, 0)
+    geomTransf('Linear', transfTag, 1, 0, 0)
     element('elasticBeamColumn', tag, nI, nJ,
             A, E, G, J, Iy, Iz, transfTag)
+
+Update (per-element transforms)
+-------------------------------
+Previously a single global transform (tag=111, vec=(1,0,0)) was used for all columns.
+We now create **one geomTransf per element** so we can later attach -jntOffset
+safely on a per-element basis. The transform tag is derived from the element tag
+in a disjoint namespace to avoid collisions with beams:
+
+    transf_tag = 1100000000 + element_tag
+
+Orientation vector (unchanged): vecXZ = (1, 0, 0)
 """
 from __future__ import annotations
 
@@ -123,10 +133,7 @@ def define_columns(
     story = _load_json(story_path)
     _raw  = _load_json(raw_path)
 
-    # Transform and properties
-    geomTransf('Linear', 111, 1, 0, 0)
-    transf_tag = 111
-
+    # Section properties
     G_col  = E_col / (2.0 * (1.0 + nu_col))
     A_col  = b_sec * h_sec
     Iy_col = (b_sec * h_sec**3) / 12.0
@@ -180,6 +187,10 @@ def define_columns(
             # Deterministic element tag (use upper story index for stability)
             tag = element_tag("COLUMN", str(ln.get("name","?")), int(sidx))
 
+            # Per-element transformation: Linear with vecXZ = (1,0,0)
+            transf_tag = 1100000000 + tag
+            geomTransf('Linear', transf_tag, 1, 0, 0)
+
             # Orientation enforcement
             if ENFORCE_COLUMN_I_AT_BOTTOM:
                 e_nI, e_nJ = n_bottom, n_top
@@ -205,7 +216,7 @@ def define_columns(
                 "transf_tag": transf_tag,
                 "A": A_col, "E": E_col, "G": G_col, "J": J_col,
                 "Iy": Iy_col, "Iz": Iz_col,
-                # NEW fields (if present in ln)
+                # Pass-through of parsed offsets (present only if provided upstream)
                 **({"length_off_i": ln["length_off_i"]} if "length_off_i" in ln else {}),
                 **({"length_off_j": ln["length_off_j"]} if "length_off_j" in ln else {}),
                 **({"offsets_i": ln["offsets_i"]} if "offsets_i" in ln else {}),
