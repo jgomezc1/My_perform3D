@@ -1,4 +1,3 @@
-# e2k_parser.py
 """
 Phase 1: Robust parser for ETABS .e2k essentials.
 
@@ -8,6 +7,9 @@ Extracts:
 - POINT ASSIGNS  (now recognizes DIAPH and DIAPHRAGM)
 - LINE CONNECTIVITIES
 - LINE ASSIGNS
+  * section/frameprop
+  * longitudinal rigid ends: LENGTHOFFI, LENGTHOFFJ
+  * nodal offsets: OFFSETXI, OFFSETYI, OFFSETZI, OFFSETXJ, OFFSETYJ, OFFSETZJ
 - DIAPHRAGM NAMES
 
 Notes
@@ -16,12 +18,14 @@ ETABS examples observed in the wild:
     POINTASSIGN "56" "01_P2_m170" DIAPH "D1"
 Some exports use DIAPHRAGM instead of DIAPH. We accept BOTH and normalize to
 the unified key 'diaphragm' in the output.
+
+For $ LINE ASSIGNS we now parse both:
+  - QUOTED tokens:  SECTION/SECT/FRAMEPROP, PIER, SPANDREL, LOCALAXIS, RELEASE
+  - NUMERIC (unquoted) tokens: LENGTHOFFI/J, OFFSETS I/J for X/Y/Z
 """
 from __future__ import annotations
 import re
-from typing import Dict, Any, List
-
-SECTION_HDR = re.compile(r'^\s*\$[^\n]*\n', re.IGNORECASE | re.MULTILINE)
+from typing import Dict, Any, List, Optional
 
 
 def _extract_section(text: str, title_regex: str) -> str:
@@ -38,6 +42,15 @@ def _extract_section(text: str, title_regex: str) -> str:
     return text[start:end]
 
 
+def _to_float_or_none(s: Optional[str]) -> Optional[float]:
+    if s is None:
+        return None
+    try:
+        return float(s)
+    except ValueError:
+        return None
+
+
 def parse_e2k(text: str) -> Dict[str, Any]:
     """
     Parse ETABS .e2k text into a normalized dict used by Phase-1.
@@ -49,7 +62,14 @@ def parse_e2k(text: str) -> Dict[str, Any]:
       "points":         { pid: { "x", "y", "third", "has_three" }, ... },
       "point_assigns":  [ { "point", "story", "diaphragm", "springprop", "extra" }, ... ],
       "lines":          { lname: { "name", "kind", "i", "j" }, ... },
-      "line_assigns":   [ { "line", "story", "section", "extra" }, ... ],
+      "line_assigns":   [
+                          {
+                            "line", "story", "section",
+                            "length_off_i", "length_off_j",
+                            "offsets_i": {"x","y","z"}, "offsets_j": {"x","y","z"},
+                            "extra"
+                          }, ...
+                        ],
       "diaphragm_names":[ "D1", "D2", ... ]
     }
     """
@@ -70,8 +90,8 @@ def parse_e2k(text: str) -> Dict[str, Any]:
         if m:
             stories.append({
                 "name": m.group(1),
-                "height": float(m.group(2)) if m.group(2) else None,
-                "elev": float(m.group(3)) if m.group(3) else None,
+                "height": _to_float_or_none(m.group(2)),
+                "elev": _to_float_or_none(m.group(3)),
                 "similar_to": m.group(4),
                 "masterstory": m.group(5),
             })
@@ -92,7 +112,7 @@ def parse_e2k(text: str) -> Dict[str, Any]:
         points[pid] = {
             "x": float(m.group(2)),
             "y": float(m.group(3)),
-            "third": float(m.group(4)) if m.group(4) else None,
+            "third": _to_float_or_none(m.group(4)),
             "has_three": m.group(4) is not None,
         }
 
@@ -146,22 +166,88 @@ def parse_e2k(text: str) -> Dict[str, Any]:
     # LINE ASSIGNS
     la_txt = _extract_section(text, r'^\s*\$ LINE ASSIGNS')
     la_lines = [ln for ln in la_txt.splitlines() if ln.strip()]
+
+    # Header: LINEASSIGN "<line>" "<story>" <tail>
     la_head = re.compile(r'^\s*LINEASSIGN\s+"([^"]+)"\s+"([^"]+)"(.*)$', re.IGNORECASE)
-    la_token = re.compile(r'\b(SECTION|SECT|FRAMEPROP|PIER|SPANDREL|LOCALAXIS|RELEASE)\b\s+"([^"]+)"', re.IGNORECASE)
+
+    # (A) QUOTED tokens: TOKEN "value"
+    la_token_quoted = re.compile(
+        r'\b(SECTION|SECT|FRAMEPROP|PIER|SPANDREL|LOCALAXIS|RELEASE)\b\s+"([^"]+)"',
+        re.IGNORECASE
+    )
+
+    # (B) NUMERIC (unquoted) tokens: TOKEN number
+    #   - LENGTHOFFI, LENGTHOFFJ
+    #   - OFFSETXI, OFFSETYI, OFFSETZI, OFFSETXJ, OFFSETYJ, OFFSETZJ
+    la_token_numeric = re.compile(
+        r'\b('
+        r'LENGTHOFFI|LENGTHOFFJ|'
+        r'OFFSETXI|OFFSETYI|OFFSETZI|'
+        r'OFFSETXJ|OFFSETYJ|OFFSETZJ'
+        r')\b\s+([-+]?\d+(?:\.\d+)?)',
+        re.IGNORECASE
+    )
+
     line_assigns: List[Dict[str, Any]] = []
+
     for ln in la_lines:
         m = la_head.match(ln)
         if not m:
             continue
         lname, story, tail = m.group(1), m.group(2), m.group(3) or ""
-        found = {k.upper(): v for k, v in la_token.findall(tail)}
-        section = found.get("SECTION") or found.get("SECT") or found.get("FRAMEPROP")
-        line_assigns.append({
+
+        # Collect quoted tokens
+        found_str: Dict[str, str] = {k.upper(): v for k, v in la_token_quoted.findall(tail)}
+        section = found_str.get("SECTION") or found_str.get("SECT") or found_str.get("FRAMEPROP")
+
+        # Collect numeric tokens
+        found_num: Dict[str, float] = {}
+        for k, v in la_token_numeric.findall(tail):
+            found_num[k.upper()] = float(v)
+
+        # Normalize offsets
+        length_off_i = found_num.get("LENGTHOFFI")
+        length_off_j = found_num.get("LENGTHOFFJ")
+
+        offsets_i = {
+            "x": found_num.get("OFFSETXI"),
+            "y": found_num.get("OFFSETYI"),
+            "z": found_num.get("OFFSETZI"),
+        }
+        # Remove keys with None to keep JSON clean
+        offsets_i = {k: v for k, v in offsets_i.items() if v is not None}
+
+        offsets_j = {
+            "x": found_num.get("OFFSETXJ"),
+            "y": found_num.get("OFFSETYJ"),
+            "z": found_num.get("OFFSETZJ"),
+        }
+        offsets_j = {k: v for k, v in offsets_j.items() if v is not None}
+
+        entry: Dict[str, Any] = {
             "line": lname,
             "story": story,
             "section": section,
-            "extra": found
-        })
+        }
+        if length_off_i is not None:
+            entry["length_off_i"] = length_off_i
+        if length_off_j is not None:
+            entry["length_off_j"] = length_off_j
+        if offsets_i:
+            entry["offsets_i"] = offsets_i
+        if offsets_j:
+            entry["offsets_j"] = offsets_j
+
+        # Preserve extras for any future tokens (quoted + numeric)
+        # If keys collide, numeric wins (more specific for these fields)
+        extra: Dict[str, Any] = {}
+        extra.update(found_str)
+        extra.update(found_num)
+        # If we elevated some extras to top-level, it's fine to keep them here too for traceability.
+        if extra:
+            entry["extra"] = extra
+
+        line_assigns.append(entry)
 
     # DIAPHRAGM NAMES
     dn_txt = _extract_section(text, r'^\s*\$ DIAPHRAGM NAMES')

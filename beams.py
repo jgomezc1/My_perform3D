@@ -173,10 +173,15 @@ def define_beams(
                 "line": str(ln.get("name", "?")),
                 "i_node": nI,
                 "j_node": nJ,
-                "section": ln.get("section"),  # may be None
+                "section": ln.get("section"),
                 "transf_tag": transf_tag,
                 "A": A_beam, "E": E_beam, "G": G_beam, "J": J_beam,
-                "Iy": Iy_beam, "Iz": Iz_beam
+                "Iy": Iy_beam, "Iz": Iz_beam,
+                # NEW fields (only if present in ln)
+                **({"length_off_i": ln["length_off_i"]} if "length_off_i" in ln else {}),
+                **({"length_off_j": ln["length_off_j"]} if "length_off_j" in ln else {}),
+                **({"offsets_i": ln["offsets_i"]} if "offsets_i" in ln else {}),
+                **({"offsets_j": ln["offsets_j"]} if "offsets_j" in ln else {}),
             })
 
     # Diagnostics

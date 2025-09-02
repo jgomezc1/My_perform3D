@@ -1,4 +1,3 @@
-# phase1_run.py
 """
 CLI entrypoint for Phase 1.
 Usage:
@@ -17,14 +16,24 @@ from config import E2K_PATH, OUT_DIR
 from e2k_parser import parse_e2k
 from story_builder import build_story_graph
 
+
 def main():
     text = Path(E2K_PATH).read_text(encoding="utf-8", errors="ignore")
     raw = parse_e2k(text)
+
+    # Tag the artifacts version so downstream tools can gate new fields safely.
+    # Bump when we add or change top-level Phase-1 structures.
+    raw["_artifacts_version"] = "1.1"  # 1.1 introduces LENGTHOFFI/J and OFFSET{X,Y,Z}{I,J} in line_assigns
+
     story = build_story_graph(raw)
 
     # Write compact JSON (easier to diff; no giant .py files)
-    (OUT_DIR / "parsed_raw.json").write_text(json.dumps(raw, indent=2, ensure_ascii=False), encoding="utf-8")
-    (OUT_DIR / "story_graph.json").write_text(json.dumps(story, indent=2, ensure_ascii=False), encoding="utf-8")
+    (OUT_DIR / "parsed_raw.json").write_text(
+        json.dumps(raw, indent=2, ensure_ascii=False), encoding="utf-8"
+    )
+    (OUT_DIR / "story_graph.json").write_text(
+        json.dumps(story, indent=2, ensure_ascii=False), encoding="utf-8"
+    )
 
     # CSV sanity: stories
     rows = [{
@@ -55,5 +64,7 @@ def main():
     print(f"  - {OUT_DIR/'story_table.csv'}")
     print(f"  - {OUT_DIR/'point_matrix.csv'}")
 
+
 if __name__ == "__main__":
     main()
+

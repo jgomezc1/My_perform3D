@@ -204,7 +204,12 @@ def define_columns(
                 "section": ln.get("section"),
                 "transf_tag": transf_tag,
                 "A": A_col, "E": E_col, "G": G_col, "J": J_col,
-                "Iy": Iy_col, "Iz": Iz_col
+                "Iy": Iy_col, "Iz": Iz_col,
+                # NEW fields (if present in ln)
+                **({"length_off_i": ln["length_off_i"]} if "length_off_i" in ln else {}),
+                **({"length_off_j": ln["length_off_j"]} if "length_off_j" in ln else {}),
+                **({"offsets_i": ln["offsets_i"]} if "offsets_i" in ln else {}),
+                **({"offsets_j": ln["offsets_j"]} if "offsets_j" in ln else {}),
             })
 
     if ENFORCE_COLUMN_I_AT_BOTTOM:

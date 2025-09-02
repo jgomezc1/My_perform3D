@@ -52,31 +52,20 @@ from config import EPS
 
 
 def compute_story_elevations(stories: List[Dict[str, Any]]) -> Dict[str, float]:
-    """
-    stories: list of dicts in ETABS file order (top -> bottom), each with:
-      - name: str
-      - height: float | None
-      - elev: float | None (explicit)
-    Returns a dict {story_name: absolute_Z}.
-    """
+    # (unchanged) ...
     if not stories:
         return {}
-
-    # Choose base story
     base_idx = None
     for i, s in enumerate(stories):
         if s["elev"] is not None and abs(s["elev"]) < EPS:
             base_idx = i
             break
     if base_idx is None:
-        base_idx = len(stories) - 1  # default: last entry as base
-
+        base_idx = len(stories) - 1
     elev: Dict[str, float] = {}
     base = stories[base_idx]
     base_z = base["elev"] if base["elev"] is not None else 0.0
     elev[base["name"]] = base_z
-
-    # Upward from base (towards top): Z(upper) = Z(lower) + HEIGHT(upper), unless ELEV overrides
     last_idx = base_idx
     for i in range(base_idx - 1, -1, -1):
         s = stories[i]
@@ -86,8 +75,6 @@ def compute_story_elevations(stories: List[Dict[str, Any]]) -> Dict[str, float]:
             z = s["elev"]
         elev[s["name"]] = z
         last_idx = i
-
-    # Downward from base (towards bottom): Z(lower) = Z(upper) - HEIGHT(upper), unless ELEV overrides
     for i in range(base_idx + 1, len(stories)):
         upper = stories[i - 1]
         s = stories[i]
@@ -96,38 +83,20 @@ def compute_story_elevations(stories: List[Dict[str, Any]]) -> Dict[str, float]:
         if s["elev"] is not None:
             z = s["elev"]
         elev[s["name"]] = z
-
     return elev
 
 
 def build_story_graph(raw: Dict[str, Any]) -> Dict[str, Any]:
-    """
-    raw: dict from parse_e2k with keys:
-      - stories: [{name, height, elev}, ...] (top->bottom order)
-      - points:  {pid: {"x": float, "y": float, "has_three": bool, "third": float|None}, ...}
-      - point_assigns: [{"point": pid, "story": name, "diaphragm":?, "springprop":?}, ...]
-      - lines:   {lname: {"name": lname, "kind": "BEAM"|"COLUMN", "i": pid, "j": pid}, ...}
-      - line_assigns: [{"line": lname, "story": name, "section":?}, ...]
-
-    Returns a STORY-centered dict with:
-      - story_order_top_to_bottom
-      - story_elev
-      - active_points[story] -> [{id,x,y,z,explicit_z,diaphragm,springprop}]
-      - active_lines[story]  -> [{name,type,i,j,section}]
-      - free_points_xyz      -> []  (explicit-Z is story-dependent now; no global free nodes)
-    """
     stories: List[Dict[str, Any]] = raw["stories"]
     points: Dict[str, Dict[str, Any]] = raw["points"]
     point_assigns: List[Dict[str, Any]] = raw["point_assigns"]
     lines: Dict[str, Dict[str, Any]] = raw["lines"]
     line_assigns: List[Dict[str, Any]] = raw["line_assigns"]
 
-    story_names = [s["name"] for s in stories]  # top -> bottom
+    story_names = [s["name"] for s in stories]
     story_elev = compute_story_elevations(stories)
     story_set = set(story_elev.keys())
 
-    # Build active points per story with the NEW Z rule
-    # (SPRINGPROP is ignored for Z computation)
     active_points = defaultdict(list)
     for a in point_assigns:
         story = a["story"]
@@ -145,7 +114,6 @@ def build_story_graph(raw: Dict[str, Any]) -> Dict[str, Any]:
         else:
             z = story_elev[story]
             explicit_flag = False
-
         active_points[story].append({
             "id": pid,
             "x": prec["x"],
@@ -156,7 +124,7 @@ def build_story_graph(raw: Dict[str, Any]) -> Dict[str, Any]:
             "springprop": a.get("springprop"),
         })
 
-    # Active lines per story (dedupe by line name; "last section wins")
+    # Active lines per story
     la_by_story = defaultdict(list)
     for la in line_assigns:
         la_by_story[la["story"]].append(la)
@@ -177,19 +145,28 @@ def build_story_graph(raw: Dict[str, Any]) -> Dict[str, Any]:
                     "j": rec["j"],
                     "section": la.get("section"),
                 }
+                # NEW: propagate offsets and lengths if present
+                if "length_off_i" in la:
+                    per_line[key]["length_off_i"] = la["length_off_i"]
+                if "length_off_j" in la:
+                    per_line[key]["length_off_j"] = la["length_off_j"]
+                if "offsets_i" in la:
+                    per_line[key]["offsets_i"] = la["offsets_i"]
+                if "offsets_j" in la:
+                    per_line[key]["offsets_j"] = la["offsets_j"]
             else:
                 if la.get("section") is not None:
                     per_line[key]["section"] = la["section"]
+                # Update with newer offset info if present
+                for fld in ("length_off_i", "length_off_j", "offsets_i", "offsets_j"):
+                    if fld in la:
+                        per_line[key][fld] = la[fld]
         active_lines[sname] = list(per_line.values())
-
-    # With the new Z rule, explicit-Z is NOT a global free coordinate—it's story-dependent.
-    # We keep this key for compatibility, but it's intentionally empty.
-    free_points_xyz: List[Dict[str, Any]] = []
 
     return {
         "story_order_top_to_bottom": story_names,
         "story_elev": story_elev,
         "active_points": dict(active_points),
         "active_lines": dict(active_lines),
-        "free_points_xyz": free_points_xyz,
+        "free_points_xyz": [],
     }
