@@ -1,33 +1,26 @@
 """
-Create COLUMN elements as OpenSeesPy elasticBeamColumn members using the following
-rules, and emit Phase-2 artifact `columns.json`.
+Create COLUMN elements as OpenSeesPy elasticBeamColumn members with support for
+ETABS rigid end zones (LENGTHOFFI/LENGTHOFFJ when RIGIDZONE=1). Writes Phase-2
+artifact `columns.json`.
 
-Local axis orientation: by default enforce i=bottom, j=top for columns (configurable).
-"find-next-lower-story" rule:
+Rules (retained)
+----------------
+- **find-next-lower-story**: For a COLUMN line at story S, connect its endpoint
+  'i' at story S to endpoint 'j' at the next lower story K where **both** i and j
+  appear in that story's active points. If none is found, skip.
+- Enforce local-axis convention (configurable): by default **i = bottom, j = top**.
 
-For each COLUMN LINEASSIGN at story S:
-  - Create exactly one segment from:
-        upper node: endpoint "i" at story S
-        lower node: endpoint "j" at the next lower story K > S where BOTH endpoints
-                    ("i" and "j") exist in that story's active points.
-  - If no such lower story exists (no occurrence of BOTH endpoints below), skip and report.
-  - Intermediate stories without endpoints are skipped by design.
+New in this version
+-------------------
+- Splits members into up to **three segments** (rigid I, deformable mid, rigid J).
+- Creates deterministic **intermediate nodes** at the offset boundaries.
+- Per-segment **geomTransf** (one per element) derived from the element tag.
+- Emits richer `columns.json` records with a `segment` field.
 
 OpenSeesPy signatures (exact):
-    geomTransf('Linear', transfTag, 1, 0, 0)
+    geomTransf('Linear', transf_tag, 1, 0, 0)
     element('elasticBeamColumn', tag, nI, nJ,
-            A, E, G, J, Iy, Iz, transfTag)
-
-Update (per-element transforms)
--------------------------------
-Previously a single global transform (tag=111, vec=(1,0,0)) was used for all columns.
-We now create **one geomTransf per element** so we can later attach -jntOffset
-safely on a per-element basis. The transform tag is derived from the element tag
-in a disjoint namespace to avoid collisions with beams:
-
-    transf_tag = 1100000000 + element_tag
-
-Orientation vector (unchanged): vecXZ = (1, 0, 0)
+            A, E, G, J, Iy, Iz, transf_tag)
 """
 from __future__ import annotations
 
@@ -50,6 +43,12 @@ try:
 except Exception:
     ENFORCE_COLUMN_I_AT_BOTTOM = True
 
+# Rigid end scale (A, Iy, Iz, J are multiplied by this for rigid segments)
+try:
+    from config import RIGID_END_SCALE  # type: ignore
+except Exception:
+    RIGID_END_SCALE = 1.0e6
+
 # Prefer project tagging helpers if available
 try:
     from tagging import element_tag  # type: ignore
@@ -58,6 +57,8 @@ except Exception:
         s = f"{kind}|{name}|{story_index}".encode("utf-8")
         return int.from_bytes(hashlib.md5(s).digest()[:4], "big") & 0x7FFFFFFF
 
+from rigid_end_utils import split_with_rigid_ends  # type: ignore
+
 
 def _load_json(path: str) -> Dict[str, Any]:
     with open(path, "r", encoding="utf-8") as f:
@@ -65,10 +66,6 @@ def _load_json(path: str) -> Dict[str, Any]:
 
 
 def _point_pid(p: Dict[str, Any]) -> Optional[str]:
-    """
-    Safely extract a point identifier from a Phase-1 active_point record.
-    Priority: 'id' → 'tag' → ('point', 'pid') if present. Returns None if none found.
-    """
     for key in ("id", "tag", "point", "pid"):
         if key in p and p[key] is not None:
             return str(p[key])
@@ -76,15 +73,11 @@ def _point_pid(p: Dict[str, Any]) -> Optional[str]:
 
 
 def _active_points_map(story: Dict[str, Any]) -> Dict[Tuple[str, str], Tuple[float, float, float]]:
-    """
-    Build lookup: (point_id, story_name) -> (x, y, z), skipping records without a usable id.
-    """
     out: Dict[Tuple[str, str], Tuple[float, float, float]] = {}
     for sname, pts in story.get("active_points", {}).items():
         for p in pts:
             pid = _point_pid(p)
             if pid is None:
-                # Graceful skip; bad record should not crash the build.
                 print(f"[columns] WARN: active_point in '{sname}' missing 'id'/'tag'; skipped.")
                 continue
             out[(pid, sname)] = (float(p["x"]), float(p["y"]), float(p["z"]))
@@ -98,13 +91,13 @@ def _point_exists(pid: str, sname: str, act_pt_map: Dict[Tuple[str, str], Tuple[
 def _ensure_node_for(
     pid: str, sname: str, sidx: int, act_pt_map: Dict[Tuple[str, str], Tuple[float, float, float]],
     existing_nodes: Set[int]
-) -> int:
-    """
-    Ensure a node for (pid, sname) exists; create it if missing using active_points coords.
-    """
+) -> Optional[int]:
+    key = (str(pid), sname)
+    if key not in act_pt_map:
+        return None
     tag = int(pid) * 1000 + int(sidx)
     if tag not in existing_nodes:
-        x, y, z = act_pt_map[(str(pid), sname)]
+        x, y, z = act_pt_map[key]
         node(tag, x, y, z)
         existing_nodes.add(tag)
     return tag
@@ -127,7 +120,7 @@ def define_columns(
     nu_col: float = 0.20
 ) -> List[int]:
     """
-    Build COLUMN elements with the "find-next-lower-story" rule.
+    Build COLUMN elements with the next-lower-story rule and rigid ends.
     Returns the list of created element tags. Also writes OUT_DIR/columns.json.
     """
     story = _load_json(story_path)
@@ -159,8 +152,8 @@ def define_columns(
             if str(ln.get("type","")).upper() != "COLUMN":
                 continue
 
-            pid_i = str(ln["i"])  # ETABS "i" (upper endpoint)
-            pid_j = str(ln["j"])  # ETABS "j" (lower endpoint)
+            pid_i = str(ln["i"])
+            pid_j = str(ln["j"])
 
             # Find next lower story K where BOTH endpoints exist
             k_found: Optional[int] = None
@@ -170,69 +163,81 @@ def define_columns(
                     k_found = k
                     break
             if k_found is None:
-                skips.append(f"{ln.get('name','?')} @ '{sname}' skipped — no lower story with both endpoints")
+                skips.append(f"{ln.get('name','?')} @ '{sname}' skipped — no lower slice with both endpoints.")
                 continue
 
-            # Create or get nodes
-            if (pid_i, sname) not in act_pt_map:
-                skips.append(f"{ln.get('name','?')} @ '{sname}' skipped — upper endpoint '{pid_i}' not in active_points[{sname}]")
+            sK = story_names[k_found]
+
+            # Prepare nodes at (i,S) and (j,K)
+            nTop = _ensure_node_for(pid_i, sname, sidx, act_pt_map, existing_nodes)   # upper
+            nBot = _ensure_node_for(pid_j, sK, k_found, act_pt_map, existing_nodes)   # lower
+            if nTop is None or nBot is None:
+                skips.append(f"{ln.get('name','?')} @ '{sname}' skipped — missing node(s).")
                 continue
-            if (pid_j, story_names[k_found]) not in act_pt_map:
-                skips.append(f"{ln.get('name','?')} @ '{sname}' skipped — lower endpoint '{pid_j}' not in active_points[{story_names[k_found]}]")
-                continue
 
-            n_top    = _ensure_node_for(pid_i, sname, sidx, act_pt_map, existing_nodes)
-            n_bottom = _ensure_node_for(pid_j, story_names[k_found], k_found, act_pt_map, existing_nodes)
+            pTop = act_pt_map[(pid_i, sname)]
+            pBot = act_pt_map[(pid_j, sK)]
 
-            # Deterministic element tag (use upper story index for stability)
-            tag = element_tag("COLUMN", str(ln.get("name","?")), int(sidx))
+            # Orientation enforcement (i=bottom, j=top) if requested
+            nI, nJ = (nBot, nTop)
+            pI, pJ = (pBot, pTop)
+            LoffI = float(ln.get("length_off_i", 0.0) or 0.0)
+            LoffJ = float(ln.get("length_off_j", 0.0) or 0.0)
+            line_name = str(ln.get("name","?"))
 
-            # Per-element transformation: Linear with vecXZ = (1,0,0)
-            transf_tag = 1100000000 + tag
-            geomTransf('Linear', transf_tag, 1, 0, 0)
-
-            # Orientation enforcement
-            if ENFORCE_COLUMN_I_AT_BOTTOM:
-                e_nI, e_nJ = n_bottom, n_top
-                orientation = "i=bottom,j=top"
+            if not ENFORCE_COLUMN_I_AT_BOTTOM:
+                # Keep ETABS i->j direction (i at S (top), j at K (bottom)):
+                nI, nJ = (nTop, nBot)
+                pI, pJ = (pTop, pBot)
             else:
-                e_nI, e_nJ = n_top, n_bottom
-                orientation = "i=top,j=bottom"
+                # ETABS i is upper; our convention is i=bottom. Swap offsets accordingly.
+                LoffI, LoffJ = float(LoffJ), float(LoffI)
 
-            # Create element
-            element('elasticBeamColumn', tag, e_nI, e_nJ,
-                    A_col, E_col, G_col, J_col, Iy_col, Iz_col, transf_tag)
-            created.append(tag)
+            parts = split_with_rigid_ends(
+                kind="COLUMN", line_name=line_name, story_index=int(sidx),
+                nI=nI, nJ=nJ, pI=pI, pJ=pJ, LoffI=LoffI, LoffJ=LoffJ
+            )
 
-            emitted.append({
-                "tag": tag,
-                "story_top": sname,
-                "story_bottom": story_names[k_found],
-                "line": str(ln.get("name","?")),
-                "i_node": e_nI,
-                "j_node": e_nJ,
-                "orientation": orientation,
-                "section": ln.get("section"),
-                "transf_tag": transf_tag,
-                "A": A_col, "E": E_col, "G": G_col, "J": J_col,
-                "Iy": Iy_col, "Iz": Iz_col,
-                # Pass-through of parsed offsets (present only if provided upstream)
-                **({"length_off_i": ln["length_off_i"]} if "length_off_i" in ln else {}),
-                **({"length_off_j": ln["length_off_j"]} if "length_off_j" in ln else {}),
-                **({"offsets_i": ln["offsets_i"]} if "offsets_i" in ln else {}),
-                **({"offsets_j": ln["offsets_j"]} if "offsets_j" in ln else {}),
-            })
+            # Create elements for each segment
+            for seg in parts['segments']:
+                role = seg['role']
+                i_tag, j_tag = seg['i'], seg['j']
 
-    if ENFORCE_COLUMN_I_AT_BOTTOM:
-        print(f"[columns] Orientation: enforced i=bottom, j=top on {len(created)} column elements.")
+                etag = element_tag("COLUMN", line_name + seg['suffix'], int(sidx))
+                transf_tag = 1100000000 + etag
+                geomTransf('Linear', transf_tag, 1, 0, 0)
+
+                if role.startswith("rigid"):
+                    A = A_col * RIGID_END_SCALE
+                    Iy = Iy_col * RIGID_END_SCALE
+                    Iz = Iz_col * RIGID_END_SCALE
+                    J  = J_col  * RIGID_END_SCALE
+                else:
+                    A, Iy, Iz, J = A_col, Iy_col, Iz_col, J_col
+
+                element('elasticBeamColumn', etag, i_tag, j_tag, A, E_col, G_col, J, Iy, Iz, transf_tag)
+                created.append(etag)
+
+                coords = parts['coords']
+                emitted.append({
+                    "tag": etag,
+                    "segment": role,
+                    "parent_line": line_name,
+                    "story": sname,
+                    "i_node": i_tag,
+                    "j_node": j_tag,
+                    "section": ln.get("section"),
+                    "transf_tag": transf_tag,
+                    "A": A, "E": E_col, "G": G_col, "J": J, "Iy": Iy, "Iz": Iz,
+                    "length_off_i": LoffI, "length_off_j": LoffJ,
+                })
 
     if skips:
         print("[columns] Skips:")
         for s in skips:
             print(" -", s)
-    print(f"[columns] Created {len(created)} column elements.")
+    print(f"[columns] Created {len(created)} column segments (including rigid ends).")
 
-    # Emit artifact
     try:
         os.makedirs(OUT_DIR, exist_ok=True)
         with open(os.path.join(OUT_DIR, "columns.json"), "w", encoding="utf-8") as f:
@@ -242,3 +247,4 @@ def define_columns(
         print(f"[columns] WARN: failed to write columns.json: {e}")
 
     return created
+
