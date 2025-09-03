@@ -6,6 +6,22 @@ def build_model(ndm: int = 3, ndf: int = 6) -> None:
     wipe()
     model("basic", "-ndm", ndm, "-ndf", ndf)
 
+    # --- Nonlinear hinge sets (from --nonlinear) ---
+    section('Elastic', 4444, 2.5e+10, 0.16, 0.00213333333, 0.00213333333, 1.04166667e+10, 0.00853333333)
+    uniaxialMaterial('Steel02', 6, 1000000, 20000000, 0.01, 20, 0.925, 0.15, 0.01, 1, 0.01, 1)
+    uniaxialMaterial('Steel02', 7, 1000000, 20000000, 0.01, 20, 0.925, 0.15, 0.01, 1, 0.01, 1)
+    section('Aggregator', 40, 6, 'My', 7, 'Mz', '-section', 4444)
+    section('Aggregator', 41, 6, 'My', 7, 'Mz', '-section', 4444)
+    beamIntegration('HingeEndpoint', 33, 40, 0.2, 41, 0.2, 4444)
+    # [hinge_set] ColHinge_C50x80C emitted (elastic=4444, int=33)
+    section('Elastic', 5555, 2.5e+10, 0.16, 0.00213333333, 0.00213333333, 1.04166667e+10, 0.00853333333)
+    uniaxialMaterial('Steel02', 16, 1000000, 20000000, 0.01, 20, 0.925, 0.15, 0.01, 1, 0.01, 1)
+    uniaxialMaterial('Steel02', 17, 1000000, 20000000, 0.01, 20, 0.925, 0.15, 0.01, 1, 0.01, 1)
+    section('Aggregator', 60, 16, 'My', 17, 'Mz', '-section', 5555)
+    section('Aggregator', 61, 16, 'My', 17, 'Mz', '-section', 5555)
+    beamIntegration('HingeEndpoint', 66, 60, 0.2, 61, 0.2, 5555)
+    # [hinge_set] ColHinge_C60x70C emitted (elastic=5555, int=66)
+
     # --- Nodes ---
     node(12000, 53.09851, 26.15, 14.775)
     node(12001, 53.09851, 26.15, 13.3)
@@ -780,175 +796,260 @@ def build_model(ndm: int = 3, ndf: int = 6) -> None:
 
     # --- Columns ---
     geomTransf('Linear', 1205534426, 1, 0, 0)
-    element('elasticBeamColumn', 105534426, 20002, 20000, 0.16, 2.5e+10, 1.04166667e+10, 0.00853333333, 0.00213333333, 0.00213333333, 1205534426)
+    # [nl] COLUMN tag 105534426 ← hinge_set 'ColHinge_C50x80C'
+    element('forceBeamColumn', 105534426, 20002, 20000, 1205534426, 33)
     geomTransf('Linear', 1330283439, 1, 0, 0)
-    element('elasticBeamColumn', 230283439, 40001, 40000, 0.16, 2.5e+10, 1.04166667e+10, 0.00853333333, 0.00213333333, 0.00213333333, 1330283439)
+    # [nl] COLUMN tag 230283439 ← hinge_set 'ColHinge_C50x80C'
+    element('forceBeamColumn', 230283439, 40001, 40000, 1330283439, 33)
     geomTransf('Linear', 1515456245, 1, 0, 0)
-    element('elasticBeamColumn', 415456245, 41001, 41000, 0.16, 2.5e+10, 1.04166667e+10, 0.00853333333, 0.00213333333, 0.00213333333, 1515456245)
+    # [nl] COLUMN tag 415456245 ← hinge_set 'ColHinge_C50x80C'
+    element('forceBeamColumn', 415456245, 41001, 41000, 1515456245, 33)
     geomTransf('Linear', 1754006935, 1, 0, 0)
-    element('elasticBeamColumn', 654006935, 780001, 780000, 0.16, 2.5e+10, 1.04166667e+10, 0.00853333333, 0.00213333333, 0.00213333333, 1754006935)
+    # [nl] COLUMN tag 654006935 ← hinge_set 'ColHinge_C50x80C'
+    element('forceBeamColumn', 654006935, 780001, 780000, 1754006935, 33)
     geomTransf('Linear', 1901380150, 1, 0, 0)
-    element('elasticBeamColumn', 801380150, 786001, 786000, 0.16, 2.5e+10, 1.04166667e+10, 0.00853333333, 0.00213333333, 0.00213333333, 1901380150)
+    # [nl] COLUMN tag 801380150 ← hinge_set 'ColHinge_C50x80C'
+    element('forceBeamColumn', 801380150, 786001, 786000, 1901380150, 33)
     geomTransf('Linear', 1854433988, 1, 0, 0)
-    element('elasticBeamColumn', 754433988, 659002, 659000, 0.16, 2.5e+10, 1.04166667e+10, 0.00853333333, 0.00213333333, 0.00213333333, 1854433988)
+    # [nl] COLUMN tag 754433988 ← hinge_set 'ColHinge_C50x80C'
+    element('forceBeamColumn', 754433988, 659002, 659000, 1854433988, 33)
     geomTransf('Linear', 1681093508, 1, 0, 0)
-    element('elasticBeamColumn', 581093508, 36001, 36000, 0.16, 2.5e+10, 1.04166667e+10, 0.00853333333, 0.00213333333, 0.00213333333, 1681093508)
+    # [nl] COLUMN tag 581093508 ← hinge_set 'ColHinge_C50x80C'
+    element('forceBeamColumn', 581093508, 36001, 36000, 1681093508, 33)
     geomTransf('Linear', 1204965128, 1, 0, 0)
-    element('elasticBeamColumn', 104965128, 795001, 795000, 0.16, 2.5e+10, 1.04166667e+10, 0.00853333333, 0.00213333333, 0.00213333333, 1204965128)
+    # [nl] COLUMN tag 104965128 ← hinge_set 'ColHinge_C50x80C'
+    element('forceBeamColumn', 104965128, 795001, 795000, 1204965128, 33)
     geomTransf('Linear', 1705022741, 1, 0, 0)
-    element('elasticBeamColumn', 605022741, 34001, 34000, 0.16, 2.5e+10, 1.04166667e+10, 0.00853333333, 0.00213333333, 0.00213333333, 1705022741)
+    # [nl] COLUMN tag 605022741 ← hinge_set 'ColHinge_C50x80C'
+    element('forceBeamColumn', 605022741, 34001, 34000, 1705022741, 33)
     geomTransf('Linear', 1294657028, 1, 0, 0)
-    element('elasticBeamColumn', 194657028, 827001, 827000, 0.16, 2.5e+10, 1.04166667e+10, 0.00853333333, 0.00213333333, 0.00213333333, 1294657028)
+    # [nl] COLUMN tag 194657028 ← hinge_set 'ColHinge_C50x80C'
+    element('forceBeamColumn', 194657028, 827001, 827000, 1294657028, 33)
     geomTransf('Linear', 1138871422, 1, 0, 0)
-    element('elasticBeamColumn', 38871422, 15001, 15000, 0.16, 2.5e+10, 1.04166667e+10, 0.00853333333, 0.00213333333, 0.00213333333, 1138871422)
+    # [nl] COLUMN tag 38871422 ← hinge_set 'ColHinge_C50x80C'
+    element('forceBeamColumn', 38871422, 15001, 15000, 1138871422, 33)
     geomTransf('Linear', 1950678072, 1, 0, 0)
-    element('elasticBeamColumn', 850678072, 1384001, 1384000, 0.16, 2.5e+10, 1.04166667e+10, 0.00853333333, 0.00213333333, 0.00213333333, 1950678072)
+    # [nl] COLUMN tag 850678072 ← hinge_set 'ColHinge_C50x80C'
+    element('forceBeamColumn', 850678072, 1384001, 1384000, 1950678072, 33)
     geomTransf('Linear', 1378050078, 1, 0, 0)
-    element('elasticBeamColumn', 278050078, 792001, 792000, 0.16, 2.5e+10, 1.04166667e+10, 0.00853333333, 0.00213333333, 0.00213333333, 1378050078)
+    # [nl] COLUMN tag 278050078 ← hinge_set 'ColHinge_C50x80C'
+    element('forceBeamColumn', 278050078, 792001, 792000, 1378050078, 33)
     geomTransf('Linear', 1857914059, 1, 0, 0)
-    element('elasticBeamColumn', 757914059, 794003, 794001, 0.16, 2.5e+10, 1.04166667e+10, 0.00853333333, 0.00213333333, 0.00213333333, 1857914059)
+    # [nl] COLUMN tag 757914059 ← hinge_set 'ColHinge_C50x80C'
+    element('forceBeamColumn', 757914059, 794003, 794001, 1857914059, 33)
     geomTransf('Linear', 1957934937, 1, 0, 0)
-    element('elasticBeamColumn', 857934937, 40003, 40001, 0.16, 2.5e+10, 1.04166667e+10, 0.00853333333, 0.00213333333, 0.00213333333, 1957934937)
+    # [nl] COLUMN tag 857934937 ← hinge_set 'ColHinge_C50x80C'
+    element('forceBeamColumn', 857934937, 40003, 40001, 1957934937, 33)
     geomTransf('Linear', 1136716140, 1, 0, 0)
-    element('elasticBeamColumn', 36716140, 41003, 41001, 0.16, 2.5e+10, 1.04166667e+10, 0.00853333333, 0.00213333333, 0.00213333333, 1136716140)
+    # [nl] COLUMN tag 36716140 ← hinge_set 'ColHinge_C50x80C'
+    element('forceBeamColumn', 36716140, 41003, 41001, 1136716140, 33)
     geomTransf('Linear', 1864224580, 1, 0, 0)
-    element('elasticBeamColumn', 764224580, 780003, 780001, 0.16, 2.5e+10, 1.04166667e+10, 0.00853333333, 0.00213333333, 0.00213333333, 1864224580)
+    # [nl] COLUMN tag 764224580 ← hinge_set 'ColHinge_C50x80C'
+    element('forceBeamColumn', 764224580, 780003, 780001, 1864224580, 33)
     geomTransf('Linear', 1655948172, 1, 0, 0)
-    element('elasticBeamColumn', 555948172, 786003, 786001, 0.16, 2.5e+10, 1.04166667e+10, 0.00853333333, 0.00213333333, 0.00213333333, 1655948172)
+    # [nl] COLUMN tag 555948172 ← hinge_set 'ColHinge_C50x80C'
+    element('forceBeamColumn', 555948172, 786003, 786001, 1655948172, 33)
     geomTransf('Linear', 1355085574, 1, 0, 0)
-    element('elasticBeamColumn', 255085574, 36003, 36001, 0.16, 2.5e+10, 1.04166667e+10, 0.00853333333, 0.00213333333, 0.00213333333, 1355085574)
+    # [nl] COLUMN tag 255085574 ← hinge_set 'ColHinge_C50x80C'
+    element('forceBeamColumn', 255085574, 36003, 36001, 1355085574, 33)
     geomTransf('Linear', 1824613101, 1, 0, 0)
-    element('elasticBeamColumn', 724613101, 795003, 795001, 0.16, 2.5e+10, 1.04166667e+10, 0.00853333333, 0.00213333333, 0.00213333333, 1824613101)
+    # [nl] COLUMN tag 724613101 ← hinge_set 'ColHinge_C50x80C'
+    element('forceBeamColumn', 724613101, 795003, 795001, 1824613101, 33)
     geomTransf('Linear', 1184717748, 1, 0, 0)
-    element('elasticBeamColumn', 84717748, 34003, 34001, 0.16, 2.5e+10, 1.04166667e+10, 0.00853333333, 0.00213333333, 0.00213333333, 1184717748)
+    # [nl] COLUMN tag 84717748 ← hinge_set 'ColHinge_C50x80C'
+    element('forceBeamColumn', 84717748, 34003, 34001, 1184717748, 33)
     geomTransf('Linear', 1226211383, 1, 0, 0)
-    element('elasticBeamColumn', 126211383, 827003, 827001, 0.16, 2.5e+10, 1.04166667e+10, 0.00853333333, 0.00213333333, 0.00213333333, 1226211383)
+    # [nl] COLUMN tag 126211383 ← hinge_set 'ColHinge_C50x80C'
+    element('forceBeamColumn', 126211383, 827003, 827001, 1226211383, 33)
     geomTransf('Linear', 1303006476, 1, 0, 0)
-    element('elasticBeamColumn', 203006476, 15003, 15001, 0.16, 2.5e+10, 1.04166667e+10, 0.00853333333, 0.00213333333, 0.00213333333, 1303006476)
+    # [nl] COLUMN tag 203006476 ← hinge_set 'ColHinge_C50x80C'
+    element('forceBeamColumn', 203006476, 15003, 15001, 1303006476, 33)
     geomTransf('Linear', 1653036799, 1, 0, 0)
-    element('elasticBeamColumn', 553036799, 1384003, 1384001, 0.16, 2.5e+10, 1.04166667e+10, 0.00853333333, 0.00213333333, 0.00213333333, 1653036799)
+    # [nl] COLUMN tag 553036799 ← hinge_set 'ColHinge_C50x80C'
+    element('forceBeamColumn', 553036799, 1384003, 1384001, 1653036799, 33)
     geomTransf('Linear', 1512415637, 1, 0, 0)
-    element('elasticBeamColumn', 412415637, 792003, 792001, 0.16, 2.5e+10, 1.04166667e+10, 0.00853333333, 0.00213333333, 0.00213333333, 1512415637)
+    # [nl] COLUMN tag 412415637 ← hinge_set 'ColHinge_C50x80C'
+    element('forceBeamColumn', 412415637, 792003, 792001, 1512415637, 33)
     geomTransf('Linear', 1442358685, 1, 0, 0)
-    element('elasticBeamColumn', 342358685, 794005, 794003, 0.16, 2.5e+10, 1.04166667e+10, 0.00853333333, 0.00213333333, 0.00213333333, 1442358685)
+    # [nl] COLUMN tag 342358685 ← hinge_set 'ColHinge_C50x80C'
+    element('forceBeamColumn', 342358685, 794005, 794003, 1442358685, 33)
     geomTransf('Linear', 1246999097, 1, 0, 0)
-    element('elasticBeamColumn', 146999097, 40005, 40003, 0.16, 2.5e+10, 1.04166667e+10, 0.00853333333, 0.00213333333, 0.00213333333, 1246999097)
+    # [nl] COLUMN tag 146999097 ← hinge_set 'ColHinge_C50x80C'
+    element('forceBeamColumn', 146999097, 40005, 40003, 1246999097, 33)
     geomTransf('Linear', 1382019976, 1, 0, 0)
-    element('elasticBeamColumn', 282019976, 41005, 41003, 0.16, 2.5e+10, 1.04166667e+10, 0.00853333333, 0.00213333333, 0.00213333333, 1382019976)
+    # [nl] COLUMN tag 282019976 ← hinge_set 'ColHinge_C50x80C'
+    element('forceBeamColumn', 282019976, 41005, 41003, 1382019976, 33)
     geomTransf('Linear', 1399324077, 1, 0, 0)
-    element('elasticBeamColumn', 299324077, 780005, 780003, 0.16, 2.5e+10, 1.04166667e+10, 0.00853333333, 0.00213333333, 0.00213333333, 1399324077)
+    # [nl] COLUMN tag 299324077 ← hinge_set 'ColHinge_C50x80C'
+    element('forceBeamColumn', 299324077, 780005, 780003, 1399324077, 33)
     geomTransf('Linear', 1974963227, 1, 0, 0)
-    element('elasticBeamColumn', 874963227, 786005, 786003, 0.16, 2.5e+10, 1.04166667e+10, 0.00853333333, 0.00213333333, 0.00213333333, 1974963227)
+    # [nl] COLUMN tag 874963227 ← hinge_set 'ColHinge_C50x80C'
+    element('forceBeamColumn', 874963227, 786005, 786003, 1974963227, 33)
     geomTransf('Linear', 1530210138, 1, 0, 0)
-    element('elasticBeamColumn', 430210138, 36005, 36003, 0.16, 2.5e+10, 1.04166667e+10, 0.00853333333, 0.00213333333, 0.00213333333, 1530210138)
+    # [nl] COLUMN tag 430210138 ← hinge_set 'ColHinge_C50x80C'
+    element('forceBeamColumn', 430210138, 36005, 36003, 1530210138, 33)
     geomTransf('Linear', 1690169374, 1, 0, 0)
-    element('elasticBeamColumn', 590169374, 795005, 795003, 0.16, 2.5e+10, 1.04166667e+10, 0.00853333333, 0.00213333333, 0.00213333333, 1690169374)
+    # [nl] COLUMN tag 590169374 ← hinge_set 'ColHinge_C50x80C'
+    element('forceBeamColumn', 590169374, 795005, 795003, 1690169374, 33)
     geomTransf('Linear', 1434743019, 1, 0, 0)
-    element('elasticBeamColumn', 334743019, 34005, 34003, 0.16, 2.5e+10, 1.04166667e+10, 0.00853333333, 0.00213333333, 0.00213333333, 1434743019)
+    # [nl] COLUMN tag 334743019 ← hinge_set 'ColHinge_C50x80C'
+    element('forceBeamColumn', 334743019, 34005, 34003, 1434743019, 33)
     geomTransf('Linear', 1155539257, 1, 0, 0)
-    element('elasticBeamColumn', 55539257, 827005, 827003, 0.16, 2.5e+10, 1.04166667e+10, 0.00853333333, 0.00213333333, 0.00213333333, 1155539257)
+    # [nl] COLUMN tag 55539257 ← hinge_set 'ColHinge_C50x80C'
+    element('forceBeamColumn', 55539257, 827005, 827003, 1155539257, 33)
     geomTransf('Linear', 1568473507, 1, 0, 0)
-    element('elasticBeamColumn', 468473507, 15005, 15003, 0.16, 2.5e+10, 1.04166667e+10, 0.00853333333, 0.00213333333, 0.00213333333, 1568473507)
+    # [nl] COLUMN tag 468473507 ← hinge_set 'ColHinge_C50x80C'
+    element('forceBeamColumn', 468473507, 15005, 15003, 1568473507, 33)
     geomTransf('Linear', 1609661527, 1, 0, 0)
-    element('elasticBeamColumn', 509661527, 1384005, 1384003, 0.16, 2.5e+10, 1.04166667e+10, 0.00853333333, 0.00213333333, 0.00213333333, 1609661527)
+    # [nl] COLUMN tag 509661527 ← hinge_set 'ColHinge_C50x80C'
+    element('forceBeamColumn', 509661527, 1384005, 1384003, 1609661527, 33)
     geomTransf('Linear', 1629402973, 1, 0, 0)
-    element('elasticBeamColumn', 529402973, 792005, 792003, 0.16, 2.5e+10, 1.04166667e+10, 0.00853333333, 0.00213333333, 0.00213333333, 1629402973)
+    # [nl] COLUMN tag 529402973 ← hinge_set 'ColHinge_C50x80C'
+    element('forceBeamColumn', 529402973, 792005, 792003, 1629402973, 33)
     geomTransf('Linear', 1259203080, 1, 0, 0)
-    element('elasticBeamColumn', 159203080, 794007, 794005, 0.16, 2.5e+10, 1.04166667e+10, 0.00853333333, 0.00213333333, 0.00213333333, 1259203080)
+    # [nl] COLUMN tag 159203080 ← hinge_set 'ColHinge_C50x80C'
+    element('forceBeamColumn', 159203080, 794007, 794005, 1259203080, 33)
     geomTransf('Linear', 1682922765, 1, 0, 0)
-    element('elasticBeamColumn', 582922765, 40007, 40005, 0.16, 2.5e+10, 1.04166667e+10, 0.00853333333, 0.00213333333, 0.00213333333, 1682922765)
+    # [nl] COLUMN tag 582922765 ← hinge_set 'ColHinge_C50x80C'
+    element('forceBeamColumn', 582922765, 40007, 40005, 1682922765, 33)
     geomTransf('Linear', 1798572110, 1, 0, 0)
-    element('elasticBeamColumn', 698572110, 41007, 41005, 0.16, 2.5e+10, 1.04166667e+10, 0.00853333333, 0.00213333333, 0.00213333333, 1798572110)
+    # [nl] COLUMN tag 698572110 ← hinge_set 'ColHinge_C50x80C'
+    element('forceBeamColumn', 698572110, 41007, 41005, 1798572110, 33)
     geomTransf('Linear', 1262747608, 1, 0, 0)
-    element('elasticBeamColumn', 162747608, 780007, 780005, 0.16, 2.5e+10, 1.04166667e+10, 0.00853333333, 0.00213333333, 0.00213333333, 1262747608)
+    # [nl] COLUMN tag 162747608 ← hinge_set 'ColHinge_C50x80C'
+    element('forceBeamColumn', 162747608, 780007, 780005, 1262747608, 33)
     geomTransf('Linear', 1398147009, 1, 0, 0)
-    element('elasticBeamColumn', 298147009, 786007, 786005, 0.16, 2.5e+10, 1.04166667e+10, 0.00853333333, 0.00213333333, 0.00213333333, 1398147009)
+    # [nl] COLUMN tag 298147009 ← hinge_set 'ColHinge_C50x80C'
+    element('forceBeamColumn', 298147009, 786007, 786005, 1398147009, 33)
     geomTransf('Linear', 1544623478, 1, 0, 0)
-    element('elasticBeamColumn', 444623478, 36007, 36005, 0.16, 2.5e+10, 1.04166667e+10, 0.00853333333, 0.00213333333, 0.00213333333, 1544623478)
+    # [nl] COLUMN tag 444623478 ← hinge_set 'ColHinge_C50x80C'
+    element('forceBeamColumn', 444623478, 36007, 36005, 1544623478, 33)
     geomTransf('Linear', 1669573467, 1, 0, 0)
-    element('elasticBeamColumn', 569573467, 795007, 795005, 0.16, 2.5e+10, 1.04166667e+10, 0.00853333333, 0.00213333333, 0.00213333333, 1669573467)
+    # [nl] COLUMN tag 569573467 ← hinge_set 'ColHinge_C50x80C'
+    element('forceBeamColumn', 569573467, 795007, 795005, 1669573467, 33)
     geomTransf('Linear', 1507457206, 1, 0, 0)
-    element('elasticBeamColumn', 407457206, 34007, 34005, 0.16, 2.5e+10, 1.04166667e+10, 0.00853333333, 0.00213333333, 0.00213333333, 1507457206)
+    # [nl] COLUMN tag 407457206 ← hinge_set 'ColHinge_C50x80C'
+    element('forceBeamColumn', 407457206, 34007, 34005, 1507457206, 33)
     geomTransf('Linear', 1889216438, 1, 0, 0)
-    element('elasticBeamColumn', 789216438, 827007, 827005, 0.16, 2.5e+10, 1.04166667e+10, 0.00853333333, 0.00213333333, 0.00213333333, 1889216438)
+    # [nl] COLUMN tag 789216438 ← hinge_set 'ColHinge_C50x80C'
+    element('forceBeamColumn', 789216438, 827007, 827005, 1889216438, 33)
     geomTransf('Linear', 1294099764, 1, 0, 0)
-    element('elasticBeamColumn', 194099764, 15007, 15005, 0.16, 2.5e+10, 1.04166667e+10, 0.00853333333, 0.00213333333, 0.00213333333, 1294099764)
+    # [nl] COLUMN tag 194099764 ← hinge_set 'ColHinge_C50x80C'
+    element('forceBeamColumn', 194099764, 15007, 15005, 1294099764, 33)
     geomTransf('Linear', 1143028416, 1, 0, 0)
-    element('elasticBeamColumn', 43028416, 1384007, 1384005, 0.16, 2.5e+10, 1.04166667e+10, 0.00853333333, 0.00213333333, 0.00213333333, 1143028416)
+    # [nl] COLUMN tag 43028416 ← hinge_set 'ColHinge_C50x80C'
+    element('forceBeamColumn', 43028416, 1384007, 1384005, 1143028416, 33)
     geomTransf('Linear', 1460998218, 1, 0, 0)
-    element('elasticBeamColumn', 360998218, 792007, 792005, 0.16, 2.5e+10, 1.04166667e+10, 0.00853333333, 0.00213333333, 0.00213333333, 1460998218)
+    # [nl] COLUMN tag 360998218 ← hinge_set 'ColHinge_C50x80C'
+    element('forceBeamColumn', 360998218, 792007, 792005, 1460998218, 33)
     geomTransf('Linear', 1664123790, 1, 0, 0)
-    element('elasticBeamColumn', 564123790, 20009, 20008, 0.16, 2.5e+10, 1.04166667e+10, 0.00853333333, 0.00213333333, 0.00213333333, 1664123790)
+    # [nl] COLUMN tag 564123790 ← hinge_set 'ColHinge_C50x80C'
+    element('forceBeamColumn', 564123790, 20009, 20008, 1664123790, 33)
     geomTransf('Linear', 1575217422, 1, 0, 0)
-    element('elasticBeamColumn', 475217422, 57009, 57008, 0.16, 2.5e+10, 1.04166667e+10, 0.00853333333, 0.00213333333, 0.00213333333, 1575217422)
+    # [nl] COLUMN tag 475217422 ← hinge_set 'ColHinge_C50x80C'
+    element('forceBeamColumn', 475217422, 57009, 57008, 1575217422, 33)
     geomTransf('Linear', 1225994467, 1, 0, 0)
-    element('elasticBeamColumn', 125994467, 59009, 59008, 0.16, 2.5e+10, 1.04166667e+10, 0.00853333333, 0.00213333333, 0.00213333333, 1225994467)
+    # [nl] COLUMN tag 125994467 ← hinge_set 'ColHinge_C50x80C'
+    element('forceBeamColumn', 125994467, 59009, 59008, 1225994467, 33)
     geomTransf('Linear', 1249945627, 1, 0, 0)
-    element('elasticBeamColumn', 149945627, 659009, 659008, 0.16, 2.5e+10, 1.04166667e+10, 0.00853333333, 0.00213333333, 0.00213333333, 1249945627)
+    # [nl] COLUMN tag 149945627 ← hinge_set 'ColHinge_C50x80C'
+    element('forceBeamColumn', 149945627, 659009, 659008, 1249945627, 33)
     geomTransf('Linear', 1424942459, 1, 0, 0)
-    element('elasticBeamColumn', 324942459, 791009, 791008, 0.16, 2.5e+10, 1.04166667e+10, 0.00853333333, 0.00213333333, 0.00213333333, 1424942459)
+    # [nl] COLUMN tag 324942459 ← hinge_set 'ColHinge_C50x80C'
+    element('forceBeamColumn', 324942459, 791009, 791008, 1424942459, 33)
     geomTransf('Linear', 1289439499, 1, 0, 0)
-    element('elasticBeamColumn', 189439499, 56009, 56008, 0.16, 2.5e+10, 1.04166667e+10, 0.00853333333, 0.00213333333, 0.00213333333, 1289439499)
+    # [nl] COLUMN tag 189439499 ← hinge_set 'ColHinge_C50x80C'
+    element('forceBeamColumn', 189439499, 56009, 56008, 1289439499, 33)
     geomTransf('Linear', 1915182287, 1, 0, 0)
-    element('elasticBeamColumn', 815182287, 20004, 20002, 0.16, 2.5e+10, 1.04166667e+10, 0.00853333333, 0.00213333333, 0.00213333333, 1915182287)
+    # [nl] COLUMN tag 815182287 ← hinge_set 'ColHinge_C50x80C'
+    element('forceBeamColumn', 815182287, 20004, 20002, 1915182287, 33)
     geomTransf('Linear', 1732801782, 1, 0, 0)
-    element('elasticBeamColumn', 632801782, 57004, 57002, 0.16, 2.5e+10, 1.04166667e+10, 0.00853333333, 0.00213333333, 0.00213333333, 1732801782)
+    # [nl] COLUMN tag 632801782 ← hinge_set 'ColHinge_C50x80C'
+    element('forceBeamColumn', 632801782, 57004, 57002, 1732801782, 33)
     geomTransf('Linear', 1206356285, 1, 0, 0)
-    element('elasticBeamColumn', 106356285, 59004, 59002, 0.16, 2.5e+10, 1.04166667e+10, 0.00853333333, 0.00213333333, 0.00213333333, 1206356285)
+    # [nl] COLUMN tag 106356285 ← hinge_set 'ColHinge_C50x80C'
+    element('forceBeamColumn', 106356285, 59004, 59002, 1206356285, 33)
     geomTransf('Linear', 1184827218, 1, 0, 0)
-    element('elasticBeamColumn', 84827218, 659004, 659002, 0.16, 2.5e+10, 1.04166667e+10, 0.00853333333, 0.00213333333, 0.00213333333, 1184827218)
+    # [nl] COLUMN tag 84827218 ← hinge_set 'ColHinge_C50x80C'
+    element('forceBeamColumn', 84827218, 659004, 659002, 1184827218, 33)
     geomTransf('Linear', 1548786369, 1, 0, 0)
-    element('elasticBeamColumn', 448786369, 791004, 791002, 0.16, 2.5e+10, 1.04166667e+10, 0.00853333333, 0.00213333333, 0.00213333333, 1548786369)
+    # [nl] COLUMN tag 448786369 ← hinge_set 'ColHinge_C50x80C'
+    element('forceBeamColumn', 448786369, 791004, 791002, 1548786369, 33)
     geomTransf('Linear', 1773346765, 1, 0, 0)
-    element('elasticBeamColumn', 673346765, 56004, 56002, 0.16, 2.5e+10, 1.04166667e+10, 0.00853333333, 0.00213333333, 0.00213333333, 1773346765)
+    # [nl] COLUMN tag 673346765 ← hinge_set 'ColHinge_C50x80C'
+    element('forceBeamColumn', 673346765, 56004, 56002, 1773346765, 33)
     geomTransf('Linear', 1350165661, 1, 0, 0)
-    element('elasticBeamColumn', 250165661, 20006, 20004, 0.16, 2.5e+10, 1.04166667e+10, 0.00853333333, 0.00213333333, 0.00213333333, 1350165661)
+    # [nl] COLUMN tag 250165661 ← hinge_set 'ColHinge_C50x80C'
+    element('forceBeamColumn', 250165661, 20006, 20004, 1350165661, 33)
     geomTransf('Linear', 1202340414, 1, 0, 0)
-    element('elasticBeamColumn', 102340414, 57006, 57004, 0.16, 2.5e+10, 1.04166667e+10, 0.00853333333, 0.00213333333, 0.00213333333, 1202340414)
+    # [nl] COLUMN tag 102340414 ← hinge_set 'ColHinge_C50x80C'
+    element('forceBeamColumn', 102340414, 57006, 57004, 1202340414, 33)
     geomTransf('Linear', 1262696387, 1, 0, 0)
-    element('elasticBeamColumn', 162696387, 59006, 59004, 0.16, 2.5e+10, 1.04166667e+10, 0.00853333333, 0.00213333333, 0.00213333333, 1262696387)
+    # [nl] COLUMN tag 162696387 ← hinge_set 'ColHinge_C50x80C'
+    element('forceBeamColumn', 162696387, 59006, 59004, 1262696387, 33)
     geomTransf('Linear', 1183678164, 1, 0, 0)
-    element('elasticBeamColumn', 83678164, 659006, 659004, 0.16, 2.5e+10, 1.04166667e+10, 0.00853333333, 0.00213333333, 0.00213333333, 1183678164)
+    # [nl] COLUMN tag 83678164 ← hinge_set 'ColHinge_C50x80C'
+    element('forceBeamColumn', 83678164, 659006, 659004, 1183678164, 33)
     geomTransf('Linear', 1519278320, 1, 0, 0)
-    element('elasticBeamColumn', 419278320, 791006, 791004, 0.16, 2.5e+10, 1.04166667e+10, 0.00853333333, 0.00213333333, 0.00213333333, 1519278320)
+    # [nl] COLUMN tag 419278320 ← hinge_set 'ColHinge_C50x80C'
+    element('forceBeamColumn', 419278320, 791006, 791004, 1519278320, 33)
     geomTransf('Linear', 1413615258, 1, 0, 0)
-    element('elasticBeamColumn', 313615258, 56006, 56004, 0.16, 2.5e+10, 1.04166667e+10, 0.00853333333, 0.00213333333, 0.00213333333, 1413615258)
+    # [nl] COLUMN tag 313615258 ← hinge_set 'ColHinge_C50x80C'
+    element('forceBeamColumn', 313615258, 56006, 56004, 1413615258, 33)
     geomTransf('Linear', 1580417373, 1, 0, 0)
-    element('elasticBeamColumn', 480417373, 20008, 20006, 0.16, 2.5e+10, 1.04166667e+10, 0.00853333333, 0.00213333333, 0.00213333333, 1580417373)
+    # [nl] COLUMN tag 480417373 ← hinge_set 'ColHinge_C50x80C'
+    element('forceBeamColumn', 480417373, 20008, 20006, 1580417373, 33)
     geomTransf('Linear', 1939473827, 1, 0, 0)
-    element('elasticBeamColumn', 839473827, 57008, 57006, 0.16, 2.5e+10, 1.04166667e+10, 0.00853333333, 0.00213333333, 0.00213333333, 1939473827)
+    # [nl] COLUMN tag 839473827 ← hinge_set 'ColHinge_C50x80C'
+    element('forceBeamColumn', 839473827, 57008, 57006, 1939473827, 33)
     geomTransf('Linear', 1803227936, 1, 0, 0)
-    element('elasticBeamColumn', 703227936, 59008, 59006, 0.16, 2.5e+10, 1.04166667e+10, 0.00853333333, 0.00213333333, 0.00213333333, 1803227936)
+    # [nl] COLUMN tag 703227936 ← hinge_set 'ColHinge_C50x80C'
+    element('forceBeamColumn', 703227936, 59008, 59006, 1803227936, 33)
     geomTransf('Linear', 1159842742, 1, 0, 0)
-    element('elasticBeamColumn', 59842742, 659008, 659006, 0.16, 2.5e+10, 1.04166667e+10, 0.00853333333, 0.00213333333, 0.00213333333, 1159842742)
+    # [nl] COLUMN tag 59842742 ← hinge_set 'ColHinge_C50x80C'
+    element('forceBeamColumn', 59842742, 659008, 659006, 1159842742, 33)
     geomTransf('Linear', 1195740006, 1, 0, 0)
-    element('elasticBeamColumn', 95740006, 791008, 791006, 0.16, 2.5e+10, 1.04166667e+10, 0.00853333333, 0.00213333333, 0.00213333333, 1195740006)
+    # [nl] COLUMN tag 95740006 ← hinge_set 'ColHinge_C50x80C'
+    element('forceBeamColumn', 95740006, 791008, 791006, 1195740006, 33)
     geomTransf('Linear', 1276080914, 1, 0, 0)
-    element('elasticBeamColumn', 176080914, 56008, 56006, 0.16, 2.5e+10, 1.04166667e+10, 0.00853333333, 0.00213333333, 0.00213333333, 1276080914)
+    # [nl] COLUMN tag 176080914 ← hinge_set 'ColHinge_C50x80C'
+    element('forceBeamColumn', 176080914, 56008, 56006, 1276080914, 33)
     geomTransf('Linear', 1778945857, 1, 0, 0)
-    element('elasticBeamColumn', 678945857, 794009, 794007, 0.16, 2.5e+10, 1.04166667e+10, 0.00853333333, 0.00213333333, 0.00213333333, 1778945857)
+    # [nl] COLUMN tag 678945857 ← hinge_set 'ColHinge_C50x80C'
+    element('forceBeamColumn', 678945857, 794009, 794007, 1778945857, 33)
     geomTransf('Linear', 1436475980, 1, 0, 0)
-    element('elasticBeamColumn', 336475980, 40009, 40007, 0.16, 2.5e+10, 1.04166667e+10, 0.00853333333, 0.00213333333, 0.00213333333, 1436475980)
+    # [nl] COLUMN tag 336475980 ← hinge_set 'ColHinge_C50x80C'
+    element('forceBeamColumn', 336475980, 40009, 40007, 1436475980, 33)
     geomTransf('Linear', 1682431779, 1, 0, 0)
-    element('elasticBeamColumn', 582431779, 41009, 41007, 0.16, 2.5e+10, 1.04166667e+10, 0.00853333333, 0.00213333333, 0.00213333333, 1682431779)
+    # [nl] COLUMN tag 582431779 ← hinge_set 'ColHinge_C50x80C'
+    element('forceBeamColumn', 582431779, 41009, 41007, 1682431779, 33)
     geomTransf('Linear', 1961003552, 1, 0, 0)
-    element('elasticBeamColumn', 861003552, 780009, 780007, 0.16, 2.5e+10, 1.04166667e+10, 0.00853333333, 0.00213333333, 0.00213333333, 1961003552)
+    # [nl] COLUMN tag 861003552 ← hinge_set 'ColHinge_C50x80C'
+    element('forceBeamColumn', 861003552, 780009, 780007, 1961003552, 33)
     geomTransf('Linear', 1292279453, 1, 0, 0)
-    element('elasticBeamColumn', 192279453, 786009, 786007, 0.16, 2.5e+10, 1.04166667e+10, 0.00853333333, 0.00213333333, 0.00213333333, 1292279453)
+    # [nl] COLUMN tag 192279453 ← hinge_set 'ColHinge_C50x80C'
+    element('forceBeamColumn', 192279453, 786009, 786007, 1292279453, 33)
     geomTransf('Linear', 1288193575, 1, 0, 0)
-    element('elasticBeamColumn', 188193575, 36009, 36007, 0.16, 2.5e+10, 1.04166667e+10, 0.00853333333, 0.00213333333, 0.00213333333, 1288193575)
+    # [nl] COLUMN tag 188193575 ← hinge_set 'ColHinge_C50x80C'
+    element('forceBeamColumn', 188193575, 36009, 36007, 1288193575, 33)
     geomTransf('Linear', 1784393399, 1, 0, 0)
-    element('elasticBeamColumn', 684393399, 795009, 795007, 0.16, 2.5e+10, 1.04166667e+10, 0.00853333333, 0.00213333333, 0.00213333333, 1784393399)
+    # [nl] COLUMN tag 684393399 ← hinge_set 'ColHinge_C50x80C'
+    element('forceBeamColumn', 684393399, 795009, 795007, 1784393399, 33)
     geomTransf('Linear', 1342910124, 1, 0, 0)
-    element('elasticBeamColumn', 242910124, 34009, 34007, 0.16, 2.5e+10, 1.04166667e+10, 0.00853333333, 0.00213333333, 0.00213333333, 1342910124)
+    # [nl] COLUMN tag 242910124 ← hinge_set 'ColHinge_C50x80C'
+    element('forceBeamColumn', 242910124, 34009, 34007, 1342910124, 33)
     geomTransf('Linear', 1814881694, 1, 0, 0)
-    element('elasticBeamColumn', 714881694, 827009, 827007, 0.16, 2.5e+10, 1.04166667e+10, 0.00853333333, 0.00213333333, 0.00213333333, 1814881694)
+    # [nl] COLUMN tag 714881694 ← hinge_set 'ColHinge_C50x80C'
+    element('forceBeamColumn', 714881694, 827009, 827007, 1814881694, 33)
     geomTransf('Linear', 1157959374, 1, 0, 0)
-    element('elasticBeamColumn', 57959374, 15009, 15007, 0.16, 2.5e+10, 1.04166667e+10, 0.00853333333, 0.00213333333, 0.00213333333, 1157959374)
+    # [nl] COLUMN tag 57959374 ← hinge_set 'ColHinge_C50x80C'
+    element('forceBeamColumn', 57959374, 15009, 15007, 1157959374, 33)
     geomTransf('Linear', 1378349851, 1, 0, 0)
-    element('elasticBeamColumn', 278349851, 1384009, 1384007, 0.16, 2.5e+10, 1.04166667e+10, 0.00853333333, 0.00213333333, 0.00213333333, 1378349851)
+    # [nl] COLUMN tag 278349851 ← hinge_set 'ColHinge_C50x80C'
+    element('forceBeamColumn', 278349851, 1384009, 1384007, 1378349851, 33)
     geomTransf('Linear', 1255194161, 1, 0, 0)
-    element('elasticBeamColumn', 155194161, 792009, 792007, 0.16, 2.5e+10, 1.04166667e+10, 0.00853333333, 0.00213333333, 0.00213333333, 1255194161)
+    # [nl] COLUMN tag 155194161 ← hinge_set 'ColHinge_C50x80C'
+    element('forceBeamColumn', 155194161, 792009, 792007, 1255194161, 33)
     # [columns] Created 85 columns.
 
     # --- Beams ---
@@ -2506,8 +2607,5 @@ def build_model(ndm: int = 3, ndf: int = 6) -> None:
     element('elasticBeamColumn', 895517729, 615007, 1384007, 0.2, 2.5e+10, 1.04166667e+10, 0.0166666667, 0.00416666667, 0.00266666667, 1895517729)
     # [beams] Created 776 beams.
 
-    # --- Nonlinear diagnostics ---
-    # [nonlinear] Failed to read overrides file: [Errno 2] No such file or directory: 'nonlinear_overrides.json'
-
-    # [summary] NL beams=0, NL columns=0, EL beams=776, EL columns=85
+    # [summary] NL beams=0, NL columns=85, EL beams=776, EL columns=0
     # --- done ---

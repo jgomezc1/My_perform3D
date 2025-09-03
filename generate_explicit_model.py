@@ -12,21 +12,23 @@ Flags:
   - --nonlinear path.json    → optional overrides to emit forceBeamColumn members
                                with hinge aggregators and HingeEndpoint integration.
 
-Artifacts consumed (contracts; unchanged):
-  - out/nodes.json           (from emit_nodes.py)
-  - out/supports.json        (from supports.py)
-  - out/diaphragms.json      (from diaphragms.py)
-  - out/columns.json         (from columns.py)
-  - out/beams.json           (from beams.py)
+Contracts (artifacts consumed):
+  - out/nodes.json
+  - out/supports.json
+  - out/diaphragms.json
+  - out/columns.json
+  - out/beams.json
 
-What's new
-----------
-1) Always emits `geomTransf(...)` exactly once for every transformation tag used.
-2) Nonlinear overrides are now schema-tolerant:
-   - Mode A ("emit"): JSON provides elastic section + uniaxial materials; we emit them.
-   - Mode B ("use_existing"): JSON provides ready-to-use tags (sec_i_tag, sec_j_tag, beamInt_tag, etc.),
-     and we will NOT emit materials/sections/integration—just reference those tags.
-3) Clear diagnostics: logs of matched targets and reasons when an override is ignored.
+What this file guarantees
+-------------------------
+1) Every transformation tag referenced by any element is **defined exactly once**
+   via `geomTransf('Linear', tag, ...)`.
+2) If an element is missing a proper per-element `transf_tag` (or has a placeholder),
+   we **derive a deterministic per-element tag**:
+      BEAM   → 1000000000 + element_tag
+      COLUMN → 1100000000 + element_tag
+3) Nonlinear overrides (via --nonlinear) apply `forceBeamColumn` and still get
+   a valid transform emitted.
 """
 from __future__ import annotations
 
@@ -36,7 +38,7 @@ import os
 from typing import Any, Dict, List, Optional, Tuple, Set
 
 
-# Config hooks (kept identical to repo)
+# Config hook
 try:
     from config import OUT_DIR  # type: ignore
 except Exception:
@@ -44,7 +46,7 @@ except Exception:
 
 
 # -----------------------
-# Helpers to read artifacts
+# Helpers
 # -----------------------
 def _read_json(path: str) -> Dict[str, Any]:
     try:
@@ -52,10 +54,6 @@ def _read_json(path: str) -> Dict[str, Any]:
             return json.load(f)
     except Exception:
         return {}
-
-
-def _exists_and_has(seq: Optional[List[Any]]) -> bool:
-    return isinstance(seq, list) and len(seq) > 0
 
 
 def _to_float(v: Any, default: float = 0.0) -> float:
@@ -73,57 +71,26 @@ def _to_int(v: Any, default: int = 0) -> int:
 
 
 # -----------------------
-# Override handling
+# Nonlinear overrides
 # -----------------------
 class HingeSet:
-    """
-    A hinge "set" can be provided in two modes:
-
-    Mode A: "emit" (fully-specified)
-      {
-        "name": "RC_Default",
-        "mode": "emit",  # optional; defaults to "emit" if elastic+matMy+matMz are present
-        "elastic": {"tag": 9001, "E":..., "A":..., "Iy":..., "Iz":..., "G":..., "J":...},
-        "matMy": {"tag": 9101, "My":..., "theta":..., "Lp":..., "b":..., "R0":..., "cR1":..., "cR2":..., "a1":..., "a2":..., "a3":..., "a4":...},
-        "matMz": {"tag": 9102, ... same keys as matMy ...},
-        "sec_i_tag": 9201,
-        "sec_j_tag": 9202,
-        "beamInt_tag": 9301,
-        "hingeLength": 0.15
-      }
-
-    Mode B: "use_existing" (reference pre-defined tags; no materials/sections emitted)
-      {
-        "name": "RC_Predef",
-        "mode": "use_existing",
-        "elastic_tag": 7001,    # optional (if needed by your aggregator)
-        "sec_i_tag": 7101,
-        "sec_j_tag": 7102,
-        "beamInt_tag": 7201,
-        "hingeLength": 0.15
-      }
-    """
     def __init__(self, data: Dict[str, Any]) -> None:
         self.name: str = str(data.get("name", "HingeSet"))
-        # Mode inference
         m = str(data.get("mode", "")).strip().lower()
         self.mode: str = m if m in ("emit", "use_existing") else "emit"
 
-        # Full emit data
         self.elastic: Dict[str, Any] = dict(data.get("elastic") or {})
         self.matMy: Dict[str, Any] = dict(data.get("matMy") or {})
         self.matMz: Dict[str, Any] = dict(data.get("matMz") or {})
 
-        # Tags (both modes use these)
         self.sec_i_tag: int = _to_int(data.get("sec_i_tag"), 0)
         self.sec_j_tag: int = _to_int(data.get("sec_j_tag"), 0)
         self.beamInt_tag: int = _to_int(data.get("beamInt_tag"), 0)
         self.hingeLength: float = _to_float(data.get("hingeLength"), 0.0)
 
-        # For use_existing mode
         self.elastic_tag: int = _to_int(data.get("elastic_tag"), _to_int(self.elastic.get("tag"), 0))
 
-        # If mode unspecified, infer from presence of elastic+matMy+matMz
+        # Infer mode if unspecified
         if m == "":
             if self.elastic and self.matMy and self.matMz:
                 self.mode = "emit"
@@ -141,11 +108,9 @@ class HingeSet:
         if not ok_core:
             reasons.append(f"[hinge_set:{self.name}] core tags/hingeLength missing or invalid.")
             return False
-        if self.mode == "emit":
-            if not self._has_full_emit_payload():
-                reasons.append(f"[hinge_set:{self.name}] mode=emit but elastic/matMy/matMz incomplete.")
-                return False
-        # use_existing requires no payload checks
+        if self.mode == "emit" and not self._has_full_emit_payload():
+            reasons.append(f"[hinge_set:{self.name}] mode=emit but elastic/matMy/matMz incomplete.")
+            return False
         return True
 
     def will_emit_defs(self) -> bool:
@@ -153,9 +118,8 @@ class HingeSet:
 
 
 class NLTarget:
-    """Which elements to apply a hinge set to, and how to emit them."""
     def __init__(self, data: Dict[str, Any]) -> None:
-        self.kind: str = str(data.get("kind", "")).upper().strip()  # "COLUMN" or "BEAM" (optional; if omitted => both)
+        self.kind: str = str(data.get("kind", "")).upper().strip()  # "COLUMN", "BEAM", or ""(match all)
         by: Dict[str, Any] = dict(data.get("by") or {})
         self.by_tags: Set[int] = { _to_int(t) for t in (by.get("tags") or []) }
         self.by_lines: Set[str] = { str(s) for s in (by.get("lines") or []) }
@@ -170,7 +134,7 @@ class NLTarget:
             return True
         if self.by_lines and (line in self.by_lines):
             return True
-        # If neither filter is provided, treat as "match all of kind" (if kind supplied)
+        # if neither filter provided, match-all for provided kind
         return (self.kind != "")
 
 
@@ -192,7 +156,6 @@ class NLOverrides:
             out._diagnostics.append(f"[nonlinear] Failed to read overrides file: {e}")
             return out
 
-        # Hinge sets
         for hs in data.get("hinge_sets", []):
             obj = HingeSet(hs)
             reasons: List[str] = []
@@ -201,7 +164,6 @@ class NLOverrides:
             else:
                 out._diagnostics.extend(reasons)
 
-        # Targets
         for tg in data.get("elements", []):
             out.targets.append(NLTarget(tg))
 
@@ -228,7 +190,7 @@ class NLOverrides:
 
 
 # -----------------------
-# Emit explicit python file (string builder)
+# Emit explicit python file
 # -----------------------
 def _emit_header(lines: List[str], ndm: int, ndf: int) -> None:
     lines.append("# -*- coding: utf-8 -*-")
@@ -237,7 +199,7 @@ def _emit_header(lines: List[str], ndm: int, ndf: int) -> None:
     lines.append("")
     lines.append("def build_model(ndm: int = 3, ndf: int = 6) -> None:")
     lines.append("    wipe()")
-    lines.append('    model("basic", "-ndm", ndm, "-ndf", ndf)')
+    lines.append('    model(\"basic\", \"-ndm\", ndm, \"-ndf\", ndf)')
     lines.append("")
 
 
@@ -248,8 +210,8 @@ def _emit_nodes(lines: List[str], nodes_json: Dict[str, Any]) -> None:
         return
     lines.append("    # --- Nodes ---")
     for n in nodes:
-        tag = int(n["tag"])
-        x, y, z = _to_float(n["x"]), _to_float(n["y"]), _to_float(n["z"])
+        tag = _to_int(n.get("tag"))
+        x, y, z = _to_float(n.get("x")), _to_float(n.get("y")), _to_float(n.get("z"))
         lines.append(f"    node({tag}, {x:.9g}, {y:.9g}, {z:.9g})")
     lines.append(f"    # [nodes] Created {len(nodes)} node(s).")
     lines.append("")
@@ -261,7 +223,7 @@ def _emit_supports(lines: List[str], sup_json: Dict[str, Any]) -> None:
         return
     lines.append("    # --- Supports (fix) ---")
     for r in recs:
-        tag = int(r["node"])
+        tag = _to_int(r.get("node"))
         m = [int(v) for v in r.get("mask", [0, 0, 0, 0, 0, 0])]
         m = (m + [0, 0, 0, 0, 0, 0])[:6]
         lines.append(f"    fix({tag}, {m[0]}, {m[1]}, {m[2]}, {m[3]}, {m[4]}, {m[5]})")
@@ -275,19 +237,16 @@ def _emit_diaphragms(lines: List[str], dg_json: Dict[str, Any]) -> None:
         return
     lines.append("    # --- Rigid Diaphragms, master mass/fix ---")
     for d in recs:
-        master = int(d["master"])
+        master = _to_int(d.get("master"))
         mass = d.get("mass") or {}
         fix  = d.get("fix") or {}
-        slaves = [int(s) for s in (d.get("slaves") or [])]
-        # mass()
+        slaves = [ _to_int(s) for s in (d.get("slaves") or []) ]
         M  = _to_float(mass.get("M"))
         Izz = _to_float(mass.get("Izz"))
         lines.append(f"    mass({master}, {M:.9g}, {M:.9g}, 0.0, 0.0, 0.0, {Izz:.9g})")
-        # fix(master, 0,0,1,1,1,0)
         ux = int(fix.get("ux", 0)); uy = int(fix.get("uy", 0)); uz = int(fix.get("uz", 1))
         rx = int(fix.get("rx", 1)); ry = int(fix.get("ry", 1)); rz = int(fix.get("rz", 0))
         lines.append(f"    fix({master}, {ux}, {uy}, {uz}, {rx}, {ry}, {rz})")
-        # rigidDiaphragm(3, master, *slaves)
         if slaves:
             s_list = ", ".join(str(s) for s in slaves)
             lines.append(f"    rigidDiaphragm(3, {master}, {s_list})")
@@ -296,7 +255,6 @@ def _emit_diaphragms(lines: List[str], dg_json: Dict[str, Any]) -> None:
 
 
 def _emit_nonlinear_defs(lines: List[str], ov: NLOverrides) -> None:
-    """Emit hinge sets that require emission (mode='emit')."""
     if not ov.any():
         return
     to_emit = [hs for hs in ov.hinge_sets.values() if hs.will_emit_defs()]
@@ -308,51 +266,62 @@ def _emit_nonlinear_defs(lines: List[str], ov: NLOverrides) -> None:
     lines.append("    # --- Nonlinear hinge sets (from --nonlinear) ---")
     for hs in to_emit:
         e = hs.elastic
-        # Elastic section wrapper (OpenSees 3D Elastic section: E,A,Iz,Iy,G,J)
-        lines.append(f"    section('Elastic', {int(e['tag'])}, {_to_float(e['E']):.9g}, {_to_float(e['A']):.9g}, "
-                     f"{_to_float(e['Iz']):.9g}, {_to_float(e['Iy']):.9g}, {_to_float(e['G']):.9g}, {_to_float(e['J']):.9g})")
-
-        # Uniaxial materials (Steel02) for My and Mz using curvature slope E_curv = M / (theta/Lp)
+        lines.append(
+            f"    section('Elastic', {int(e['tag'])}, "
+            f"{_to_float(e['E']):.9g}, {_to_float(e['A']):.9g}, {_to_float(e['Iz']):.9g}, "
+            f"{_to_float(e['Iy']):.9g}, {_to_float(e['G']):.9g}, {_to_float(e['J']):.9g})"
+        )
         for label, m in (("My", hs.matMy), ("Mz", hs.matMz)):
             matTag = _to_int(m.get("tag"))
             My = _to_float(m.get("My")); theta = _to_float(m.get("theta")); Lp = _to_float(m.get("Lp"))
             Ecurv = My / (theta / Lp) if theta > 0.0 and Lp > 0.0 else 0.0
             b = _to_float(m.get("b")); R0 = _to_float(m.get("R0")); cR1 = _to_float(m.get("cR1")); cR2 = _to_float(m.get("cR2"))
             a1 = _to_float(m.get("a1")); a2 = _to_float(m.get("a2")); a3 = _to_float(m.get("a3")); a4 = _to_float(m.get("a4"))
-            lines.append(f"    uniaxialMaterial('Steel02', {matTag}, {My:.9g}, {Ecurv:.9g}, {b:.9g}, "
-                         f"{R0:.9g}, {cR1:.9g}, {cR2:.9g}, {a1:.9g}, {a2:.9g}, {a3:.9g}, {a4:.9g})")
-
-        # Aggregator sections for end i and end j
-        lines.append(f"    section('Aggregator', {hs.sec_i_tag}, "
-                     f"{int(hs.matMy['tag'])}, 'My', {int(hs.matMz['tag'])}, 'Mz', '-section', {int(e['tag'])})")
-        lines.append(f"    section('Aggregator', {hs.sec_j_tag}, "
-                     f"{int(hs.matMy['tag'])}, 'My', {int(hs.matMz['tag'])}, 'Mz', '-section', {int(e['tag'])})")
-
-        # Beam integration (HingeEndpoint)
-        lines.append(f"    beamIntegration('HingeEndpoint', {hs.beamInt_tag}, "
-                     f"{hs.sec_i_tag}, {hs.hingeLength:.9g}, {hs.sec_j_tag}, {hs.hingeLength:.9g}, {int(e['tag'])})")
-
+            lines.append(
+                f"    uniaxialMaterial('Steel02', {matTag}, {My:.9g}, {Ecurv:.9g}, {b:.9g}, "
+                f"{R0:.9g}, {cR1:.9g}, {cR2:.9g}, {a1:.9g}, {a2:.9g}, {a3:.9g}, {a4:.9g})"
+            )
+        lines.append(
+            f"    section('Aggregator', {hs.sec_i_tag}, "
+            f"{int(hs.matMy['tag'])}, 'My', {int(hs.matMz['tag'])}, 'Mz', '-section', {int(e['tag'])})"
+        )
+        lines.append(
+            f"    section('Aggregator', {hs.sec_j_tag}, "
+            f"{int(hs.matMy['tag'])}, 'My', {int(hs.matMz['tag'])}, 'Mz', '-section', {int(e['tag'])})"
+        )
+        lines.append(
+            f"    beamIntegration('HingeEndpoint', {hs.beamInt_tag}, "
+            f"{hs.sec_i_tag}, {hs.hingeLength:.9g}, {hs.sec_j_tag}, {hs.hingeLength:.9g}, {int(e['tag'])})"
+        )
         lines.append(f"    # [hinge_set] {hs.name} emitted (elastic={int(e['tag'])}, int={hs.beamInt_tag})")
     lines.append("")
 
 
-# --- NEW: transformation emission tracking/emitter ---
+# Track which transformation tags we already emitted
 def _emit_geom_if_needed(lines: List[str], tr: int, kind: str, emitted: Set[int]) -> None:
-    """
-    Ensure a geomTransf is emitted once for the given transformation tag.
-    Orientation vector is inferred from the element kind:
-      - COLUMN → (1, 0, 0)
-      - BEAM   → (0, 0, 1)
-    Unknown kinds default to BEAM vector for safety.
-    """
     if tr in emitted:
         return
     if kind.upper() == "COLUMN":
         lines.append(f"    geomTransf('Linear', {int(tr)}, 1, 0, 0)")
     else:
-        # Default/BEAM
         lines.append(f"    geomTransf('Linear', {int(tr)}, 0, 0, 1)")
     emitted.add(int(tr))
+
+
+def _derive_transf_tag(kind: str, ele_tag: int, existing_tag: int) -> int:
+    """
+    Ensure a per-element transformation tag even if JSON had a placeholder or 0.
+    - For BEAM:   placeholder 0/222 → 1000000000 + ele_tag
+    - For COLUMN: placeholder 0/111 → 1100000000 + ele_tag
+    Otherwise return existing_tag.
+    """
+    if kind.upper() == "BEAM":
+        if existing_tag in (0, 222):
+            return 1000000000 + int(ele_tag)
+    else:  # COLUMN
+        if existing_tag in (0, 111):
+            return 1100000000 + int(ele_tag)
+    return int(existing_tag)
 
 
 def _emit_columns(lines: List[str], cols_json: Dict[str, Any],
@@ -365,7 +334,8 @@ def _emit_columns(lines: List[str], cols_json: Dict[str, Any],
     for c in cols:
         tag = _to_int(c.get("tag"))
         i_node = _to_int(c.get("i_node")); j_node = _to_int(c.get("j_node"))
-        transf_tag = _to_int(c.get("transf_tag")) or 111
+        transf_tag_raw = _to_int(c.get("transf_tag")) or 111
+        tr = _derive_transf_tag("COLUMN", tag, transf_tag_raw)
         A = _to_float(c.get("A")); E = _to_float(c.get("E")); G = _to_float(c.get("G"))
         J = _to_float(c.get("J")); Iy = _to_float(c.get("Iy")); Iz = _to_float(c.get("Iz"))
         line_name = str(c.get("line", "?"))
@@ -373,15 +343,14 @@ def _emit_columns(lines: List[str], cols_json: Dict[str, Any],
         picked = ov.find("COLUMN", tag, line_name)
         if picked:
             hs, tgt = picked
-            tr = _to_int(tgt.transf_tag) or transf_tag or 111
+            # An override may provide its own transf_tag; still derive a per-element default if it is 0.
+            tr_override = _to_int(tgt.transf_tag) or tr
+            tr = _derive_transf_tag("COLUMN", tag, tr_override)
             _emit_geom_if_needed(lines, tr, "COLUMN", tr_emitted)
-
-            # Emit nonlinear element (forceBeamColumn)
             lines.append(f"    # [nl] COLUMN tag {tag} ← hinge_set '{hs.name}'")
             lines.append(f"    element('forceBeamColumn', {tag}, {i_node}, {j_node}, {tr}, {hs.beamInt_tag})")
             counters["nl_columns"] += 1
         else:
-            tr = transf_tag or 111
             _emit_geom_if_needed(lines, tr, "COLUMN", tr_emitted)
             lines.append(f"    element('elasticBeamColumn', {tag}, {i_node}, {j_node}, "
                          f"{A:.9g}, {E:.9g}, {G:.9g}, {J:.9g}, {Iy:.9g}, {Iz:.9g}, {tr})")
@@ -400,7 +369,8 @@ def _emit_beams(lines: List[str], beams_json: Dict[str, Any],
     for b in bs:
         tag = _to_int(b.get("tag"))
         i_node = _to_int(b.get("i_node")); j_node = _to_int(b.get("j_node"))
-        transf_tag = _to_int(b.get("transf_tag")) or 222
+        transf_tag_raw = _to_int(b.get("transf_tag")) or 222
+        tr = _derive_transf_tag("BEAM", tag, transf_tag_raw)
         A = _to_float(b.get("A")); E = _to_float(b.get("E")); G = _to_float(b.get("G"))
         J = _to_float(b.get("J")); Iy = _to_float(b.get("Iy")); Iz = _to_float(b.get("Iz"))
         line_name = str(b.get("line", "?"))
@@ -408,20 +378,25 @@ def _emit_beams(lines: List[str], beams_json: Dict[str, Any],
         picked = ov.find("BEAM", tag, line_name)
         if picked:
             hs, tgt = picked
-            tr = _to_int(tgt.transf_tag) or transf_tag or 222
+            tr_override = _to_int(tgt.transf_tag) or tr
+            tr = _derive_transf_tag("BEAM", tag, tr_override)
             _emit_geom_if_needed(lines, tr, "BEAM", tr_emitted)
-
             lines.append(f"    # [nl] BEAM tag {tag} ← hinge_set '{hs.name}'")
             lines.append(f"    element('forceBeamColumn', {tag}, {i_node}, {j_node}, {tr}, {hs.beamInt_tag})")
             counters["nl_beams"] += 1
         else:
-            tr = transf_tag or 222
             _emit_geom_if_needed(lines, tr, "BEAM", tr_emitted)
             lines.append(f"    element('elasticBeamColumn', {tag}, {i_node}, {j_node}, "
                          f"{A:.9g}, {E:.9g}, {G:.9g}, {J:.9g}, {Iy:.9g}, {Iz:.9g}, {tr})")
             counters["el_beams"] += 1
     lines.append(f"    # [beams] Created {len(bs)} beams.")
     lines.append("")
+
+
+def _emit_header_and_defs(lines: List[str], ndm: int, ndf: int, ov: NLOverrides) -> None:
+    _emit_header(lines, ndm, ndf)
+    # Nonlinear sets that need emission
+    _emit_nonlinear_defs(lines, ov)
 
 
 def _emit_footer(lines: List[str], counters: Dict[str, int], diag: List[str]) -> None:
@@ -441,28 +416,27 @@ def _build_explicit(ndm: int, ndf: int,
                     nodes_path: str, supports_path: str, diaph_path: str,
                     cols_path: str, beams_path: str,
                     ov: NLOverrides) -> None:
-    """Assemble the script into a list of lines and write it."""
     lines: List[str] = []
-    _emit_header(lines, ndm, ndf)
+    _emit_header_and_defs(lines, ndm, ndf, ov)
 
     nodes_json = _read_json(nodes_path)
     sup_json   = _read_json(supports_path)
-    d_json     = _read_json(diaphragms_path := diaph_path)
+    d_json     = _read_json(diaph_path)
     cols_json  = _read_json(cols_path)
     beams_json = _read_json(beams_path)
 
+    # Nodes / supports / diaphragms first
     _emit_nodes(lines, nodes_json)
     _emit_supports(lines, sup_json)
     _emit_diaphragms(lines, d_json)
-    _emit_nonlinear_defs(lines, ov)
 
-    # Track which transformation tags have been emitted
+    # Track emitted transforms
     tr_emitted: Set[int] = set()
 
     # Counters
     counters = {"nl_beams": 0, "nl_columns": 0, "el_beams": 0, "el_columns": 0}
 
-    # Emit elements (and per-tag geomTransf as needed)
+    # Elements (with per-tag transforms)
     _emit_columns(lines, cols_json, ov, tr_emitted, counters)
     _emit_beams(lines, beams_json, ov, tr_emitted, counters)
 
@@ -473,9 +447,8 @@ def _build_explicit(ndm: int, ndf: int,
         f.write("\n".join(lines))
     print(f"[explicit] Wrote {out_path} (ndm={ndm}, ndf={ndf})")
     if tr_emitted:
-        print(f"[explicit] Emitted {len(tr_emitted)} geomTransf tag(s): sample={list(sorted(tr_emitted))[:8]}")
-    print(f"[explicit] Summary: NL beams={counters['nl_beams']}, NL columns={counters['nl_columns']}, "
-          f"EL beams={counters['el_beams']}, EL columns={counters['el_columns']}")
+        sample = list(sorted(tr_emitted))[:8]
+        print(f"[explicit] Emitted {len(tr_emitted)} geomTransf tag(s). sample={sample}")
 
 
 def main() -> None:
