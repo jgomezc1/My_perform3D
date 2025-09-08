@@ -2,6 +2,15 @@
 
 ---
 
+## [2025-09-08]
+**Branch & Commit:** feature/offsets @ 34264e2
+
+**Last Session**
+- Rigid ends implemented. Intermediate nodes now registered in nodes.json.
+
+**Next Up**
+- Attach intermediate nodes (kind=intermediate) at each story to that story’s rigid diaphragm.
+
 ## [2025-09-04]
 **Branch & Commit:** feature/offsets @ 77f6b85
 
