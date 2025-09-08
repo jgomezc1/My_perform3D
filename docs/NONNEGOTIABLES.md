@@ -1,0 +1,2 @@
+- **No dangling endpoints**: Before emitting `beams.json` / `columns.json`, verify that **all** referenced nodes exist in `nodes.json`. Fail fast otherwise.
+- Intermediate nodes must be created via a **single registration function** that guarantees deterministic tags and deduplication.

@@ -5,6 +5,7 @@ artifact `beams.json`.
 
 New in this version
 -------------------
+- Auto-initialize OpenSees model if ndm/ndf are zero (no wipe).
 - Splits members into up to **three segments** (rigid I, deformable mid, rigid J).
 - Creates deterministic **intermediate nodes** at the offset boundaries.
 - Per-segment **geomTransf** (one per element) derived from the element tag.
@@ -14,17 +15,15 @@ Assumptions (unchanged)
 -----------------------
 - Deterministic node tags:
       node_tag = point_int * 1000 + story_index
-  where story_index is 0 for the **top** story and increases downward.
-- Deterministic element tags via tagging.element_tag(kind, name, story_index). If
-  tagging.py is not available, we fall back to an internal stable hash.
-- Orientation vector: vecXZ = (0, 0, 1) for beams.
+- Story index 0 = Roof (top), increasing downward.
+- Orientation vector: local z-axis = (0, 0, 1) for beams.
 
 Schema note
 -----------
 Previous `beams.json` contained one entry per line/element. We now emit
 **one entry per created segment** while preserving prior fields. New fields:
-`segment` (role), `parent_line`, and optional `i_coords`/`j_coords`. Downstream
-consumers expecting one-per-line should filter `segment == "deformable"`.
+`segment` (role), `parent_line`, and optional `i_coords`/`j_coords`.
+Downstream consumers expecting one-per-line can filter `segment == "deformable"`.
 """
 from __future__ import annotations
 
@@ -33,7 +32,7 @@ import json
 import os
 import hashlib
 
-from openseespy.opensees import geomTransf, element, node, getNodeTags
+import openseespy.opensees as ops  # unified ops namespace
 
 # Optional config hooks
 try:
@@ -49,7 +48,7 @@ except Exception:
 
     def element_tag(kind: str, name: str, story_index: int) -> int:  # type: ignore
         s = f"{kind}|{name}|{story_index}".encode("utf-8")
-        return int.from_bytes(hashlib.md5(s).digest()[:4], "big") & 0x7FFFFFFF
+        return int.from_bytes(hashlib.md5(s).digest()[:4], "big") & 0x7FFFFF
 
 # Rigid end scale (A, Iy, Iz, J are multiplied by this for rigid segments)
 try:
@@ -60,16 +59,27 @@ except Exception:
 from rigid_end_utils import split_with_rigid_ends  # type: ignore
 
 
+def _ensure_ops_model(ndm: int = 3, ndf: int = 6) -> None:
+    """
+    Ensure the OpenSees domain is initialized. If ndm/ndf are zero, set a basic 3D, 6-DOF model.
+    This is idempotent and does not wipe an existing model.
+    """
+    try:
+        cur_ndm = ops.getNDM()
+        cur_ndf = ops.getNDF()
+    except Exception:
+        cur_ndm, cur_ndf = 0, 0
+    if int(cur_ndm) == 0 or int(cur_ndf) == 0:
+        ops.model("basic", "-ndm", ndm, "-ndf", ndf)
+        print(f"[beams] Initialized OpenSees model: ndm={ndm}, ndf={ndf}")
+
+
 def _load_json(path: str) -> Dict[str, Any]:
     with open(path, "r", encoding="utf-8") as f:
         return json.load(f)
 
 
 def _point_pid(p: Dict[str, Any]) -> Optional[str]:
-    """
-    Safely extract a point identifier from a Phase-1 active_point record.
-    Priority: 'id' → 'tag' → ('point', 'pid') if present. Returns None if none found.
-    """
     for key in ("id", "tag", "point", "pid"):
         if key in p and p[key] is not None:
             return str(p[key])
@@ -77,25 +87,16 @@ def _point_pid(p: Dict[str, Any]) -> Optional[str]:
 
 
 def _active_points_map(story: Dict[str, Any]) -> Dict[Tuple[str, str], Tuple[float, float, float]]:
-    """
-    Build lookup: (point_id, story_name) -> (x, y, z), skipping records without a usable id.
-    """
     out: Dict[Tuple[str, str], Tuple[float, float, float]] = {}
-    for sname, pts in story.get("active_points", {}).items():
+    aps = story.get("active_points") or {}
+    for sname, pts in aps.items():
         for p in pts:
             pid = _point_pid(p)
-            if pid is None:
+            if not pid:
                 print(f"[beams] WARN: active_point in '{sname}' missing 'id'/'tag'; skipped.")
                 continue
             out[(pid, sname)] = (float(p["x"]), float(p["y"]), float(p["z"]))
     return out
-
-
-def _dedupe_last_section_wins(lines_for_story: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
-    last: Dict[str, Dict[str, Any]] = {}
-    for ln in lines_for_story:
-        last[str(ln["name"])] = ln  # overwrite => last wins
-    return list(last.values())
 
 
 def _ensure_node_for(
@@ -112,14 +113,21 @@ def _ensure_node_for(
     tag = int(pid) * 1000 + int(sidx)
     if tag not in existing_nodes:
         x, y, z = act_pt_map[key]
-        node(tag, x, y, z)
+        ops.node(tag, x, y, z)
         existing_nodes.add(tag)
     return tag
 
 
+def _dedupe_last_section_wins(lines_for_story: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
+    last: Dict[str, Dict[str, Any]] = {}
+    for ln in lines_for_story:
+        last[str(ln["name"])] = ln
+    return list(last.values())
+
+
 def define_beams(
     story_path: str = os.path.join(OUT_DIR, "story_graph.json"),
-    raw_path: str   = os.path.join(OUT_DIR, "parsed_raw.json"),
+    raw_path: str = os.path.join(OUT_DIR, "parsed_raw.json"),
     *,
     # --- Placeholder properties (override as needed; units consistent with your model) ---
     b_sec: float = 0.40,   # width  [m]
@@ -132,31 +140,36 @@ def define_beams(
     Supports rigid ends via LENGTHOFFI/LENGTHOFFJ in story_graph.
     Returns the list of created element tags. Also writes OUT_DIR/beams.json.
     """
+    # Ensure OpenSees domain exists
+    _ensure_ops_model(3, 6)
+
     story = _load_json(story_path)
-    _raw  = _load_json(raw_path)  # parity/debugging
+    _raw = _load_json(raw_path)  # parity/debugging
 
     # --- Section / Material ---
-    G_beam  = E_beam / (2.0 * (1.0 + nu_beam))
-    A_beam  = b_sec * h_sec
+    G_beam = E_beam / (2.0 * (1.0 + nu_beam))
+    A_beam = b_sec * h_sec
     Iy_beam = (b_sec * h_sec**3) / 12.0
     Iz_beam = (h_sec * b_sec**3) / 12.0
-    J_beam  =  b_sec * h_sec**3 / 3.0
+    J_beam = b_sec * h_sec**3 / 3.0
 
     story_names: List[str] = list(story.get("story_order_top_to_bottom", []))  # top -> bottom
     story_index = {name: i for i, name in enumerate(story_names)}
-    act_pt_map  = _active_points_map(story)
+    act_pt_map = _active_points_map(story)
 
     created: List[int] = []
     skips: List[str] = []
     emitted: List[Dict[str, Any]] = []
 
-    existing_nodes: Set[int] = set(getNodeTags())
+    try:
+        existing_nodes: Set[int] = set(ops.getNodeTags())
+    except Exception:
+        existing_nodes = set()
 
     active_lines: Dict[str, List[Dict[str, Any]]] = story.get("active_lines", {})
     for sname, lines in active_lines.items():
         sidx = story_index[sname]
         per_story = _dedupe_last_section_wins(lines)
-
         for ln in per_story:
             if str(ln.get("type", "")).upper() != "BEAM":
                 continue
@@ -175,38 +188,47 @@ def define_beams(
 
             LoffI = float(ln.get("length_off_i", 0.0) or 0.0)
             LoffJ = float(ln.get("length_off_j", 0.0) or 0.0)
-
             line_name = str(ln.get("name", "?"))
+
             parts = split_with_rigid_ends(
                 kind="BEAM", line_name=line_name, story_index=int(sidx),
                 nI=nI, nJ=nJ, pI=pI, pJ=pJ, LoffI=LoffI, LoffJ=LoffJ
             )
 
-            # Create elements per returned segments
+            # Create elements for each segment
             for seg in parts['segments']:
                 role = seg['role']
                 i_tag, j_tag = seg['i'], seg['j']
 
-                # Stable element tag within BEAM range using line_name+suffix
+                # unique element + transform tags
                 etag = element_tag("BEAM", line_name + seg['suffix'], int(sidx))
+                transf_tag = 1000000000 + etag  # avoid collisions with columns
+                ops.geomTransf('Linear', transf_tag, 0, 0, 1)  # local z axis
 
-                # Per-element transformation: Linear with vecXZ = (0,0,1)
-                transf_tag = 1000000000 + etag
-                geomTransf('Linear', transf_tag, 0, 0, 1)
-
-                # Properties (inflate if rigid)
                 if role.startswith("rigid"):
                     A = A_beam * RIGID_END_SCALE
                     Iy = Iy_beam * RIGID_END_SCALE
                     Iz = Iz_beam * RIGID_END_SCALE
-                    J  = J_beam  * RIGID_END_SCALE
+                    J = J_beam * RIGID_END_SCALE
                 else:
                     A, Iy, Iz, J = A_beam, Iy_beam, Iz_beam, J_beam
 
-                element('elasticBeamColumn', etag, i_tag, j_tag, A, E_beam, G_beam, J, Iy, Iz, transf_tag)
+                # Ensure split interface nodes exist in the OpenSees domain
+                coord_by_tag = {
+                    int(parts['nodes']['nI']): parts['coords']['nI'],
+                    int(parts['nodes']['nIm']): parts['coords']['nIm'],
+                    int(parts['nodes']['nJm']): parts['coords']['nJm'],
+                    int(parts['nodes']['nJ']): parts['coords']['nJ'],
+                }
+                for t in (i_tag, j_tag):
+                    if t not in existing_nodes:
+                        cx, cy, cz = coord_by_tag[int(t)]
+                        ops.node(int(t), float(cx), float(cy), float(cz))
+                        existing_nodes.add(int(t))
+
+                ops.element('elasticBeamColumn', etag, i_tag, j_tag, A, E_beam, G_beam, J, Iy, Iz, transf_tag)
                 created.append(etag)
 
-                # Emit record
                 coords = parts['coords']
                 emitted.append({
                     "tag": etag,

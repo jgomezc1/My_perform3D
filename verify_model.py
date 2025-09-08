@@ -16,11 +16,10 @@ Outputs:
   - <OUT_DIR>/verify_report.json  (machine-readable)
   - Console summary.
 
-Adds checks:
-  - story_elev_order: story elevations are monotone from top->bottom
-  - node_z_consistency: nodes.json grid Z equals story_elev[story] - offset(point)
-
-NOTE: To keep JSON serialization robust across OSes, all paths stored in the report are str.
+Checks added/updated in this version:
+  - endpoints_exist: all element endpoints exist in nodes.json
+  - orphans: does NOT flag registered rigid-interface nodes
+  - nodes_presence: ignores rigid-interface nodes in "extra_nodes"
 """
 from __future__ import annotations
 
@@ -65,13 +64,25 @@ def _active_point_tag_set(story_graph: Dict[str, Any]) -> Set[int]:
 
 
 def _nodes_used_by_elements(elem_json: Dict[str, Any], kind: str) -> Set[int]:
+    """
+    Collect endpoint tags used by elements in an artifact blob.
+    Accepts common keys: i_node/j_node, i/j, node_i/node_j, ni/nj.
+    """
     used: Set[int] = set()
     recs = (elem_json or {}).get(kind) or []
     for e in recs:
-        for k in ("i_node", "j_node"):
-            v = e.get(k)
-            if isinstance(v, int):
-                used.add(v)
+        # Primary keys used in beams/columns emitters
+        if isinstance(e.get("i_node"), int):
+            used.add(int(e["i_node"]))
+        if isinstance(e.get("j_node"), int):
+            used.add(int(e["j_node"]))
+
+        # Secondary fallbacks
+        for ki, kj in (("i", "j"), ("node_i", "node_j"), ("ni", "nj"), ("I", "J")):
+            if ki in e and isinstance(e[ki], int):
+                used.add(int(e[ki]))
+            if kj in e and isinstance(e[kj], int):
+                used.add(int(e[kj]))
     return used
 
 
@@ -90,7 +101,6 @@ def verify_model(
     *,
     strict: bool = False,
 ) -> Dict[str, Any]:
-    # Normalize to str to avoid WindowsPath leaking into JSON
     artifacts_dir_str = str(artifacts_dir)
 
     sg = _load(os.path.join(artifacts_dir_str, "story_graph.json")) or {}
@@ -119,7 +129,6 @@ def verify_model(
         names, _ = _story_index_map(sg)
         elev = sg.get("story_elev") or {}
         vals = [float(elev.get(n, 0.0)) for n in names]
-        # top->bottom should be non-increasing (top has the largest elevation)
         ok = all(vals[i] >= vals[i + 1] - 1e-9 for i in range(len(vals) - 1))
         if not ok:
             elev_order["status"] = "fail" if strict else "warn"
@@ -192,10 +201,14 @@ def verify_model(
     nodes_check = {"status": "warn", "details": []}
     expected_grid = _active_point_tag_set(sg) if sg else set()
     have_nodes = {int(n.get("tag")) for n in (nj.get("nodes") or [])} if nj else set()
+    kinds_by_tag = {int(n.get("tag")): str(n.get("kind", "")) for n in (nj.get("nodes") or [])} if nj else {}
     masters_in_dg = {int(rec.get("master")) for rec in (dg.get("diaphragms") or [])} if dg else set()
+    interface_tags = {t for t, k in kinds_by_tag.items() if k == "rigid_interface"}
+
     if nj:
         missing_grid = sorted(list(expected_grid - have_nodes))
-        extra_nodes = sorted(list(have_nodes - expected_grid - masters_in_dg))
+        # Do not count registered interface nodes as "extra"
+        extra_nodes = sorted(list((have_nodes - expected_grid - masters_in_dg) - interface_tags))
         total = len(nj.get("nodes") or [])
         grid_count = sum(1 for n in (nj.get("nodes") or []) if n.get("kind") == "grid")
         master_count = sum(1 for n in (nj.get("nodes") or []) if n.get("kind") == "diaphragm_master")
@@ -205,8 +218,8 @@ def verify_model(
             nodes_check["details"].append(f"{len(missing_grid)} expected grid node(s) missing from nodes.json")
             nodes_check["missing_grid_sample"] = missing_grid[:10]
         if extra_nodes:
-            nodes_check["status"] = "warn"
-            nodes_check["details"].append(f"{len(extra_nodes)} node(s) not in story_graph or diaphragms (sample shown)")
+            # informational
+            nodes_check["details"].append(f"{len(extra_nodes)} extra node(s) (not grid/master); sample shown")
             nodes_check["extra_nodes_sample"] = extra_nodes[:10]
         if not missing_grid and not extra_nodes:
             nodes_check["status"] = "pass"
@@ -221,7 +234,6 @@ def verify_model(
         names, sidx = _story_index_map(sg)
         elev_by_story: Dict[str, float] = sg.get("story_elev") or {}
         ap: Dict[str, List[Dict[str, Any]]] = sg.get("active_points") or {}
-        # (story, point_id_str) -> offset
         offset_map: Dict[Tuple[str, str], float] = {}
         for sname, pts in ap.items():
             for p in pts:
@@ -295,15 +307,52 @@ def verify_model(
         checks_meta["details"].append("Transforms and section labels present")
     report["checks"]["transforms_sections"] = checks_meta
 
-    # --- orphans ---
+    # --- endpoints_exist (NEW) ---
+    endpoints_check = {"status": "pass", "details": []}
+    if nj:
+        have_nodes = {int(n.get("tag")) for n in (nj.get("nodes") or [])}
+        missing: List[Dict[str, Any]] = []
+
+        def _scan(label: str, blob: Dict[str, Any]) -> None:
+            recs = (blob or {}).get(label) or []
+            for idx, e in enumerate(recs, start=1):
+                i_tag = e.get("i_node")
+                j_tag = e.get("j_node")
+                if not isinstance(i_tag, int) or not isinstance(j_tag, int):
+                    # Try fallbacks
+                    for ki, kj in (("i", "j"), ("node_i", "node_j"), ("ni", "nj"), ("I", "J")):
+                        if ki in e and kj in e and isinstance(e[ki], int) and isinstance(e[kj], int):
+                            i_tag, j_tag = int(e[ki]), int(e[kj])
+                            break
+                if isinstance(i_tag, int) and isinstance(j_tag, int):
+                    bad = [t for t in (i_tag, j_tag) if t not in have_nodes]
+                    if bad:
+                        missing.append({"index": idx, "kind": label, "missing": bad})
+
+        _scan("beams", bj)
+        _scan("columns", cj)
+
+        if missing:
+            endpoints_check["status"] = "fail"
+            endpoints_check["details"].append(f"{len(missing)} element(s) reference node(s) absent from nodes.json")
+            endpoints_check["sample"] = missing[:10]
+        else:
+            endpoints_check["details"].append("All element endpoints exist in nodes.json")
+    else:
+        endpoints_check["status"] = "fail" if strict else "warn"
+        endpoints_check["details"].append("nodes.json missing; cannot verify endpoints")
+    report["checks"]["endpoints_exist"] = endpoints_check
+
+    # --- orphans (updated to ignore registered interface nodes) ---
     checks_orphans = {"status": "pass", "details": []}
     expected_nodes = _active_point_tag_set(sg)
     used_nodes = _nodes_used_by_elements(cj, "columns") | _nodes_used_by_elements(bj, "beams")
-    grid_like_used = {t for t in used_nodes if t % 1000 >= 0}
-    missing = sorted(grid_like_used - expected_nodes)
+    have_nodes = {int(n.get("tag")) for n in (nj.get("nodes") or [])} if nj else set()
+    # Only consider as orphan those used nodes that are neither in story_graph nor in nodes.json
+    missing = sorted((used_nodes - expected_nodes) - have_nodes)
     if missing:
         checks_orphans["status"] = "warn" if not strict else "fail"
-        checks_orphans["details"].append(f"{len(missing)} element node(s) not in story_graph active_points")
+        checks_orphans["details"].append(f"{len(missing)} element node(s) not in story_graph or nodes.json")
         checks_orphans["missing_nodes_sample"] = missing[:10]
     else:
         checks_orphans["details"].append("No orphan element nodes detected")

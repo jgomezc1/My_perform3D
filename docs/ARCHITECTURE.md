@@ -1,54 +1,46 @@
-\# Architecture (High-Signal Map)
+# System Architecture (My_perform3D)
 
+## Overview
+Goal: translate ETABS `.e2k` into an OpenSeesPy model + machine-readable artifacts, then verify and probe the model.
 
+**Phases**
+1. **Phase-1 (Parse & Story Graph)**
+   - `e2k_parser.py` → normalized dict
+   - `story_builder.py` → `out/story_graph.json` (stories, elevations, active points/lines)
+2. **Phase-2 (Domain + Artifacts)**
+   - `nodes.py` + `emit_nodes.py` → `out/nodes.json` (domain nodes incl. diaphragm masters)
+   - `diaphragms.py` → `out/diaphragms.json` (master/slaves, mass/fix)
+   - `beams.py`, `columns.py` → `out/beams.json`, `out/columns.json` (segmenting for rigid ends)
+   - Supports/BCs → `out/supports.json`
+3. **Explicit Model & Checks**
+   - `generate_explicit_model.py` → `out/explicit_model.py`
+   - `explicit_runtime_check.py` / `explicit_static_probe.py` → smoke/probe analyses
+   - `verify_model.py`, `verify_domain_vs_artifacts.py` → parity checks
 
-\## Data Flow
+**Pipelines**
+- `phase1_run.py`, `run_pipeline.py` orchestrate end-to-end generation.
 
-ETABS `.e2k` → \*\*Phase-1\*\* (`e2k\_parser.py` → `story\_builder.py`) → artifacts in `out/`:
+## Dataflow
+`.e2k` → `e2k_parser.py` → `story_builder.py` → `story_graph.json`
+→ (`diaphragms.py`, `nodes.py`/`emit_nodes.py`) → `nodes.json`, `diaphragms.json`
+→ (`beams.py`, `columns.py`, `supports.py`) → `beams.json`, `columns.json`, `supports.json`
+→ `generate_explicit_model.py` → `explicit_model.py` → checks/probes
 
-\- `parsed\_raw.json`, `story\_graph.json`, plus CSV sanity files.
+## Key Conventions
+- Node tag determinism (see PROMPT / NONNEGOTIABLES).
+- Rigid end logic handled via `rigid_end_utils.split_with_rigid_ends(...)`.
+- Per-element `geomTransf` (unique tag derived from element tag).
+### Node creation ordering (critical)
+- Any process that creates new nodes (e.g., rigid-end splitting) must **register nodes first** into the nodes registry → flushed to `out/nodes.json`.
+- Only then may `beams.json` / `columns.json` be emitted, ensuring their `i_node`/`j_node` exist.
+- Preferred API: `emit_nodes.register_intermediate_node(story, x, y, z, source="rigid_end") -> tag`
+  - Deterministic tag strategy required (see NONNEGOTIABLES).
 
+## External Interfaces
+- OpenSeesPy API for model build, constraints, analysis.
+- JSON artifacts in `out/` consumed by generator and viewers.
 
-
-\*\*Phase-2 (domain)\*\* via `MODEL\_translator.build\_model(stage)`:
-
-1\) `nodes.define\_nodes()` builds grid nodes (tag = `point\_id\*1000 + story\_index`).
-
-2\) `diaphragms.define\_rigid\_diaphragms()` creates master @ XY centroid; \*\*skips\*\* stories with supports and the `"DISCONNECTED"` label; writes `out/diaphragms.json`.
-
-3\) `supports.define\_point\_restraints\_from\_e2k()` maps ETABS `RESTRAINT` → `fix(...)`; uses the grid-tag rule; optional fallback to `parsed\_raw.json`.
-
-4\) `columns.define\_columns()` vertical segments with “find-next-lower-story”; i=bottom, j=top enforced.
-
-5\) `beams.define\_beams()` per-story, “last section wins”.
-
-
-
-Viewer `model\_viewer\_APP.py`: plots nodes/elements; overlays diaphragm masters and BCs from `out/\*.json`.
-
-
-
-\## Files (purpose)
-
-\- `e2k\_parser.py`: tolerant parser for stories/points/assigns/lines/diaphragms.
-
-\- `story\_builder.py`: computes story elevations, active points/lines per story.
-
-\- `nodes.py`, `diaphragms.py`, `supports.py`, `columns.py`, `beams.py`: domain builders.
-
-\- `MODEL\_translator.py`: orchestrates build stages.
-
-\- `model\_viewer\_APP.py`: Streamlit viewer.
-
-
-
-\## Conventions
-
-\- \*\*Tag rule\*\*: `node\_tag = int(point\_id)\*1000 + story\_index` (top=0 downward).
-
-\- \*\*Stages\*\*: `nodes` → `columns` → `all`.
-
-\- \*\*Diaphragms\*\*: all-or-nothing per story; DISCONNECTED = none; stories with supports = none.
-
-
-
+## Failure Modes to Watch
+- Missing intermediate nodes when splitting for rigid ends.
+- Diaphragm creation on stories with supports.
+- Per-element transforms missing in `explicit_model.py`.

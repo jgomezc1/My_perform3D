@@ -12,15 +12,16 @@ Rules (retained)
 
 New in this version
 -------------------
+- Auto-initialize OpenSees model if ndm/ndf are zero (no wipe).
 - Splits members into up to **three segments** (rigid I, deformable mid, rigid J).
 - Creates deterministic **intermediate nodes** at the offset boundaries.
 - Per-segment **geomTransf** (one per element) derived from the element tag.
 - Emits richer `columns.json` records with a `segment` field.
 
 OpenSeesPy signatures (exact):
-    geomTransf('Linear', transf_tag, 1, 0, 0)
-    element('elasticBeamColumn', tag, nI, nJ,
-            A, E, G, J, Iy, Iz, transf_tag)
+    ops.geomTransf('Linear', transf_tag, 1, 0, 0)
+    ops.element('elasticBeamColumn', tag, nI, nJ,
+                A, E, G, J, Iy, Iz, transf_tag)
 """
 from __future__ import annotations
 
@@ -29,7 +30,7 @@ import json
 import os
 import hashlib
 
-from openseespy.opensees import geomTransf, element, node, getNodeTags
+import openseespy.opensees as ops  # unified ops namespace
 
 # Optional config hooks
 try:
@@ -37,7 +38,7 @@ try:
 except Exception:
     OUT_DIR = "out"
 
-# Configuration switch: enforce column local axis i=bottom, j=top
+# Convention: i = bottom, j = top (swap if needed)
 try:
     from config import ENFORCE_COLUMN_I_AT_BOTTOM  # type: ignore
 except Exception:
@@ -60,6 +61,21 @@ except Exception:
 from rigid_end_utils import split_with_rigid_ends  # type: ignore
 
 
+def _ensure_ops_model(ndm: int = 3, ndf: int = 6) -> None:
+    """
+    Ensure the OpenSees domain is initialized. If ndm/ndf are zero, set a basic 3D, 6-DOF model.
+    This is idempotent and does not wipe an existing model.
+    """
+    try:
+        cur_ndm = ops.getNDM()
+        cur_ndf = ops.getNDF()
+    except Exception:
+        cur_ndm, cur_ndf = 0, 0
+    if int(cur_ndm) == 0 or int(cur_ndf) == 0:
+        ops.model("basic", "-ndm", ndm, "-ndf", ndf)
+        print(f"[columns] Initialized OpenSees model: ndm={ndm}, ndf={ndf}")
+
+
 def _load_json(path: str) -> Dict[str, Any]:
     with open(path, "r", encoding="utf-8") as f:
         return json.load(f)
@@ -74,10 +90,11 @@ def _point_pid(p: Dict[str, Any]) -> Optional[str]:
 
 def _active_points_map(story: Dict[str, Any]) -> Dict[Tuple[str, str], Tuple[float, float, float]]:
     out: Dict[Tuple[str, str], Tuple[float, float, float]] = {}
-    for sname, pts in story.get("active_points", {}).items():
+    aps = story.get("active_points") or {}
+    for sname, pts in aps.items():
         for p in pts:
             pid = _point_pid(p)
-            if pid is None:
+            if not pid:
                 print(f"[columns] WARN: active_point in '{sname}' missing 'id'/'tag'; skipped.")
                 continue
             out[(pid, sname)] = (float(p["x"]), float(p["y"]), float(p["z"]))
@@ -98,7 +115,7 @@ def _ensure_node_for(
     tag = int(pid) * 1000 + int(sidx)
     if tag not in existing_nodes:
         x, y, z = act_pt_map[key]
-        node(tag, x, y, z)
+        ops.node(tag, x, y, z)
         existing_nodes.add(tag)
     return tag
 
@@ -112,7 +129,7 @@ def _dedupe_last_section_wins(lines_for_story: List[Dict[str, Any]]) -> List[Dic
 
 def define_columns(
     story_path: str = os.path.join(OUT_DIR, "story_graph.json"),
-    raw_path: str   = os.path.join(OUT_DIR, "parsed_raw.json"),
+    raw_path: str = os.path.join(OUT_DIR, "parsed_raw.json"),
     *,
     b_sec: float = 0.40,   # width  [m]
     h_sec: float = 0.40,   # depth  [m]
@@ -123,56 +140,64 @@ def define_columns(
     Build COLUMN elements with the next-lower-story rule and rigid ends.
     Returns the list of created element tags. Also writes OUT_DIR/columns.json.
     """
+    # Ensure OpenSees domain exists
+    _ensure_ops_model(3, 6)
+
     story = _load_json(story_path)
-    _raw  = _load_json(raw_path)
+    _raw = _load_json(raw_path)
 
     # Section properties
-    G_col  = E_col / (2.0 * (1.0 + nu_col))
-    A_col  = b_sec * h_sec
+    G_col = E_col / (2.0 * (1.0 + nu_col))
+    A_col = b_sec * h_sec
     Iy_col = (b_sec * h_sec**3) / 12.0
     Iz_col = (h_sec * b_sec**3) / 12.0
-    J_col  =  b_sec * h_sec**3 / 3.0
+    J_col = b_sec * h_sec**3 / 3.0
 
     story_names: List[str] = list(story.get("story_order_top_to_bottom", []))  # top -> bottom
     story_index = {name: i for i, name in enumerate(story_names)}
-    act_pt_map  = _active_points_map(story)
+    act_pt_map = _active_points_map(story)
 
     created: List[int] = []
     skips: List[str] = []
     emitted: List[Dict[str, Any]] = []
 
-    existing_nodes: Set[int] = set(getNodeTags())
+    try:
+        existing_nodes: Set[int] = set(ops.getNodeTags())
+    except Exception:
+        existing_nodes = set()
 
+    # Lines are per story; we build columns between consecutive stories where points reappear.
     active_lines: Dict[str, List[Dict[str, Any]]] = story.get("active_lines", {})
     for sname, lines in active_lines.items():
         sidx = story_index[sname]
         per_story = _dedupe_last_section_wins(lines)
 
+        # For each COLUMN line at this story, find the next lower story that also contains both points.
         for ln in per_story:
-            if str(ln.get("type","")).upper() != "COLUMN":
+            if str(ln.get("type", "")).upper() != "COLUMN":
                 continue
 
-            pid_i = str(ln["i"])
-            pid_j = str(ln["j"])
+            pid_i: str = str(ln["i"])  # ETABS i is upper
+            pid_j: str = str(ln["j"])  # ETABS j is lower (on that story)
 
-            # Find next lower story K where BOTH endpoints exist
+            # Find next lower story where BOTH points exist
             k_found: Optional[int] = None
+            sK: Optional[str] = None
             for k in range(sidx + 1, len(story_names)):
-                sK = story_names[k]
-                if _point_exists(pid_i, sK, act_pt_map) and _point_exists(pid_j, sK, act_pt_map):
+                sK_candidate = story_names[k]
+                if _point_exists(pid_i, sK_candidate, act_pt_map) and _point_exists(pid_j, sK_candidate, act_pt_map):
                     k_found = k
+                    sK = sK_candidate
                     break
-            if k_found is None:
-                skips.append(f"{ln.get('name','?')} @ '{sname}' skipped — no lower slice with both endpoints.")
+            if k_found is None or sK is None:
+                skips.append(f"{ln.get('name','?')} @ '{sname}' skipped — no lower story with both endpoints")
                 continue
 
-            sK = story_names[k_found]
-
-            # Prepare nodes at (i,S) and (j,K)
+            # Build (nTop, nBot) and their coords
             nTop = _ensure_node_for(pid_i, sname, sidx, act_pt_map, existing_nodes)   # upper
             nBot = _ensure_node_for(pid_j, sK, k_found, act_pt_map, existing_nodes)   # lower
             if nTop is None or nBot is None:
-                skips.append(f"{ln.get('name','?')} @ '{sname}' skipped — missing node(s).")
+                skips.append(f"{ln.get('name','?')} @ '{sname}' skipped — endpoint nodes missing")
                 continue
 
             pTop = act_pt_map[(pid_i, sname)]
@@ -183,7 +208,7 @@ def define_columns(
             pI, pJ = (pBot, pTop)
             LoffI = float(ln.get("length_off_i", 0.0) or 0.0)
             LoffJ = float(ln.get("length_off_j", 0.0) or 0.0)
-            line_name = str(ln.get("name","?"))
+            line_name = str(ln.get("name", "?"))
 
             if not ENFORCE_COLUMN_I_AT_BOTTOM:
                 # Keep ETABS i->j direction (i at S (top), j at K (bottom)):
@@ -205,17 +230,30 @@ def define_columns(
 
                 etag = element_tag("COLUMN", line_name + seg['suffix'], int(sidx))
                 transf_tag = 1100000000 + etag
-                geomTransf('Linear', transf_tag, 1, 0, 0)
+                ops.geomTransf('Linear', transf_tag, 1, 0, 0)
 
                 if role.startswith("rigid"):
                     A = A_col * RIGID_END_SCALE
                     Iy = Iy_col * RIGID_END_SCALE
                     Iz = Iz_col * RIGID_END_SCALE
-                    J  = J_col  * RIGID_END_SCALE
+                    J = J_col * RIGID_END_SCALE
                 else:
                     A, Iy, Iz, J = A_col, Iy_col, Iz_col, J_col
 
-                element('elasticBeamColumn', etag, i_tag, j_tag, A, E_col, G_col, J, Iy, Iz, transf_tag)
+                # Ensure split interface nodes exist in the OpenSees domain
+                coord_by_tag = {
+                    int(parts['nodes']['nI']): parts['coords']['nI'],
+                    int(parts['nodes']['nIm']): parts['coords']['nIm'],
+                    int(parts['nodes']['nJm']): parts['coords']['nJm'],
+                    int(parts['nodes']['nJ']): parts['coords']['nJ'],
+                }
+                for t in (i_tag, j_tag):
+                    if t not in existing_nodes:
+                        cx, cy, cz = coord_by_tag[int(t)]
+                        ops.node(int(t), float(cx), float(cy), float(cz))
+                        existing_nodes.add(int(t))
+
+                ops.element('elasticBeamColumn', etag, i_tag, j_tag, A, E_col, G_col, J, Iy, Iz, transf_tag)
                 created.append(etag)
 
                 coords = parts['coords']
@@ -247,4 +285,3 @@ def define_columns(
         print(f"[columns] WARN: failed to write columns.json: {e}")
 
     return created
-
