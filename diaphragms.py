@@ -46,6 +46,8 @@ from openseespy.opensees import (
     getNodeTags as _ops_getNodeTags,
     fix as _ops_fix,
     mass as _ops_mass,
+    model as _ops_model,
+    wipe as _ops_wipe,
 )
 
 # Optional config hooks
@@ -92,20 +94,23 @@ def _call_rigid(master: int, slaves: List[int]) -> None:
 
 
 def _centroid_xy(pts_xy: List[Tuple[float, float]]) -> Tuple[float, float]:
-    n = max(len(pts_xy), 1)
-    sx = sum(x for x, _ in pts_xy)
-    sy = sum(y for _, y in pts_xy)
-    return sx / n, sy / n
+    """Simple centroid of XY points."""
+    if not pts_xy:
+        return (0.0, 0.0)
+    sx = sum(p[0] for p in pts_xy)
+    sy = sum(p[1] for p in pts_xy)
+    n = float(len(pts_xy))
+    return (sx / n, sy / n)
 
 
 def _cross(o: Tuple[float, float], a: Tuple[float, float], b: Tuple[float, float]) -> float:
     return (a[0] - o[0]) * (b[1] - o[1]) - (a[1] - o[1]) * (b[0] - o[0])
 
 
-def _convex_hull(points: List[Tuple[float, float]]) -> List[Tuple[float, float]]:
-    """Monotone chain convex hull. Returns vertices in CCW order (first==last not repeated)."""
-    pts = sorted(set(points))
-    if len(pts) <= 2:
+def _convex_hull(pts: List[Tuple[float, float]]) -> List[Tuple[float, float]]:
+    """Andrew’s monotone chain, returns hull in CCW order, no duplicate last point."""
+    pts = sorted(set(pts))
+    if len(pts) <= 1:
         return pts
     lower: List[Tuple[float, float]] = []
     for p in pts:
@@ -121,13 +126,10 @@ def _convex_hull(points: List[Tuple[float, float]]) -> List[Tuple[float, float]]
 
 
 def _polygon_area(pts_ccw: List[Tuple[float, float]]) -> float:
-    n = len(pts_ccw)
-    if n < 3:
+    if len(pts_ccw) < 3:
         return 0.0
     a = 0.0
-    for i in range(n):
-        x1, y1 = pts_ccw[i]
-        x2, y2 = pts_ccw[(i + 1) % n]
+    for (x1, y1), (x2, y2) in zip(pts_ccw, pts_ccw[1:] + [pts_ccw[0]]):
         a += x1 * y2 - x2 * y1
     return abs(a) * 0.5
 
@@ -144,14 +146,34 @@ def _story_indices_with_supports(supports_path: str, story_count: int) -> Set[in
         return idxs
     try:
         data = _read_json(supports_path)
-        for rec in data.get("applied", []):
-            tag = int(rec.get("node"))
-            sidx = tag % 1000
-            if 0 <= sidx < max(story_count, 1):
-                idxs.add(sidx)
-    except Exception as e:
-        print(f"[diaphragms] WARN: failed reading supports: {e}")
+    except Exception:
+        return idxs
+    sup_nodes = data.get("supports", [])
+    for s in sup_nodes:
+        try:
+            t = int(s.get("tag"))
+            idxs.add(t % 1000)
+        except Exception:
+            continue
+    # Defensive clamp
+    idxs = set(i for i in idxs if 0 <= i < story_count)
     return idxs
+
+
+def _ensure_ops_model(ndm: int = 3, ndf: int = 6) -> None:
+    """
+    Ensure a valid OpenSees model exists so node/mass/fix/rigidDiaphragm calls succeed.
+    We always start with a clean builder for determinism.
+    """
+    try:
+        _ops_wipe()
+    except Exception:
+        pass
+    try:
+        _ops_model("basic", "-ndm", ndm, "-ndf", ndf)
+        print(f"[diaphragms] Initialized OpenSees model: ndm={ndm}, ndf={ndf}")
+    except Exception as e:
+        print(f"[diaphragms] WARN: failed to initialize OpenSees model: {e}")
 
 
 def define_rigid_diaphragms(
@@ -164,11 +186,23 @@ def define_rigid_diaphragms(
     Returns:
         List of (story_name, master_tag, [slave_tags...])
     """
-    # ---- Load Phase-1 artifacts ----
-    sg = _read_json(story_path)
-    pr = _read_json(raw_path)
+    # Ensure OpenSees is initialized (fixes "ndm and ndf are zero")
+    _ensure_ops_model()
 
-    story_order: List[str] = list(sg.get("story_order_top_to_bottom", []))
+    # Inputs
+    try:
+        sg = _read_json(story_path)
+    except Exception as e:
+        print(f"[diaphragms] ERROR reading {story_path}: {e}")
+        return []
+
+    try:
+        pr = _read_json(raw_path)
+    except Exception:
+        pr = {}
+
+    story_order: List[str] = sg.get("story_order_top_to_bottom", [])
+    story_elev: Dict[str, float] = sg.get("story_elev", {})
     active_points: Dict[str, List[Dict[str, Any]]] = sg.get("active_points", {})
 
     # Known diaphragm names from the .e2k (if present)
@@ -199,36 +233,42 @@ def define_rigid_diaphragms(
             skips.append(f"{sname}: no active points")
             continue
 
-        # Exclude points off the story plane
-        plane_pts = [p for p in pts if not bool(p.get("explicit_z", False))]
-        if not plane_pts:
-            skips.append(f"{sname}: all points have explicit_z=True")
+        sidx = story_index.get(sname, None)
+        if sidx is None:
+            skips.append(f"{sname}: missing story index")
             continue
 
-        sidx = story_index[sname]
-
-        # -- Rule 0: If story has supports, skip diaphragm --
         if sidx in idx_with_supports:
-            skips.append(f"{sname}: has restraint/support nodes → no rigid diaphragm")
+            skips.append(f"{sname}: story has supports → skip diaphragm")
             continue
 
-        # -- Rule 1: Validate diaphragm labels (treat 'DISCONNECTED' as no-diaphragm) --
-        labels = []
-        disconnected_only = True
+        # Filter to candidates on same plane (z ≈ story_elev)
+        z0 = float(story_elev.get(sname, 0.0))
+        plane_pts: List[Dict[str, Any]] = []
+        for p in pts:
+            try:
+                z = float(p.get("z", z0))
+            except Exception:
+                z = z0
+            if abs(z - z0) <= EPS:
+                plane_pts.append(p)
+
+        if not plane_pts:
+            skips.append(f"{sname}: no candidates on story plane z={z0}")
+            continue
+
+        # Diaphragm labels
+        labels: List[str | None] = []
         all_valid_named = True
         for p in plane_pts:
-            lbl_raw = p.get("diaphragm")
-            lbl = str(lbl_raw).strip() if lbl_raw is not None else ""
-            if lbl.upper() == "DISCONNECTED" or lbl == "":
+            label = str(p.get("diaphragm", "")).strip()
+            if not label or label.lower() == "disconnected":
                 labels.append(None)
+                all_valid_named = False
             else:
-                labels.append(lbl)
-                disconnected_only = False
-                if known_diaph and (lbl not in known_diaph):
+                labels.append(label)
+                if known_diaph and (label not in known_diaph):
                     all_valid_named = False
-        if disconnected_only:
-            skips.append(f"{sname}: DIAPH='DISCONNECTED' → no rigid diaphragm")
-            continue
 
         # Require *all* candidates to have a valid (non-empty, not DISCONNECTED) label
         if not all(lbl is not None for lbl in labels):
@@ -258,37 +298,41 @@ def define_rigid_diaphragms(
 
         # Compute convex-hull area for mass proxy
         hull = _convex_hull(list(zip(xs, ys)))
-        area = _polygon_area(hull)  # m^2
-        M = CONCRETE_DENSITY * SLAB_THICKNESS * area  # kg (lumped translational mass)
-        Izz = RZ_MASS_FACTOR * M                       # crude proxy for polar inertia
+        area = _polygon_area(hull)
 
-        # Create master node with a fresh tag
+        # Create master node
         master_tag = next_tag_base
         next_tag_base += 1
-        _ops_node(master_tag, cx, cy, cz)
+        try:
+            _ops_node(master_tag, cx, cy, cz)
+            print(f"[diaphragms] master node {master_tag} @ ({cx:.3f},{cy:.3f},{cz:.3f}) for story '{sname}'")
+        except Exception as e:
+            skips.append(f"{sname}: failed to create master node: {e}")
+            continue
 
-        # Apply lumped mass and out-of-plane fixities to the master
+        # Mass & fixity on master
+        M = CONCRETE_DENSITY * SLAB_THICKNESS * area
+        Izz = RZ_MASS_FACTOR * M
         mass_applied = False
         fix_applied = False
         try:
             _ops_mass(master_tag, M, M, 0.0, 0.0, 0.0, Izz)
             mass_applied = True
-            print(f"[diaphragms] mass(master={master_tag}, M={M:.3f}, Izz={Izz:.3f}) (t={SLAB_THICKNESS}, ρ={CONCRETE_DENSITY}, A={area:.3f})")
         except Exception as e:
-            print(f"[diaphragms] WARN: failed applying mass to master {master_tag}: {e}")
-
+            print(f"[diaphragms] WARN mass({master_tag}) failed: {e}")
         try:
             _ops_fix(master_tag, 0, 0, 1, 1, 1, 0)
             fix_applied = True
-            print(f"[diaphragms] fix(master={master_tag}, ux=0, uy=0, uz=1, rx=1, ry=1, rz=0)")
         except Exception as e:
-            print(f"[diaphragms] WARN: failed applying fix to master {master_tag}: {e}")
+            print(f"[diaphragms] WARN fix({master_tag}) failed: {e}")
 
-        # Slaves are the existing story nodes
-        slave_tags = [t for (t, _, _, _) in tags_coords]
-
-        # Apply rigid diaphragm constraint (XY plane => perpDirn=3)
-        _call_rigid(master_tag, slave_tags)
+        # Constraint
+        slave_tags = sorted(t for t, *_ in tags_coords if t != master_tag)
+        try:
+            _call_rigid(master_tag, slave_tags)
+        except Exception as e:
+            skips.append(f"{sname}: rigidDiaphragm failed: {e}")
+            continue
 
         created.append((sname, master_tag, slave_tags))
         meta.append({
@@ -319,4 +363,85 @@ def define_rigid_diaphragms(
         for s in skips:
             print(" -", s)
 
+    # Attach intermediate rigid-interface nodes into slaves
+    try:
+        added = attach_intermediate_nodes_to_rds(OUT_DIR)
+        print(f"[diaphragms] Attached {added} intermediate node(s) to diaphragms.")
+    except Exception as e:
+        print(f"[diaphragms] attach: WARN: {e}")
+
     return created
+
+
+def attach_intermediate_nodes_to_rds(out_dir: str = OUT_DIR, inter_file: str = "_intermediate_nodes.json") -> int:
+    """
+    Post-process OUT_DIR/diaphragms.json to attach all nodes with kind="rigid_interface"
+    (a.k.a. intermediate interface nodes created by rigid-end splitting) to the slaves
+    list of the diaphragm that matches their `story` field.
+
+    - Does NOT change schema.
+    - Idempotent and deterministic (de-duplicates and sorts).
+    - Returns the number of attachments performed (new tags actually added).
+    """
+    diaph_path = os.path.join(out_dir, "diaphragms.json")
+    inter_path = os.path.join(out_dir, inter_file)
+
+    if not os.path.exists(diaph_path):
+        print(f"[diaphragms] attach: {diaph_path} not found; nothing to do.")
+        return 0
+    if not os.path.exists(inter_path):
+        print(f"[diaphragms] attach: {inter_path} not found; nothing to do.")
+        return 0
+
+    try:
+        with open(diaph_path, "r", encoding="utf-8") as f:
+            diaph = json.load(f)
+        with open(inter_path, "r", encoding="utf-8") as f:
+            inter = json.load(f)
+    except Exception as e:
+        print(f"[diaphragms] attach: failed to read inputs: {e}")
+        return 0
+
+    di_list = diaph.get("diaphragms") or []
+    nodes = inter.get("nodes") or []
+
+    # Build story -> set(tags) from intermediate nodes
+    by_story: Dict[str, Set[int]] = {}
+    for n in nodes:
+        try:
+            if str(n.get("kind","")).strip().lower() != "rigid_interface":
+                continue
+            s = str(n.get("story","")).strip()
+            if not s:
+                continue
+            t = int(n.get("tag"))
+        except Exception:
+            continue
+        by_story.setdefault(s, set()).add(t)
+
+    if not by_story:
+        print("[diaphragms] attach: no intermediate nodes to attach.")
+        return 0
+
+    added = 0
+    for d in di_list:
+        sname = str(d.get("story","")).strip()
+        if not sname or sname not in by_story:
+            continue
+        slaves = list(map(int, d.get("slaves") or []))
+        before = set(slaves)
+        # Union then sort
+        after = before | by_story[sname]
+        if after != before:
+            added += len(after - before)
+            d["slaves"] = sorted(after)
+
+    try:
+        with open(diaph_path, "w", encoding="utf-8") as f:
+            json.dump({"diaphragms": di_list, **{k:v for k,v in diaph.items() if k != "diaphragms"}}, f, indent=2)
+        print(f"[diaphragms] attach: updated {diaph_path} (+{added} tag(s)).")
+    except Exception as e:
+        print(f"[diaphragms] attach: failed to write {diaph_path}: {e}")
+        return 0
+
+    return added
