@@ -22,6 +22,7 @@ SLAB_THICKNESS: float = 0.10        # m
 CONCRETE_DENSITY: float = 2500.0    # kg/m^3
 RZ_MASS_FACTOR: float = 100.0       # Izz = factor * M
 EPS: float = 1e-9
+PLANE_TOL: float = 1e-6             # z-plane tolerance for attaching intermediates
 
 Outputs
 -------
@@ -75,6 +76,11 @@ try:
     from config import RZ_MASS_FACTOR  # type: ignore
 except Exception:
     RZ_MASS_FACTOR = 100.0  # Izz = factor * M
+
+try:
+    from config import PLANE_TOL  # type: ignore
+except Exception:
+    PLANE_TOL = 1e-6  # allowable |z - story_elev| to attach intermediate nodes
 
 
 def _read_json(path: str) -> Dict[str, Any]:
@@ -161,10 +167,7 @@ def _story_indices_with_supports(supports_path: str, story_count: int) -> Set[in
 
 
 def _ensure_ops_model(ndm: int = 3, ndf: int = 6) -> None:
-    """
-    Ensure a valid OpenSees model exists so node/mass/fix/rigidDiaphragm calls succeed.
-    We always start with a clean builder for determinism.
-    """
+    """Ensure a valid OpenSees model exists so node/mass/fix/rigidDiaphragm calls succeed."""
     try:
         _ops_wipe()
     except Exception:
@@ -181,12 +184,7 @@ def define_rigid_diaphragms(
     raw_path: str = os.path.join(OUT_DIR, "parsed_raw.json"),
     supports_path: str = os.path.join(OUT_DIR, "supports.json"),
 ) -> List[Tuple[str, int, List[int]]]:
-    """Identify and create rigid diaphragms per story (single group per story).
-
-    Returns:
-        List of (story_name, master_tag, [slave_tags...])
-    """
-    # Ensure OpenSees is initialized (fixes "ndm and ndf are zero")
+    """Identify and create rigid diaphragms per story (single group per story)."""
     _ensure_ops_model()
 
     # Inputs
@@ -363,7 +361,7 @@ def define_rigid_diaphragms(
         for s in skips:
             print(" -", s)
 
-    # Attach intermediate rigid-interface nodes into slaves
+    # Attach intermediate rigid-interface nodes into slaves (z-plane filtered)
     try:
         added = attach_intermediate_nodes_to_rds(OUT_DIR)
         print(f"[diaphragms] Attached {added} intermediate node(s) to diaphragms.")
@@ -375,9 +373,9 @@ def define_rigid_diaphragms(
 
 def attach_intermediate_nodes_to_rds(out_dir: str = OUT_DIR, inter_file: str = "_intermediate_nodes.json") -> int:
     """
-    Post-process OUT_DIR/diaphragms.json to attach all nodes with kind="rigid_interface"
-    (a.k.a. intermediate interface nodes created by rigid-end splitting) to the slaves
-    list of the diaphragm that matches their `story` field.
+    Post-process OUT_DIR/diaphragms.json to attach nodes with kind="rigid_interface"
+    to the slaves list of the diaphragm that matches their `story` field **and**
+    whose z-coordinate lies on the story plane within PLANE_TOL.
 
     - Does NOT change schema.
     - Idempotent and deterministic (de-duplicates and sorts).
@@ -385,6 +383,7 @@ def attach_intermediate_nodes_to_rds(out_dir: str = OUT_DIR, inter_file: str = "
     """
     diaph_path = os.path.join(out_dir, "diaphragms.json")
     inter_path = os.path.join(out_dir, inter_file)
+    story_path = os.path.join(out_dir, "story_graph.json")
 
     if not os.path.exists(diaph_path):
         print(f"[diaphragms] attach: {diaph_path} not found; nothing to do.")
@@ -392,45 +391,58 @@ def attach_intermediate_nodes_to_rds(out_dir: str = OUT_DIR, inter_file: str = "
     if not os.path.exists(inter_path):
         print(f"[diaphragms] attach: {inter_path} not found; nothing to do.")
         return 0
+    if not os.path.exists(story_path):
+        print(f"[diaphragms] attach: {story_path} not found; cannot z-filter; nothing to do.")
+        return 0
 
     try:
         with open(diaph_path, "r", encoding="utf-8") as f:
             diaph = json.load(f)
         with open(inter_path, "r", encoding="utf-8") as f:
             inter = json.load(f)
+        with open(story_path, "r", encoding="utf-8") as f:
+            sg = json.load(f)
     except Exception as e:
         print(f"[diaphragms] attach: failed to read inputs: {e}")
         return 0
 
     di_list = diaph.get("diaphragms") or []
     nodes = inter.get("nodes") or []
+    story_elev: Dict[str, float] = sg.get("story_elev", {})
 
-    # Build story -> set(tags) from intermediate nodes
+    # Build story -> set(tags) from intermediate nodes, z-plane filtered
     by_story: Dict[str, Set[int]] = {}
+    skipped_offplane = 0
     for n in nodes:
         try:
-            if str(n.get("kind","")).strip().lower() != "rigid_interface":
+            if str(n.get("kind", "")).strip().lower() != "rigid_interface":
                 continue
-            s = str(n.get("story","")).strip()
-            if not s:
+            s = str(n.get("story", "")).strip()
+            if not s or s not in story_elev:
                 continue
             t = int(n.get("tag"))
+            z = float(n.get("z"))
+            if abs(z - float(story_elev[s])) > PLANE_TOL:
+                skipped_offplane += 1
+                continue
         except Exception:
             continue
         by_story.setdefault(s, set()).add(t)
 
+    if skipped_offplane:
+        print(f"[diaphragms] attach: skipped {skipped_offplane} intermediate node(s) off the story plane (> {PLANE_TOL}).")
+
     if not by_story:
-        print("[diaphragms] attach: no intermediate nodes to attach.")
+        print("[diaphragms] attach: no intermediate nodes to attach (after z-plane filter).")
         return 0
 
     added = 0
     for d in di_list:
-        sname = str(d.get("story","")).strip()
+        sname = str(d.get("story", "")).strip()
         if not sname or sname not in by_story:
             continue
         slaves = list(map(int, d.get("slaves") or []))
         before = set(slaves)
-        # Union then sort
         after = before | by_story[sname]
         if after != before:
             added += len(after - before)
@@ -438,7 +450,7 @@ def attach_intermediate_nodes_to_rds(out_dir: str = OUT_DIR, inter_file: str = "
 
     try:
         with open(diaph_path, "w", encoding="utf-8") as f:
-            json.dump({"diaphragms": di_list, **{k:v for k,v in diaph.items() if k != "diaphragms"}}, f, indent=2)
+            json.dump({"diaphragms": di_list, **{k: v for k, v in diaph.items() if k != "diaphragms"}}, f, indent=2)
         print(f"[diaphragms] attach: updated {diaph_path} (+{added} tag(s)).")
     except Exception as e:
         print(f"[diaphragms] attach: failed to write {diaph_path}: {e}")

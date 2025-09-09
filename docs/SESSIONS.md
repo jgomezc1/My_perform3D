@@ -1,6 +1,15 @@
 # Session Handoff (Rolling Notes)
 
 ---
+## [2025-09-09]
+**Branch & Commit:** feature/offsets @ 34264e2
+
+**Last Session**
+- Rigid ends implemented. Intermediate nodes now registered in nodes.json.
+
+**Next Up**
+- Attach intermediate nodes (kind=intermediate) at each story to that story’s rigid diaphragm.
+
 
 ## [2025-09-08]
 **Branch & Commit:** feature/offsets @ 34264e2
