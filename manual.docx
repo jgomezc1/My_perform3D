@@ -1,0 +1,452 @@
+ETABS .e2k Model Storage Scheme
+This document provides a comprehensive description of each major section found in an ETABS-generated .e2k text file, based on the KOSMOS_Plat.e2k example and explanations useful for its translation into an OpenSeesPy equivalent model.
+Components of the .e2k file
+1. File Header and Program Information
+$ File ...: A comment line indicating the original file path and the timestamp when the .e2k file was exported from ETABS.
+$ PROGRAM INFORMATION: Specifies the software (ETABS) and version (20.2.0) that generated the file. This is crucial for compatibility.
+2. Model Controls and Basic Definitions
+$ CONTROLS: Defines global settings for the model.
+UNITS: Sets the base units for force, length, and temperature (e.g., "KGF", "M", "C").
+MERGETOL: The tolerance distance below which separate nodes are merged into one.
+RLLF: Parameters for Reduced Live Load Factors, a code-based provision.
+$ STORIES - IN SEQUENCE FROM TOP: Defines the vertical layout of the building, including story height, elevation, and master/similar story relationships.
+$ GRIDS: Defines the grid systems (e.g., "G1") used for modeling, including the location and labels for each grid line.
+$ DIAPHRAGM NAMES: Defines floor diaphragms (e.g., "D1"), which model the in-plane stiffness of floor slabs to distribute lateral loads. They can be RIGID or SEMI-RIGID.
+3. Material and Section Properties
+$ MATERIAL PROPERTIES: Defines all materials for the model (e.g., "Concrete", "Steel"). Key properties include E (Modulus of Elasticity), U (Poisson's Ratio), WEIGHTPERVOLUME, and strength parameters like FC (for concrete) or FY (for steel).
+$ FRAME SECTIONS: Defines the cross-sections for all line elements (beams, columns, braces). It specifies the section's name, shape, dimensions, and assigned material.
+$ CONCRETE SECTIONS: Provides concrete-specific design information for the frame sections, including reinforcement details, cover, and design type (Column or Beam).
+$ SLAB PROPERTIES / $ WALL PROPERTIES: Defines the properties for area sections used for slabs and walls. This includes the material, thickness, and modeling type (e.g., Membrane, ShellThin).
+$ LINK PROPERTIES: Defines properties for specialized link elements used to model dampers, isolators, gaps, or other specific nonlinear behaviors.
+$ POINT SPRING PROPERTIES: Defines spring supports used to model soil-structure interaction or other elastic supports by specifying stiffness values for each degree of freedom.
+4. Geometry and Connectivity
+$ POINT COORDINATES: A list of all the points (nodes) in the model, defined by a unique name (typically a number) and their X, Y, and Z coordinates.
+$ LINE CONNECTIVITIES: Defines all line elements (beams, columns) by connecting the points defined in the coordinates table.
+$ AREA CONNECTIVITIES: Defines all area elements (slabs, walls) by listing the points that form their corners, typically in a counter-clockwise order.
+5. Assignments (Connecting Properties to Geometry)
+$ POINT ASSIGNS: Assigns properties or constraints to points. This includes RESTRAINT conditions (e.g., fixed, pinned), DIAPH (diaphragm) assignments, and SPRINGPROP (spring) assignments.
+$ LINE ASSIGNS: Assigns properties to line elements. This includes SECTION assignments, moment RELEASE conditions (to model pins), and rigid end LENGTHOFF (offsets).
+$ AREA ASSIGNS: Assigns properties to area elements. This includes SHELLPROP (slab/wall property) assignments, PIER or SPANDREL labels for design, and meshing instructions.
+6. Loading, Analysis, and Design
+$ LOAD PATTERNS: Defines the names and types of loads (e.g., "DEAD", "LIVE", "QUAKE"). It also specifies the SELFWEIGHTMULT (self-weight multiplier).
+$ LOAD CASES: Defines the analysis cases, such as LINEAR STATIC or MODAL analysis, and specifies which load patterns are included.
+$ COMBINATIONS: Defines load combinations for design, which combine the results of different load cases using specified scale factors (e.g., 1.4 * DEAD + 1.6 * LIVE).
+$ JOINT LOADS - FORCE: Applies point loads directly to joints/nodes for a given load case.
+$ FRAME LOADS - DISTRIBUTED: Applies distributed loads along frame elements.
+$ SHELL OBJECT LOADS - UNIFORM: Applies uniform surface loads to shell (area) elements.
+$ DESIGN PREFERENCES / OVERWRITES: Sections that control the parameters
+STORY-centric data structure
+The data structure in the .e2k file is highly efficient and object-oriented from an ETABS perspective, but it is fundamentally different from the explicit, nodal-based structure required by programs like OpenSeesPy. (See the attached EjemploNew.e2k file)
+Figure 1 illustrates the ETABS .e2k file's story-centric data structure. It's a highly efficient scheme that defines the building as a "stack of stories," where each story acts as a template to which structural elements are associated. It might be understood like a STORY based data structure where different building entities belong to a floor.
+Figure 1 shows STORY 08_P4 and its associated elements corresponding to:
+Column “C43”
+Beam “B10”
+Point “22” (In the top end of column “C43”)
+Point “23”
+Point “45”.
+All these elements and points belong to STORY “08_P4”.
+Thus a STORY  is defined by all the entities contained in it (beams, nodes, etc) and/or all the entities “hanging” from it. In Figure 1 Column “C43” and point “45” both hang from STORY 08_P4.
+
+
+
+
+
+
+
+
+
+
+Figure 1. STORY based storage scheme
+The generation of an OpenSeesPy model from an ETABS model (stored in the .e2k file) corresponds to the generation of OpenSeesPy entries for each and everyone of the entities stored in the STORIES defining the building. If every STORY is defined in this way the building is then formed by a stack of STORIES with all of its entities stored or associated to the given STORY, see Figure 2.
+
+On the other hand in an OpenSeesPy model all the entities, that is nodes, elements, loads, materials, etc, must be explicitly defined in a traditional storage scheme. A typical OpenseesPy model looks like:
+
+wipe()
+    model("basic", "-ndm", ndm, "-ndf", ndf)
+
+    # --- Nodes ---
+    node(1, 60.990652, 20.9609649, 14.775)
+    node(2, 59.4406246, 22.2606796, 13.3)
+
+geomTransf('Linear', 1442376417, 1, 0, 0)
+    element('elasticBeamColumn', 342376417, 20002, 1860458314, 160000, 2.5e+10, 1.04166667e+10, 8533.33333, 2133.33333, 2133.33333, 1442376417)
+    geomTransf('Linear', 1205534426, 1, 0, 0)
+    # [nl] COLUMN tag 105534426 ← hinge_set 'ColHinge_C50x80C'
+    element('forceBeamColumn', 105534426, 1860458314, 1851532825, 1205534426, 43)
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Figure 2. Stack of STORIES representing a building model
+
+In what follows we will define the relevant parts of the .e2k file needed for creation of a basic structure, that is a framed building conformed initially by STORIES, Nodal Points, Beams and Columns. Once this basic model is built into OpenSeesPy we will progressively add complexities to the model.
+The basic components of the .e2k file
+The $ STORIES section
+This section of the .e2k file defines the basic database unit in the .e2k storage scheme. It is identified by the keyword $ STORIES followed by the definition and relevant parameters of each one of the STORIES forming the building stack.
+The stack is defined in sequence from the top and for coding purposes we can adopt an indexing system where (with reference to the sample file) STORY “11_P6” corresponds to index = 0, STORY “08_P5” to index = 1 and so on until running all the stack. The stack of floors also stores the definition of the global vertical (Z) reference system of the model. The datum (Z = 0.0) is located at the STORY with the parameter ELEV 0 in the bottom of the stack, in this case corresponding to the STORY labeled “Base”. The Z coordinate of the remaining STORIES is cumulative defined by the HEIGHT parameter in each STORY. Accordingly, STORY “01_P2_m170” with HEIGHT 2.0 is at Z = 2.0; STORY “02_P2” with HEIGHT 1.7 is at Z = 2.0+1.7; STORY “03_P3_m170” with HEIGHT 1.7 is at Z = 2.0+1.7+1.7 and this pattern follows all the way to the last level of the stack.
+$ STORIES - IN SEQUENCE FROM TOP
+  STORY "11_P6"  HEIGHT 1.475 
+  STORY "08_P5"  HEIGHT 1.55 SIMILARTO "04_P3"  
+  STORY "07_P5_m155"  HEIGHT 1.55 SIMILARTO "03_P3_m170"  
+  STORY "04_P4"  HEIGHT 1.55 SIMILARTO "04_P3"  
+  STORY "05_P4_m155"  HEIGHT 1.55 SIMILARTO "03_P3_m170"  
+  STORY "04_P3"  HEIGHT 1.7 MASTERSTORY "Yes"  
+  STORY "03_P3_m170"  HEIGHT 1.7 MASTERSTORY "Yes"  
+  STORY "02_P2"  HEIGHT 1.7 
+  STORY "01_P2_m170"  HEIGHT 2 
+  STORY "Base"  ELEV 0 
+The $ POINT COORDINATES section
+This section of the .e2k file defines the plan or global  X, Y coordinates of all the points existing in the building model. This is done in terms of the 2D "master plan" containing all potential structural points, but only with their X and Y coordinates.
+We could think of the master plan like a plane storing the normal projection of all the points existing in the model, see Figure 3. Accordingly there might be many different points “50” sharing the same (X,Y) coordinates but at different Z locations.
+
+Figure 3. General floor storing the projection of all the nodal points in the building over a horizontal plan.
+The start of the section is identified by the statment $ POINT COORDINATES  followed by the X,Y coordinates of the projection of every point on the plane
+$ POINT COORDINATES
+  POINT "50"  46.9 27.45 
+  POINT "51"  47.95 27.45 
+  POINT "52"  49 27.45 
+  POINT "53"  50.05 27.45 
+  POINT "25"  51.1 27.45  2.5 
+ The $ POINT ASSIGNS section
+The complete definition of the nodal points in the building, corresponding to their vertical distribution using the projections from the previous section, is defined in the $ POINT ASSIGNS  section. To illustrate how this works consider a hypothetical stack of 3 floors as shown in Figure 4. Notice that in the stack of floors column “C1” spans two different floors and each column segment is shown with initial and end points described by the same point tag, in this case nodal point “50”. Notice once again that there are in fact three nodes labeled “50” sharing the same (X,Y) coordinates but at different Z locations. Similarly, column “C2” spanning one STORY is formed by identical end points in this case “51”. This multispan representation of the column will be explained later.
+
+
+
+
+
+
+
+
+
+
+
+Figure 4. Stack of hypothetical floors.
+Now, the X,Y locations of these nodes appear in the general 2D master plan shown in Figure 5. Off course to precisely locate the points in space, and translate them into OpenSees we need both, their X,Y location and their Z location. 
+
+
+Figure 5. General 2D master plan corresponding to the physical nodes shown in Figure 4.
+
+To define the Z coordinate the .e2k file uses the $ POINT ASSIGNS section and the $ POINT COORDINATES section as described next. Although in the general master plan a Point appears only once, each appearance of the point in the vertical elevation of the building is described by an entry in the $ POINT ASSIGNS section of the file indicating the location of the POINT in the corresponding STORY. For instance while in the $ POINT COORDINATES section, and in the general 2D master plan, point “50” appears only once, in the $ POINT ASSIGNS section (and in the stack of Figure 4) it appears 3 times each one corresponding to its association to STORIES BASE, STORY 1 and STORY 2 respectively.
+$ POINT ASSIGNS
+POINTASSIGN "50" "BASE"
+POINTASSIGN "50" "STORY 1"
+POINTASSIGN "50" "STORY 2"
+POINTASSIGN "51" "STORY 1"
+POINTASSIGN "51" "STORY 2"
+POINTASSIGN "52" "BASE"
+POINTASSIGN "52" "STORY 1"
+POINTASSIGN "53" "BASE"
+POINTASSIGN "53" "STORY 1“
+POINTASSIGN “25" "STORY 2"
+Accordingly, the X, Y coordinates of the nodes appearing in the $ POINT ASSIGNS  section is read from the general 2D master plan ($ POINT COORDINATES section) while the Z coordinate is the one from the associated STORY. For instance there is a point “50” is located at X = 46.9 Y =27.45 Z = ZBASE;  a second point “50” located at at X = 46.9 Y =27.45 Z = ZSTORY1 and a third point “50” located at at X = 46.9 Y =27.45 Z = ZSTORY2. Clearly these are 3 different physical points which eventually would have three different point tags when translated to OpenSeesPy.
+Notice that all the points in the $ POINT COORDINATE section, except point “25”, have only their  X,Y coordinates defined and we already know how to obtain their Z location. However point “25”, (shown in the elevation view of Figure 4) is declared in that section like:
+POINT "25"  51.1 27.45  2.5
+The third numerical entry corresponding in this case to 2.5 defines the distance from the node to its associated STORY. According to the $ POINT ASSIGNS section definition for this node which is:
+POINTASSIGN “25" "STORY 2"
+This node belongs to STORY 2 but it is located at a distance of 2.5 below (as it hangs from the STORY). Therefore the Z coordinate of point “25” is equal to:
+Z25 = ZSTORY2-2.5
+This rule is to be applied ALWAYS whenever there is a node with explicit Z value defined in the $ POINT COORDINATES section of the file.
+ 
+ 
+The $ LINE CONNECTIVITIES section
+The $ LINE CONNECTIVITIES section defines the abstract topology or the "wiring diagram" of the frame. It connects the points from the 2D master plan to create logical elements. Again, in this section the connectivities are defined in terms of abstract points and using the multispan column representation of columns while the actual element creation is completed in the $ LINE ASSIGNS section. To clarify, consider once again the general 2D master plan shown in Figure 6 where we now observe a first abstract beam element “B10” connecting nodes “52” and “53”, a second abstract beam element “B5” connecting nodes “50” and “51”, and an abstract column element “C43” connecting nodes “50” and “50”. These are abstract elements since they are not fully defined until they are not assigned to specific STORIES. 
+
+
+
+
+
+
+
+
+
+
+
+Figure 6. General 2D Master plan with column and beam elements connectivities
+The representation of the elements in the general 2D master plan is then described in terms of the $ LINE CONNECTIVITIES of the .e2k file. For instance the definition of the abstract elements corresponding to the plan in Figure 6 would be as follows:
+$ LINE CONNECTIVITIES
+LINE "C43"  COLUMN "50" "50"
+LINE "B10"  BEAM   "52" "53"
+LINE "B5"	  BEAM   "50" "51"
+The $ LINE ASSIGNS section
+The $ LINE ASSIGNS section of the .e2k file allows to precisely define the location and particular features of the beam and column elements in the building. For instance beam “B10” as defined in the $ LINE CONNECTIVITIES section in Figure 6 might exist in several stories but under different particular conditions. For instance it might have end releases in one story but rigid connections in a different one. Its location and particular conditions are indicated in the $ LINE ASSIGNS section in exactly the same way as the $ POINT ASSIGNS specifies particular conditions for the abstract points defined in the $ POINT COORDINATES section.
+
+
+
+
+
+
+
+ 
+
+
+
+Figure 7. Stack of floors with column and beams
+Consider the stack of floors shown in Figure 7. This stack, having now a precise location and distribution of columns and beams will be defined by its corresponding $ LINE ASSIGNS section as follows:
+$ LINE ASSIGNS
+LINEASSIGN "C43"    	"STORY 1"
+LINEASSIGN "C43"    	"STORY 2"
+LINEASSIGN "C2"    	     "STORY 2"
+LINEASSIGN "B10"          "BASE"
+LINEASSIGN "B10"	     "STORY 1"
+Note that in this section there are going to be as many entries as there are elements in the actual building. For instance the stack of floors shows two beams “B10” located in the stories “BASE” and “STORY 1” respectively as declared in the two entries from the file. Similarly, there are 3 column segments in the stack of floors, two of them of the type “C43” spanning STORY 1  and STORY 2 and one column type “C2” associated with STORY 2.
+Consider the special case shown in Figure 8 where a column type “C43”, already defined in the $ LINE CONNECTIVITIES section by
+ LINE "C43"  COLUMN "50" "50"  
+goes from a point “50” located in floor BASE to a second point “50” located in STORY 2. This column clearly hangs from STORY 2 therefore it belongs to STORY 2 and it runs all the way down to the floor BASE but without having any point in the intermediate STORY 1. This column would still be defined by:
+LINEASSIGN "C43"    	"STORY 2"
+in the $ LINE ASSIGNS section and the program would know that it directly connects to the BASE floor as there is no POINT “50” in STORY 1. In other words the code would know that the column goes from point “50” located in the STORY from which the column hangs to the first next point “50” in a lower STORY. This would be the general rule to locate column segments. In the case of column “C43” in Figure 8 there is only one column segment going from STORY 2 directly into the BASE floor and therefore there is no support for the column in STORY 1.
+
+
+
+
+
+
+
+
+
+
+
+
+Figure 8. Special case of a column going through an intermediate story
+End Offsets
+Length offsets
+In ETABS frame section properties are assigned to frame objects. However, actual structural members have finite cross-sectional dimensions. When two members such as a beam and column are connected at a joint, there is some overlap of the cross-sections. In many structures, the dimensions of the members are large, and the length of the overlap can be a significant fraction of the total length of the frame section. ETABS provides the capability of defining end length offsets along the length of frame sections to account for these finite dimensions of structural components. Length offsets are defined in the LINEASSIGNs of the .e2k file as follows:
+LINEASSIGN  "C522"  "02_P2"  SECTION "C50x80C"  LENGTHOFFI 0.275 LENGTHOFFJ 0.275 RIGIDZONE 1
+
+Joint offsets
+On the other hand when a frame object is used to model a frame section, the frame object is assumed to be located at the centroid of the frame section. Thus, when frame objects (frame sections) intersect in a model, it means that the centroids of the associated frame objects intersect. In a real structure, that is not always the case. For example, it is not unusual for one or more floor beams in a building to frame eccentrically into a column. ETABS provides the capability of defining frame joint offsets to account for these eccentric connections. Joint Offsets are defined in the LINEASSIGNs of the .e2k file as follows:
+LINEASSIGN  "C522"  "02_P2"    OFFSETXI -0.05  OFFSETYI 0.2  OFFSETXJ -0.05  OFFSETYJ 0.2
+The offsets parameters have the following meanings:
+OFFSETXI: End offset at nodal point I along the global X direction.
+OFFSETYI: End offset at nodal point I along the global Y direction.
+OFFSETXJ: End offset at nodal point J along the global X direction.
+OFFSETYJ: End offset at nodal point J along the global Y direction.
+When none of these parameters appear within the LINEASSIGN of an element it means there are no offsets. 
+
+In OpenSeesPy the end offsets are specified as:
+'geomTransf('Linear', transfTag, *vecxz, '-jntOffset', *dI, *dJ)'
+where *dI and *dJ are lists with the offset values specified with respect to the global coordinate system for element-ends node i and node j respectively.
+For instance, a beam with longitudinal direction parallel to the global X direction a rigid end offset with the same values as in the etabs example, would have assigned a transformation like: geomTransf('Linear', 222, 0, 0, 1, '-jntOffset', 0.4 , 0 , 0, 0 , 0 , 0). The zero values in the above line indicate zero offsets in the global Y and Z directions. Notice that in the .e2k file
+
+
+
+
+
+
+
+
+SUMMARY OF THE RELEVANT DATA BLOCKS IN THE .e2k FILE
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Suggested Assembly Instructions
+Here we propose an initial set of assembly instructions for the OpenSees model out of the .e2k file defining the ETABS model.
+Using the General 2D Master Plan ($ POINT COORDINATES), the vertical stack of floors ($ STORIES) and the vertical distribution of the points in the stack of floors ($ POINT ASSIGNS) generate all the physical points in the building. Each point can now be represented in OpenSeesPy format like: node(node_tag, x, y, z). Note that further ahead in the process additional points would appear when creating rigid diaphragms and rigid ends. 
+Create a mapping between the ETABS points defined in the $ POINT ASSIGNS   section and the OpenSeesPy nodal points. For instance there should be a correspondence between node “50” in STORY 1 and an OpenSeesPy node, and between node “50” in STORY 2 and a different OpenSeesPy node.
+Generate the Beams: For each STORY and for each beam within the STORY, and using the nodal mapping created in 2 define the corresponding OpenSeesPy beams using for instance placeholders like:
+    b_sec = 0.40
+     h_sec = 0.50
+    A_beam = b_sec * h_sec
+    Iy_beam = (b_sec * h_sec**3) / 12
+    Iz_beam = (h_sec * b_sec**3) / 12
+    J_beam = b_sec * h_sec**3 / 3
+    E_beam = 2.50e10
+    G_beam = 1.04e10
+    transfTag = 222
+   # Define the beam elements
+ element('elasticBeamColumn', 1064, 507, 485, A_beam, E_beam, G_beam,    J_beam, Iy_beam, Iz_beam, transfTag)
+Generate the columns: For each STORY and for each column within the STORY, and using the nodal mapping created in 2 define the corresponding OpenSeesPycolumns using for instance:
+    geomTransf('Linear', 111, 1, 0, 0)
+    # --- Placeholder Material and Section Properties ---
+    # NOTE: These are temporary values for visualization.
+    b_col = 0.40
+    h_col = 0.40
+    E_col = 2.5e10
+    nu_col = 0.2
+    G_col = E_col / (2 * (1 + nu_col))
+    A_col  = b_col * h_col
+    Iy_col = (b_col * h_col**3) / 12
+    Iz_col = (h_col * b_col**3) / 12
+    J_col  = b_col * h_col**3 / 3
+
+    # Define the column elements
+
+    element('elasticBeamColumn', 1, 1, 2, A_col, E_col, G_col, J_col, Iy_col, Iz_col, 111)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+I'm working on the RDC_PERFORM structural analysis system that translates ETABS .e2k files into OpenSees models. I need help with the implementation of 'end offsets'.
+RDC_PERFORM uses a three-phase architecture:
+Phase 1: Parse .e2k files → story_graph.json
+Phase 2: Generate domain artifacts (nodes.json, beams.json, columns.json, etc.)
+Phase 3: Create standalone OpenSees model (explicit_model.py)
+Key Innovation: Advanced rigid end zone handling that splits ETABS elements into 2-3 OpenSees segments (rigid_i → deformable → rigid_j) with inflated stiffness properties for rigid parts.
+Current Task :Add support for ETABS end offset parameters (OFFSETX/Y/Z) in column elements, similar to how rigid end zones are currently handled
+Files to Review:
+Please examine these files to understand the current implementation:
+docs/ARCHITECTURE.md - System overview and conventions
+docs/CONTRIBUTING.md - Workflow and verification procedures
+e2k_parser.py, columns.py, rigid_end_utils.py, generate_explicit_model.py
+Expected Deliverables:
+PLAN - Implementation steps and risks
+FILE CHANGES - Complete files (no fragments)
+HOW TO RUN - Exact commands for testing
+VERIFICATION - Validation steps and expected outputs
+Technical Constraints:
+Maintain deterministic node tagging: tag = point_id * 1000 + story_index
+All i_node/j_node references must exist in nodes.json before element creation
+Rigid segments must never receive nonlinear overrides
+Follow PEP-8 and include type hints
+Hola Inge el tema de la legalidad del software es algo que se deberia exigir siempre!
+Recomendar
+1
+Responder1 respuesta
+1 comentario del comentario de Juan Pablo Granada Castaño
+
+
+1 semana
+Juan Pablo Granada Castaño estamos de acuerdo, y es algo que no pasa.
+Recomendar
+Responder
+
+
+Ana Maria Parra Bastidas, PhD, MSc, CE, PE in Colombia   • Siguiendo
+Projects Engineer and Partner at Carlos H. Parra & Asociados
+(editado)1 semana
+Trabajar como persona natural no es excusa para no entregar lo que exige la NSR-10, garantizar la calidad de los estudios y diseños y trabajar con software pirata. El tema del software es muy delicado ya que se de empereaas grandes que han hecho comparativos, al menos con software geotécnico, entre los resultados de software pirata y software original y no da lo mismo. Por lo que uno debe ser claro con el cliente y explicarle que uno cobra mucho más porque emplea licenciáis originales, y debe explicarle en el riesgo en que incurren ingenieros y proyectos diseñados con software pirata. También por experiencia puedo decir que en tema de estudio de suelos, esos estudios de valores muy inferiores resultan en sobrecostos y atrasos seguros en la obra y generalmente en la repetición de los estudios geotécnicos
+… más
+Recomendar
+10
+Responder2 respuestas
+2 respuestas del comentario de Ana Maria Parra Bastidas, PhD, MSc, CE, PE in Colombia
+Ver respuestas anteriores
+
+
+Jonnathan Camargo Orozco • 2º
+Ingeniero Estructural Independiente
+1 semana
+Ana Maria Parra Bastidas, PhD, MSc, CE, PE in Colombia Aunque sigo como persona natural he hecho el deber de legalizar el software. Aún así los clientes quieren todo regalado.
+Recomendar
+Responder
+
+
+Luis Carlos Hernández Segura   • 2º
+Ingeniero Civil Estructural. CSI SUITE / BLUEBEAM / ENERCALC / PLS TOWER / RAMS SS / RISA 3D / REVIT Software developer Python / SQL / RPA IBM
+1 semana
+Curioso. Como diseñador me he enfrentado a empresas que cobran proyectos casi un 40% por debajo del costo que manejo como persona natural.
+Recomendar
+2
+Responder1 respuesta
+1 comentario del comentario de Luis Carlos Hernández Segura
+
+
+Julián Pérez Autor
+Ingeniero Civil | Especialista en Estructuras | Candidato a Magíster en Ingeniería | Fundador de Fluencia Ingeniería S.A.S | Docente Universitario
+1 semana
+Luis Carlos Hernández Segura Seguramente también sucede, lo cual es difícil de entender, como una empresa pagando arriendo, software, mantenimiento, personal, llegan a esos valores. Cabe resaltar que esto no aplica para todos, vos sabes cuánto vale tu trabajo y por eso cobras lo que cobras, pero hay un común denominador que se logra evidenciar.
+Recomendar
+Responder
+
+
+William Fernández   • 2º
+| Mechanical Design Engineer | SolidWorks Professional - (CSWP) | Coordinar proyectos de innovación.
+1 semana
+Sin mencionar que es muchos casos a los clientes solo les importa la fabricación "económica", tomando por poco los servicios de ingeniería de diseño y calculo, así, que si la competencia les fabrica por menos, inclusive sin diseños, al cliente no le va a importar y sucede muy a menudo en proyectos metalmecánicos y diseño de máquinas. Saludos.
+Recomendar
+1
+Responder1 respuesta
+1 comentario del comentario de William Fernández
+
+
+Julián Pérez Autor
+Ingeniero Civil | Especialista en Estructuras | Candidato a Magíster en Ingeniería | Fundador de Fluencia Ingeniería S.A.S | Docente Universitario
+6 días
+William Fernández Tal cual, incluso también pasa que el constructor dice, yo tengo mi diseñador y es alguien que no es experimentado y regalan el “diseño” pero lo cobran en la construcción.
+Recomendar
+Responder
+
+
+Ruben Astudillo Ramírez • 2º
+Ingeniero civil en minas | Geotecnia | Estructural | Proyectos | Estructuras de acero |
+1 semana
+La competencia es dura, y en el sistema capitalista solo importa el dinero.
+Sí alguien puede hacerlo más barato y está calificado, él se lleva el proyecto.
+Recomendar
+Responder1 respuesta
+1 comentario del comentario de Ruben Astudillo Ramírez
+
+
+Julián Pérez Autor
+Ingeniero Civil | Especialista en Estructuras | Candidato a Magíster en Ingeniería | Fundador de Fluencia Ingeniería S.A.S | Docente Universitario
+6 días
+Ruben Astudillo Ramírez Así es, sin embargo, Rubén está pasando algo increíble y es que en muchas ocasiones no están calificados, yo tengo varios ejemplos de planos y memorias y quedarías impresionado con lo que entregan.
+Recomendar
+1
+Responder
+
+Luis Fernando Cabrera Delgado • 3er+
+Ingeniero Civil
+5 días
+En desacuerdo, entonces para realizar diseños tengo que crear una empresa?
+Recomendar
+Responder3 respuestas
+3 respuestas del comentario de Luis Fernando Cabrera Delgado
+Ver respuestas anteriores
+
+Luis Fernando Cabrera Delgado • 3er+
+Ingeniero Civil
+4 días
+Julián Pérez Eso si puede ser debatible, pero hay muchos programas gratis para diseño de Metaldeck, correas, etc y el resto lo puedo hacer en hojas de cálculo, se puede diseñar sin tener que comprar un software costoso, hay programas no tan buenos pero económicos.
+
+
+
